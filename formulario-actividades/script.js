@@ -104,11 +104,21 @@ function buildCardHTML(id) {
         '<label for="rrssExtension-' + id + '">RRSS</label>' +
         '<input type="text" id="rrssExtension-' + id + '" placeholder="Información para tagear a la gente en IG">' +
         '</div>' +
+        // '<div class="field">' +
+        // '<label for="fechaHoraExtension-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        // '<input type="datetime-local" id="fechaHoraExtension-' + id + '" required>' +
+        // '<p class="field-error" id="err-fechaHoraExtension-' + id + '">Este campo es obligatorio.</p>' +
+        // '</div>' +
+
         '<div class="field">' +
         '<label for="fechaHoraExtension-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="datetime-local" id="fechaHoraExtension-' + id + '" required>' +
+        // Cambiamos type a "text" y agregamos la clase "datepicker"
+        '<input type="text" class="datepicker" id="fechaHoraExtension-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
         '<p class="field-error" id="err-fechaHoraExtension-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
+
+
+
         '<div class="field">' +
         '<label>¿Necesita una sala? <span class="req">*</span></label>' +
         '<div class="radio-chips" id="necesitaSalaExtension-' + id + '" data-required="true">' +
@@ -392,6 +402,29 @@ function addCard() {
     wrapper.innerHTML = buildCardHTML(id);
     container.appendChild(wrapper);
     wireCard(id);
+    // updateCardUI();
+
+
+    // === ACTIVAR FLATPICKR AQUÍ ===
+    // Buscamos cualquier input con la clase datepicker dentro de la tarjeta recién creada
+    flatpickr(wrapper.querySelectorAll('.datepicker'), {
+        enableTime: true,
+        dateFormat: "d-m-Y H:i",
+        minuteIncrement: 30,
+        time_24hr: true,
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+                shorthand: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+                longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            },
+            months: {
+                shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                longhand: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            },
+        }
+    });
+
     updateCardUI();
 }
 
