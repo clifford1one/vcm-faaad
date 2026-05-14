@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<!-- en head se almacena metadatos y configuraciones tecninas -->
+
+<head>
+    <!-- UTF-8 es un tipo de codificacion de caracteres. -->
+    <!-- un codificador de caracteres es un metodo para traducir las letras en lenguaje binario-->
+    <meta charset="UTF-8">
+    <!-- este es el texto que se ve arrihba en la tab -->
+    <title>FaAAD - Perfil de Ingreso</title>
+    <!-- este es el icono que se ve arriba en la tab -->
+    <link rel="icon" type="image/x-icon" href="./ww4-assets/ww4-assets.assets/favicon-ryq-orange.ico">
+
+    <!-- aca le pido que use los archivos css y js -->
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+</head>
+<!-- en el body va todo el front -->
+
+<body>
+
+    <body>
+
+        <!-- ── Barra de progreso sticky ── -->
+        <nav id="progressSteps" aria-label="Progreso del formulario">
+            <div class="steps-inner">
+                <button class="step-btn active" data-step="0">Autor</button>
+                <button class="step-btn" data-step="1">Proyecto</button>
+                <button class="step-btn" data-step="2">Imágenes</button>
+                <button class="step-btn" data-step="3">Revisión</button>
+            </div>
+        </nav>
+
+        <!-- Nav móvil — bottom bar 3 pasos (solo visible en ≤600px) -->
+        <nav id="mobileNav" aria-label="Navegación del formulario">
+            <button class="mob-step-btn active" data-page="0">
+                <span class="mob-step-num">01</span>
+                <span class="mob-step-label">Autor</span>
+            </button>
+            <button class="mob-step-btn" data-page="1">
+                <span class="mob-step-num">02</span>
+                <span class="mob-step-label">Proyecto</span>
+            </button>
+            <button class="mob-step-btn" data-page="2">
+                <span class="mob-step-num">03</span>
+                <span class="mob-step-label">Enviar</span>
+            </button>
+        </nav>
+
+        <div class="form-wrap">
+
+            <div class="page-header">
+                <h1>Encuesta Cohorte 2026</h1>
+                <p>¡Bienvenido/a a Diseño udp! 2026</p>
+
+                <!-- <h1>¡Bienvenido/a a Diseño udp!</h1>
+    <p>Encuesta Cohorte 2026</p> -->
+            </div>
+
+            <!-- Modal criterios -->
+            <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+                <div class="modal">
+                    <div class="modal-header">
+                        <h2 id="modalTitle">Criterios de selección</h2>
+                        <button class="modal-close" id="closeBases" aria-label="Cerrar">×</button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="criteria-list">
+                            <li class="criteria-item">
+                                <div class="criteria-icon">01</div>
+                                <div class="criteria-text">
+                                    <strong>Evidencia física del proyecto</strong>
+                                    <p>Se priorizan proyectos materializados: maquetas, prototipos, objetos,
+                                        instalaciones o intervenciones. Los proyectos puramente conceptuales o supuestos
+                                        no son considerados.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">02</div>
+                                <div class="criteria-text">
+                                    <strong>Calidad del registro fotográfico</strong>
+                                    <p>Las imágenes deben comunicar el proyecto a través de un relato visual sólido y de
+                                        buena calidad técnica. La fotografía es el principal medio de presentación del
+                                        trabajo.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">03</div>
+                                <div class="criteria-text">
+                                    <strong>Impacto y contribución al medio</strong>
+                                    <p>Se valoran proyectos que demuestren o proyecten un aporte significativo al
+                                        contexto en que se insertan: social, cultural, productivo o territorial.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">04</div>
+                                <div class="criteria-text">
+                                    <strong>Interdisciplinariedad y vinculación</strong>
+                                    <p>Se priorizan proyectos que dialoguen con otras disciplinas o que establezcan
+                                        vínculos con comunidades, organizaciones o sectores externos a la academia.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">05</div>
+                                <div class="criteria-text">
+                                    <strong>Uso de tecnologías emergentes</strong>
+                                    <p>Proyectos que integren nuevas tecnologías de forma crítica y propositiva, tanto
+                                        en su proceso de diseño como en el resultado final.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">06</div>
+                                <div class="criteria-text">
+                                    <strong>Diseño crítico y perspectiva latinoamericana</strong>
+                                    <p>Se seleccionan proyectos con una mirada reflexiva sobre el diseño, que integren
+                                        pensamiento crítico y/o una perspectiva situada desde el contexto
+                                        latinoamericano.</p>
+                                </div>
+                            </li>
+                            <li class="criteria-item">
+                                <div class="criteria-icon">07</div>
+                                <div class="criteria-text">
+                                    <strong>Activación de economías creativas</strong>
+                                    <p>Proyectos que contribuyan al desarrollo de industrias creativas, modelos de
+                                        producción alternativos o ecosistemas de innovación local.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <p class="modal-footer-reserva">Nos reservamos el derecho de publicación.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Aviso previo -->
+            <div class="aviso-previo">
+                <p>El propósito de esta encuesta es conocer mejor los intereses, hábitos y habilidades de quienes
+                    comienzan, a partir de este año, a formar parte de nuestra comunidad Diseño | FaAAD udp . </p>
+
+                <p>Esta encuesta no busca evaluarte en particular. Si no tienes una respuesta a la pregunta, no importa,
+                    <u>evita googlear y deja el espacio en blanco.</u></p>
+
+                <p>Lee con atención cada pregunta y contesta con honestidad, lyas repuestas entregadas serán de utilidad
+                    para entender mejor el contexto del grupo de estudiantes recibido, así como también orientar el
+                    trabajo educativo de las/os docentes. Tu información no será divulgada.</p>
+                <!-- <button class="aviso-criteria-btn" id="openBases">Revisa los criterios de selección →</button>-->
+            </div>
+
+            <form id="projectForm" novalidate>
+
+                <!-- Error summary -->
+                <div id="error-summary" role="alert" aria-live="polite"></div>
+
+                <div class="form-card">
+
+                    <!-- ── Página 0: Autor ── -->
+                    <div class="mob-page active" data-page="0">
+                        <div class="author-section" id="anchorAutor">
+                            <h2>Información del autor</h2>
+                            <div class="field-row">
+                                <div class="field">
+                                    <label for="nombreResponsable">Nombre(s) <span class="req">*</span></label>
+                                    <input type="text" id="nombreResponsable" placeholder="Nombre 1 (Nombre 2)" required>
+                                    <p class="field-error" id="err-nombreResponsable">Este campo es obligatorio.</p>
+                                </div>
+                                <div class="field">
+                                    <label for="emailResponsable">Apellidos <span class="req">*</span></label>
+                                    <input type="email" id="emailResponsable" placeholder="Apellido 1 Apellido 2"
+                                        required>
+                                    <p class="field-error" id="err-emailResponsable">Este campo es obligatorio.</p>
+                                </div>
+                                <div class="field">
+                                    <label for="emailResponsable">Email del autor <span class="req">*</span></label>
+                                    <input type="email" id="emailResponsable" placeholder="correo@ejemplo.com" required>
+                                    <p class="field-error" id="err-emailResponsable">Este campo es obligatorio.</p>
+                                </div>
+                                <div class="field">
+                                    <label for="nombreResponsable">RUT <span class="req">*</span></label>
+                                    <input type="text" id="nombreResponsable" placeholder="XXXXXXXX-X" required>
+                                    <p class="field-error" id="err-nombreResponsable">Este campo es obligatorio.</p>
+                                </div>
+
+                            </div>
+                            <p class="helper">Puedes agregar uno o más proyectos a continuación. El nombre y email se
+                                asociarán a todos.</p>
+                        </div>
+                        <!-- Botón continuar — solo visible en móvil -->
+                        <div class="mob-nav-row mob-nav-row--end">
+                            <button type="button" class="mob-nav-btn mob-nav-btn--next" data-to="1">Continuar <span
+                                    aria-hidden="true">→</span></button>
+                        </div>
+                    </div>
+
+                    <!-- ── Página 1: Proyecto e Imágenes ── -->
+                    <div class="mob-page" data-page="1">
+                        <!-- Tarjetas dinámicas -->
+                        <div id="projectsContainer" id="anchorProyecto"></div>
+
+                        <!-- Agregar proyecto -->
+                        <div class="add-project-wrap" id="anchorImagenes">
+                            <button type="button" class="btn-add-project" id="addProjectBtn">
+                                <span class="btn-add-project-icon">+</span>
+                                Agregar otro proyecto
+                            </button>
+                        </div>
+                        <!-- Botones previo/siguiente — solo visibles en móvil -->
+                        <div class="mob-nav-row mob-nav-row--split">
+                            <button type="button" class="mob-nav-btn mob-nav-btn--prev" data-to="0"><span
+                                    aria-hidden="true">←</span> Autor</button>
+                            <button type="button" class="mob-nav-btn mob-nav-btn--next" data-to="2">Revisar <span
+                                    aria-hidden="true">→</span></button>
+                        </div>
+                    </div>
+
+                    <!-- ── Página 2: Revisión y envío ── -->
+                    <div class="mob-page" data-page="2">
+                        <!-- Acciones -->
+                        <div class="form-actions" id="anchorRevision">
+                            <button type="button" class="btn btn-outline" id="clearBtn">Limpiar</button>
+                            <button type="submit" class="btn btn-primary" id="submitBtn">
+                                <span id="btnText">Enviar proyecto</span>
+                                <span id="btnArrow">→</span>
+                                <div class="spinner" id="spinner"></div>
+                            </button>
+                        </div>
+                        <!-- Botón volver — solo visible en móvil -->
+                        <div class="mob-nav-row mob-nav-row--start">
+                            <button type="button" class="mob-nav-btn mob-nav-btn--prev" data-to="1"><span
+                                    aria-hidden="true">←</span> Volver</button>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="status" id="statusMsg"></div>
+            </form>
+
+            <!-- Pantalla de confirmación post-envío -->
+            <div id="confirmacion">
+                <h2 class="confirm-title">Proyecto<br>enviado.</h2>
+                <p class="confirm-body">
+                    El equipo de comunicaciones de FaAAD UDP revisará tu solicitud.
+                    Si el proyecto es seleccionado, te contactaremos a
+                    <strong id="confirm-email"></strong>.
+                </p>
+                <p class="confirm-list-label">Proyectos enviados</p>
+                <ul id="confirm-list"></ul>
+                <button class="btn btn-primary" id="btnVolverFormulario">Enviar otro proyecto</button>
+            </div>
+
+        </div>
+
+
+    </body>

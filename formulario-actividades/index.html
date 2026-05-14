@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Actividades — FaAAD UDP</title>
+    <link rel="icon" type="image/x-icon" href="./assets/icons/logo-udp-cuad.ico">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=error" />
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- ── Barra de progreso sticky ── -->
+    <nav id="progressSteps" aria-label="Progreso del formulario">
+        <div class="steps-inner">
+            <button class="step-btn active" data-step="0">Autor</button>
+            <button class="step-btn" data-step="1">Solicitud</button>
+            <button class="step-btn" data-step="2">Imágenes</button>
+            <button class="step-btn" data-step="3">Revisión</button>
+        </div>
+    </nav>
+
+    <!-- Nav móvil — bottom bar 3 pasos (solo visible en ≤600px) -->
+    <nav id="mobileNav" aria-label="Navegación del formulario">
+        <button class="mob-step-btn active" data-page="0">
+            <span class="mob-step-num">01</span>
+            <span class="mob-step-label">Autor</span>
+        </button>
+        <button class="mob-step-btn" data-page="1">
+            <span class="mob-step-num">02</span>
+            <span class="mob-step-label">Solicitud</span>
+        </button>
+        <button class="mob-step-btn" data-page="2">
+            <span class="mob-step-num">03</span>
+            <span class="mob-step-label">Enviar</span>
+        </button>
+    </nav>
+
+    <div class="form-wrap">
+
+        <div class="page-header">
+            <h1>Formulario de Actividades</h1>
+            <p>Después de llenar el formulario, el equipo de VcM se contactará contigo en un plazo máximo de 2 días para
+                completar la solicitud.</p>
+        </div>
+
+        <!-- Aviso previo -->
+        <div class="aviso-previo" style="display: flex; align-items:top; gap:10px;">
+            <span class="material-symbols-outlined">
+                error
+            </span>
+            <p style="margin-top: 2px;">El registro no garantiza la aprobación. El equipo de FaAAD UDP evalúa cada
+                solicitud
+                antes de aprobarla.</p>
+        </div>
+
+        <form id="projectForm" novalidate>
+
+            <!-- Error summary -->
+            <div id="error-summary" role="alert" aria-live="polite"></div>
+
+            <div class="form-card">
+
+                <!-- ── Página 0: Autor ── -->
+                <div class="mob-page active" data-page="0">
+                    <div class="author-section" id="anchorAutor">
+                        <h2>Información:</h2>
+                        <div class="field-row">
+
+                            <div class="field">
+                                <label for="nombreResponsable">Nombre <span class="req">*</span></label>
+                                <input type="text" id="nombreResponsable" placeholder="Nombre completo" required>
+                                <p class="field-error" id="err-nombreResponsable">Este campo es obligatorio.</p>
+                            </div>
+                            <div class="field">
+                                <label for="emailResponsable">Email <span class="req">*</span></label>
+                                <input type="email" id="emailResponsable" placeholder="correo@ejemplo.com" required>
+                                <p class="field-error" id="err-emailResponsable">Este campo es obligatorio.</p>
+                            </div>
+                        </div>
+                        <p class="helper">Puedes agregar una o más solicitudes a continuación. El nombre y email se
+                            asociarán a
+                            todas.</p>
+                    </div>
+                    <!-- Botón continuar — solo visible en móvil -->
+                    <div class="mob-nav-row mob-nav-row--end">
+                        <button type="button" class="mob-nav-btn mob-nav-btn--next" data-to="1">Continuar <span
+                                aria-hidden="true">→</span></button>
+                    </div>
+                </div>
+
+                <!-- ── Página 1: Solicitud ── -->
+                <div class="mob-page" data-page="1">
+                    <!-- Tarjetas dinámicas -->
+                    <div id="projectsContainer" id="anchorProyecto"></div>
+
+                    <!-- Agregar proyecto -->
+                    <div class="add-project-wrap" id="anchorProyecto">
+                        <button type="button" class="btn-add-project" id="addProjectBtn">
+                            <span class="btn-add-project-icon">+</span>
+                            Agregar otra solicitud
+                        </button>
+                    </div>
+                    <!-- Botones previo/siguiente — solo visibles en móvil -->
+                    <div class="mob-nav-row mob-nav-row--split">
+                        <button type="button" class="mob-nav-btn mob-nav-btn--prev" data-to="0"><span
+                                aria-hidden="true">←</span>
+                            Autor</button>
+                        <button type="button" class="mob-nav-btn mob-nav-btn--next" data-to="2">Revisar <span
+                                aria-hidden="true">→</span></button>
+                    </div>
+                </div>
+
+                <!-- ── Página 2: Revisión y envío ── -->
+                <div class="mob-page" data-page="2">
+                    <!-- Acciones -->
+                    <div class="form-actions" id="anchorRevision">
+                        <button type="button" class="btn btn-outline" id="clearBtn">Limpiar</button>
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <span id="btnText">Enviar solicitud</span>
+                            <span id="btnArrow">→</span>
+                            <div class="spinner" id="spinner"></div>
+                        </button>
+                    </div>
+                    <!-- Botón volver — solo visible en móvil -->
+                    <div class="mob-nav-row mob-nav-row--start">
+                        <button type="button" class="mob-nav-btn mob-nav-btn--prev" data-to="1"><span
+                                aria-hidden="true">←</span>
+                            Volver</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="status" id="statusMsg"></div>
+        </form>
+
+        <!-- Pantalla de confirmación post-envío -->
+        <div id="confirmacion">
+            <h2 class="confirm-title">Solicitud<br>enviada.</h2>
+            <p class="confirm-body">
+                El equipo de comunicaciones de FaAAD UDP revisará tu solicitud.
+                Si la solicitud es aprobada, te contactaremos a
+                <strong id="confirm-email"></strong>.
+            </p>
+            <p class="confirm-list-label">Solicitudes enviadas</p>
+            <ul id="confirm-list"></ul>
+            <button class="btn btn-primary" id="btnVolverFormulario">Enviar otro proyecto</button>
+        </div>
+    </div>
+</body>
+
+</html>
