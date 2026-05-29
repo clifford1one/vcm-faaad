@@ -22,6 +22,9 @@ function buildCardHTML(id) {
         '<option value="extension">Iniciativas de extensión organizadas por UDP</option>' +
         '<option value="externa">Participación en instancias externas</option>' +
         '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
+
+        '<option value="vcm">Registro de Actividades VcM</option>' +
+
         '</select>' +
         '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
         '</div>' +
@@ -274,11 +277,26 @@ function buildCardHTML(id) {
         '<label for="linksExterna-' + id + '">Links a información complementaria</label>' +
         '<input type="text" id="linksExterna-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
+
+
+        // '<div class="field">' +
+        // '<label for="fechaHoraExterna-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        // '<input type="datetime-local" id="fechaHoraExterna-' + id + '" required>' +
+        // '<p class="field-error" id="err-fechaHoraExterna-' + id + '">Este campo es obligatorio.</p>' +
+        // '</div>' +
+
+
+
         '<div class="field">' +
-        '<label for="fechaHoraExterna-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="datetime-local" id="fechaHoraExterna-' + id + '" required>' +
-        '<p class="field-error" id="err-fechaHoraExterna-' + id + '">Este campo es obligatorio.</p>' +
+        '<label for="fechaHoraExtension-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        // Cambiamos type a "text" y agregamos la clase "datepicker"
+        '<input type="text" class="datepicker" id="fechaHoraExterna-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaHoraExtension-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
+
+
+
+
         '<div class="field">' +
         '<label for="lugarExterna-' + id + '">Lugar <span class="req">*</span></label>' +
         '<input type="text" id="lugarExterna-' + id + '" placeholder="Respuesta corta" required>' +
@@ -384,34 +402,133 @@ function buildCardHTML(id) {
         '<input type="file" class="file-input-hidden" id="fileRegistroInvestigacion-' + id + '" multiple accept="image/*,.pdf">' +
         '<span class="drop-counter" id="cntRegistroInvestigacion-' + id + '"></span>' +
         '</div>' +
+
+
         '<div class="preview-grid" id="prevRegistroInvestigacion-' + id + '"></div>' +
         '</div>' +
         '</div>' +
-        '</div>'
+        '</div>' +   // ← agrega el + aquí
+
+        // Registro de actividades VCM
+        '<div class="form-section solicitud-vcm" id="solicitud-vcm-' + id + '" style="display:none">' +
+        // ... campos vcm ...
+
+        '<p class="section-title">Registro de actividades VCM</p>' +
+        '<div class="field"><label for="actividadVcm-' + id + '">Actividad <span class="req">*</span></label>' +
+        '<input type="text" id="actividadVcm-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-actividadVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+        '<div class="field"><label for="nivelVcm-' + id + '">Nivel</label>' +
+        '<input type="text" id="nivelVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
+        '<input type="text" id="lineaEstrategicaVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="convenioVcm-' + id + '">Convenio</label>' +
+        '<input type="text" id="convenioVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="contraparteVcm-' + id + '">Contraparte</label>' +
+        '<input type="text" id="contraparteVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label>¿Cuenta con financiamiento? <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="financiamientoVcm-' + id + '" data-required="true">' +
+        '<label class="radio-chip"><input type="radio" name="financiamientoVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="financiamientoVcm-' + id + '" value="No"><span>No</span></label>' +
+        '</div>' +
+        '<p class="field-error" id="err-financiamientoVcm-' + id + '">Selecciona una opción.</p></div>' +
+        '<div class="field"><label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
+        '<input type="text" id="tipoFinanciamientoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="montoVcm-' + id + '">Monto</label>' +
+        '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="fechaVcm-' + id + '">Fecha <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaVcm-' + id + '" placeholder="Seleccione fecha..." readonly required>' +
+        '<p class="field-error" id="err-fechaVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+        '<div class="field"><label for="objetivoVcm-' + id + '">Objetivo</label>' +
+        '<input type="text" id="objetivoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="responsableVcm-' + id + '">Responsable <span class="req">*</span></label>' +
+        '<input type="text" id="responsableVcm-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-responsableVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+        '<div class="field"><label for="cursoVcm-' + id + '">Curso</label>' +
+        '<input type="text" id="cursoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="outputVcm-' + id + '">Resultado esperado (output)</label>' +
+        '<input type="text" id="outputVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="outcomeVcm-' + id + '">Resultado esperado (outcome)</label>' +
+        '<input type="text" id="outcomeVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="indicadorActividadVcm-' + id + '">Indicador de actividad</label>' +
+        '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
+        '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>'+
+
+        '</div>'     // ← sin + , sigue siendo el último
     );
 }
+
+// // ── Agregar / eliminar tarjetas ──────────────────────────────
+// function addCard() {
+//     var id = nextCardId++;
+//     cardOrder.push(id);
+//     var container = document.getElementById('projectsContainer');
+//     var wrapper = document.createElement('div');
+//     wrapper.id = 'card-' + id;
+//     wrapper.className = 'project-card';
+//     wrapper.innerHTML = buildCardHTML(id);
+//     container.appendChild(wrapper);
+//     wireCard(id);
+//     // updateCardUI();
+
+
+//     // === ACTIVAR FLATPICKR AQUÍ ===
+//     // Buscamos cualquier input con la clase datepicker dentro de la tarjeta recién creada
+//     flatpickr(wrapper.querySelectorAll('.datepicker'), {
+//         enableTime: true,
+//         dateFormat: "d-m-Y H:i",
+//         minuteIncrement: 30,
+//         time_24hr: true,
+//         locale: {
+//             firstDayOfWeek: 1,
+//             weekdays: {
+//                 shorthand: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+//                 longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+//             },
+//             months: {
+//                 shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+//                 longhand: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+//             },
+//         }
+//     });
+
+//     updateCardUI();
+// }
+
 
 // ── Agregar / eliminar tarjetas ──────────────────────────────
 function addCard() {
     var id = nextCardId++;
     cardOrder.push(id);
+
     var container = document.getElementById('projectsContainer');
     var wrapper = document.createElement('div');
     wrapper.id = 'card-' + id;
     wrapper.className = 'project-card';
+
+    // Generar el HTML de la tarjeta
     wrapper.innerHTML = buildCardHTML(id);
     container.appendChild(wrapper);
+
+    // Conectar lógica de la tarjeta (botones, radios, etc.)
     wireCard(id);
-    // updateCardUI();
 
-
-    // === ACTIVAR FLATPICKR AQUÍ ===
-    // Buscamos cualquier input con la clase datepicker dentro de la tarjeta recién creada
+    // === ACTIVAR FLATPICKR ===
+    // Al usar wrapper.querySelectorAll('.datepicker'), activamos TODOS los 
+    // calendarios de la tarjeta (Extensión, Externa, etc.) de una sola vez.
     flatpickr(wrapper.querySelectorAll('.datepicker'), {
         enableTime: true,
         dateFormat: "d-m-Y H:i",
         minuteIncrement: 30,
         time_24hr: true,
+        //desactivar domingos
+        disable: [
+            function (date) {
+                // Regresa true si el día es 0 (Domingo) para deshabilitarlo
+                return (date.getDay() === 0);
+            }
+        ],
+        //
         locale: {
             firstDayOfWeek: 1,
             weekdays: {
@@ -425,6 +542,7 @@ function addCard() {
         }
     });
 
+    // Actualizar la interfaz (números de tarjeta, visibilidad, etc.)
     updateCardUI();
 }
 
@@ -465,6 +583,9 @@ function wireCard(id) {
         document.getElementById('solicitud-extension-' + id).style.display = val === 'extension' ? 'block' : 'none';
         document.getElementById('solicitud-externa-' + id).style.display = val === 'externa' ? 'block' : 'none';
         document.getElementById('solicitud-investigacion-' + id).style.display = val === 'investigacion' ? 'block' : 'none';
+
+        document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
+
         this.classList.remove('error');
         hideFieldError('tipoSolicitud-' + id);
         hideErrorSummary();
@@ -725,6 +846,16 @@ function validateForm() {
                 { fid: 'investigadorResponsableInvestigacion', label: 'Investigador responsable y afiliación institucional (Solicitud ' + num + ')' }
             ]);
         }
+
+        else if (tipo === 'vcm') {
+            cardFields = cardFields.concat([
+                { fid: 'actividadVcm', label: 'Actividad (Solicitud ' + num + ')' },
+                { fid: 'financiamientoVcm', label: '¿Cuenta con financiamiento? (Solicitud ' + num + ')' },
+                { fid: 'fechaVcm', label: 'Fecha (Solicitud ' + num + ')' },
+                { fid: 'responsableVcm', label: 'Responsable (Solicitud ' + num + ')' }
+            ]);
+        }
+
         cardFields.forEach(function (f) {
             var el = document.getElementById(f.fid + '-' + id);
             if (!el) return;
@@ -832,6 +963,10 @@ document.getElementById('projectForm').addEventListener('submit', function (e) {
         if (tipo === 'extension') return cval(id, 'tituloExtension');
         if (tipo === 'externa') return cval(id, 'tituloExterna');
         if (tipo === 'investigacion') return cval(id, 'tituloInvestigacion');
+
+        if (tipo === 'vcm') return cval(id, 'actividadVcm');
+
+
         return 'Sin título';
     });
     var capturedEmail = document.getElementById('emailResponsable').value.trim();
@@ -932,6 +1067,23 @@ function buildPayload(id) {
         payload.rolUdpInvestigacion = getRadio(id, 'rolUdpInvestigacion');
         payload.investigadorResponsableInvestigacion = cval(id, 'investigadorResponsableInvestigacion');
         payload.investigadoresColaboradoresInvestigacion = cval(id, 'investigadoresColaboradoresInvestigacion');
+    } else if (tipo === 'vcm') {
+        payload.actividadVcm = cval(id, 'actividadVcm');
+        payload.nivelVcm = cval(id, 'nivelVcm');
+        payload.lineaEstrategicaVcm = cval(id, 'lineaEstrategicaVcm');
+        payload.convenioVcm = cval(id, 'convenioVcm');
+        payload.contraparteVcm = cval(id, 'contraparteVcm');
+        payload.financiamientoVcm = getRadio(id, 'financiamientoVcm');
+        payload.tipoFinanciamientoVcm = cval(id, 'tipoFinanciamientoVcm');
+        payload.montoVcm = cval(id, 'montoVcm');
+        payload.fechaVcm = cval(id, 'fechaVcm');
+        payload.objetivoVcm = cval(id, 'objetivoVcm');
+        payload.responsableVcm = cval(id, 'responsableVcm');
+        payload.cursoVcm = cval(id, 'cursoVcm');
+        payload.outputVcm = cval(id, 'outputVcm');
+        payload.outcomeVcm = cval(id, 'outcomeVcm');
+        payload.indicadorActividadVcm = cval(id, 'indicadorActividadVcm');
+        payload.indicadorResultadoVcm = cval(id, 'indicadorResultadoVcm');
     }
     return payload;
 }
