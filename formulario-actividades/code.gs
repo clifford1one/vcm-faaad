@@ -3,9 +3,9 @@
 var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
 var SHEET_GENERAL = 'pruebas-VCM';
 
-var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw'
+var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw';
 // var SHEET_GENERAL_VCM = 'pruebitas'
-var SHEET_GENERAL_VCM = 'Registro-VcM'
+var SHEET_GENERAL_VCM = 'Registro-VcM';
 
 
 var DRIVE_FOLDER_ID = '114KG_idXui1SK3amPksnTVK5ejd8mted';
@@ -132,19 +132,23 @@ function enviarProyecto(payload) {
       row[1] = payload.nivelVcm;
       row[2] = payload.lineaEstrategicaVcm;
       row[3] = payload.convenioVcm;
-      row[4] = payload.contraparteVcm;
-      row[5] = payload.financiamientoVcm;
+      row[4]= payload.institucionConvenioVcm;
+      row[5] = payload.contraparteVcm;
+      row[6] = payload.financiamientoVcm;
       // en la 6, se pone el tipo de financ, no importa si externo interno u otro
-      row[6] = payload.tipoFinanciamientoVcm || payload.fondoExternoVcm || payload.fondoInternoVcm;
-      row[7] = payload.montoVcm;
-      row[8] = payload.fechaVcm;
-      row[9] = payload.objetivoVcm;
-      row[10] = payload.responsableVcm;
-      row[11] = payload.cursoVcm;
-      row[12] = payload.outputVcm;
-      row[13] = payload.outcomeVcm;
-      row[14] = payload.indicadorActividadVcm;
-      row[15] = payload.indicadorResultadoVcm;
+      row[7] = payload.tipoFinanciamientoVcm || payload.fondoExternoVcm || payload.fondoInternoVcm;
+      row[8] = payload.montoVcm;
+      // row[8] = payload.fechaVcm;
+      row[9] = (payload.fechaInicioVcm || '') + ' - ' + (payload.fechaTerminoVcm || '');
+
+
+      row[10] = payload.objetivoVcm;
+      row[11] = payload.responsableVcm;
+      row[12] = payload.cursoVcm;
+      row[13] = payload.outputVcm;
+      row[14] = payload.outcomeVcm;
+      row[15] = payload.indicadorActividadVcm;
+      row[16] = payload.indicadorResultadoVcm;
     }
 
     row[90] = payload.nombreResponsable;
@@ -164,7 +168,7 @@ function enviarProyecto(payload) {
 
     if (payload.tipoSolicitud === 'vcm') {
       var ssVcm = SpreadsheetApp.openById(SPREADSHEET_ID_VCM);
-      var sheetVcm = ssVcm.getSheetByName('pruebitas');
+      var sheetVcm = ssVcm.getSheetByName('Registro-VcM');
       if (sheetVcm) {
         sheetVcm.appendRow(row);
       }
@@ -200,7 +204,7 @@ function enviarProyecto(payload) {
           '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
       });
     } else {
-      var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
+      var sheetGeneral = ss.getSheetByName(SHEET_GENERAL_VCM);
       if (sheetGeneral) {
         sheetGeneral.appendRow(row);
       }

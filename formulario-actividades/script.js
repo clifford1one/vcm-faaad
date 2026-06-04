@@ -74,6 +74,9 @@ function buildCardHTML(id) {
         '<option value="Otra institución">Otra institución</option>' +
         '</select>' +
         '</div>' +
+
+      
+
         '<div class="field-row">' +
         '<div class="field">' +
         '<label for="participantesNombreExtension-' + id + '">Nombre <span class="req">*</span></label>' +
@@ -423,7 +426,12 @@ function buildCardHTML(id) {
         // '<div class="field"><label for="nivelVcm-' + id + '">Nivel</label>' +
         // '<input type="text" id="nivelVcm-' + id + '" placeholder="Respuesta corta"></div>' +
 
-        '<div class="field"><label>Nivel</label>' +
+        // '<div class="field"><label>Nivel</label>' +
+        // '<div class="field"><label>Nivel <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Texto explicativo del nivel aquí.</span></span></label>' +
+        '<div class="field"><label>Nivel <span class="tooltip-icon">?</span><span class="tooltip-box" style="left:5vw">Inicial: actividades unidireccionales de impacto externo limitado en el medio y/o estudiantes. Ejemplos: salidas a terreno, visitas de profesionales externos a la sala de clases o talleres abiertos a la comunidad.<br><br>Medio: acciones unidireccionales o bidireccionales que generan un impacto en la comunidad y en los estudiantes como parte de un proceso formativo. Ejemplos: charlas, conversatorios, seminarios, trabajo con contrapartes en cursos teórico prácticos, participación en ferias o instancias de divulgación (podcast, vodcast, etc).<br><br>Alto: acciones bidireccionales, continuas y de alto impacto entre la escuela y su entorno. Ejemplos: desarrollo de exposiciones, actividades semestrales con contrapartes en cursos o taller, workshops y publicaciones académicas.</span></label>' +
+
+
+
         '<div class="radio-chips">' +
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Inicial"><span>Inicial</span></label>' +
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Medio"><span>Medio</span></label>' +
@@ -431,23 +439,72 @@ function buildCardHTML(id) {
         '</div></div>' +
 
 
-        '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
-        '<input type="text" id="lineaEstrategicaVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
+        // '<input type="text" id="lineaEstrategicaVcm-' + id + '" placeholder="Respuesta corta"></div>' +
 
+        // desplegable linea estratégica
+        // '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
+
+        '<div class="field"><label>Línea Estratégica<span class="tooltip-icon">?</span><span class="tooltip-box" style="left:13vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
+        '<select id="lineaEstrategicaVcm-' + id + '">' +
+        '<option value="">Selecciona una opción</option>' +
+        '<option value="Docencia vinculada al medio">1. Docencia vinculada al medio</option>' +
+        '<option value="Extensión académica y cultural">2. Extensión académica y cultural</option>' +
+        '<option value="Desarrollo de proyectos y servicios comunitarios">3. Desarrollo de proyectos y servicios comunitarios</option>' +
+        '<option value="Redes y posicionamiento disciplinar">4. Redes y posicionamiento disciplinar</option>' +
+        '</select></div>' +
 
 
         // '<div class="field"><label for="convenioVcm-' + id + '">Convenio</label>' +
         // '<input type="text" id="convenioVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+        // '<div class="field"><label>Convenio</label>' +
+        // '<div class="radio-chips">' +
+        // '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
+        // '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
+        // '</div></div>' +
+
+
         '<div class="field"><label>Convenio</label>' +
         '<div class="radio-chips">' +
         '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
         '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
         '</div></div>' +
+        '<div class="field" id="institucionConvenioWrapVcm-' + id + '" style="display:none">' +
+        '<label for="institucionConvenioVcm-' + id + '">Institución con convenio</label>' +
+        '<select id="institucionConvenioVcm-' + id + '">' +
+        '<option value="">Selecciona una institución</option>' +
+        '<option value="Museo de la Solidaridad Salvador Allende">Museo de la Solidaridad Salvador Allende</option>' +
+        '<option value="Centro Cultural CEINA">Centro Cultural CEINA</option>' +
+        '<option value="Museo Nacional de Bellas Artes">Museo Nacional de Bellas Artes</option>' +
+        '<option value="Biblioteca Nacional de Chile">Biblioteca Nacional de Chile</option>' +
+        '<option value="Teatro Municipal de Santiago">Teatro Municipal de Santiago</option>' +
+        '<option value="Museo Interactivo Mirador">Museo Interactivo Mirador</option>' +
+        '<option value="Museo de Artes Visuales">Museo de Artes Visuales</option>' +
+        '<option value="Museo Artequín">Museo Artequín</option>' +
+        '<option value="Empresa de Ferrocarriles del Estado">Empresa de Ferrocarriles del Estado</option>' +
+        '<option value="Museo de la Memoria y los Derechos Humanos">Museo de la Memoria y los Derechos Humanos</option>' +
+        '<option value="Museo de la Educación Gabriela Mistral">Museo de la Educación Gabriela Mistral</option>' +
+        '<option value="Fundación TECHO Chile">Fundación TECHO Chile</option>' +
+        '<option value="Municipalidad de Recoleta">Municipalidad de Recoleta</option>' +
+        '<option value="MOBIL Arquitectos">MOBIL Arquitectos</option>' +
+        '<option value="Asociación de Oficinas de Arquitectura">Asociación de Oficinas de Arquitectura</option>' +
+        // '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
+        // '<option value="Otra institución">Otra institución</option>' +
+        // '</select>' +
+        // '</div>' +
+        '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
+'<option value="Otra institución">Otra institución</option>' +
+'</select>' +
+'<div id="institucionConvenioOtroWrapVcm-' + id + '" style="display:none">' +
+'<input type="text" id="institucionConvenioOtroVcm-' + id + '" placeholder="Especifica la institución">' +
+'</div>' +
+'</div>' +  
 
 
 
-        '<div class="field"><label for="contraparteVcm-' + id + '">Contraparte</label>' +
-        '<input type="text" id="contraparteVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label for="contraparteVcm-' + id + '">Nombre y Cargo Contraparte</label>' +
+        '<input type="text" id="contraparteVcm-' + id + '" placeholder="Nombre, Cargo"></div>' +
 
 
 
@@ -487,7 +544,7 @@ function buildCardHTML(id) {
         '<label>Fondo interno</label>' +
         '<div class="radio-chips">' +
         '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Vértice"><span>Vértice</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Innovación DOC"><span>Innovación DOC</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Innovación Docente"><span>Innovación Docente</span></label>' +
         '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Otro"><span>Otro</span></label>' +
         '</div>' +
         '<div class="field" id="fondoInternoOtroWrapVcm-' + id + '" style="display:none">' +
@@ -524,15 +581,32 @@ function buildCardHTML(id) {
 
 
 
-        '<div class="field"><label for="fechaVcm-' + id + '">Fecha y Hora <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker" id="fechaVcm-' + id + '" placeholder="Seleccione fecha..." readonly required>' +
-        '<p class="field-error" id="err-fechaVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+        // '<div class="field"><label for="fechaVcm-' + id + '">Fecha y Hora <span class="req">*</span></label>' +
+        // '<input type="text" class="datepicker" id="fechaVcm-' + id + '" placeholder="Seleccione fecha..." readonly required>' +
+        // '<p class="field-error" id="err-fechaVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+
+
+
+        // calendario inicio y fin
+        '<div class="field-row">' +
+        '<div class="field">' +
+        '<label for="fechaInicioVcm-' + id + '">Fecha de inicio <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker-fecha" id="fechaInicioVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
+        '<p class="field-error" id="err-fechaInicioVcm-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '<div class="field">' +
+        '<label for="fechaTerminoVcm-' + id + '">Fecha de término <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker-fecha" id="fechaTerminoVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
+        '<p class="field-error" id="err-fechaTerminoVcm-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '</div>' +
+
         '<div class="field"><label for="objetivoVcm-' + id + '">Objetivo</label>' +
         '<input type="text" id="objetivoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="responsableVcm-' + id + '">Responsable <span class="req">*</span></label>' +
+        '<div class="field"><label for="responsableVcm-' + id + '">Responsable UDP<span class="req">*</span></label>' +
         '<input type="text" id="responsableVcm-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-responsableVcm-' + id + '">Este campo es obligatorio.</p></div>' +
-        '<div class="field"><label for="cursoVcm-' + id + '">Curso</label>' +
+        '<div class="field"><label for="cursoVcm-' + id + '">Curso Asociado</label>' +
         '<input type="text" id="cursoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="outputVcm-' + id + '">Resultado esperado (output)</label>' +
         '<input type="text" id="outputVcm-' + id + '" placeholder="Respuesta corta"></div>' +
@@ -631,6 +705,22 @@ function addCard() {
         }
     });
 
+    // calendario pa vcm
+    flatpickr(wrapper.querySelectorAll('.datepicker-fecha'), {
+        enableTime: false,
+        dateFormat: "Y/m/d",
+        locale: {
+            firstDayOfWeek: 1,
+            weekdays: {
+                shorthand: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
+                longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+            },
+            months: {
+                shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
+                longhand: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+            },
+        }
+    });
     // Actualizar la interfaz (números de tarjeta, visibilidad, etc.)
     updateCardUI();
 }
@@ -793,6 +883,22 @@ function wireCard(id) {
             });
         });
     });
+
+    // despliega opcion de convenios si pones qie si convenio en tipo de solicitud vcm
+    card.querySelectorAll('input[name="convenioVcm-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var wrap = document.getElementById('institucionConvenioWrapVcm-' + id);
+            if (wrap) wrap.style.display = this.value === 'Sí' ? 'block' : 'none';
+        });
+    });
+
+    var instConvenioVcm = document.getElementById('institucionConvenioVcm-' + id);
+    if (instConvenioVcm) {
+        instConvenioVcm.addEventListener('change', function () {
+            var otroWrap = document.getElementById('institucionConvenioOtroWrapVcm-' + id);
+            if (otroWrap) otroWrap.style.display = this.value === 'Otra institución' ? 'block' : 'none';
+        });
+    }
 }
 
 // Wire apoyo gráfico drop zones (called lazily when panel opens)
@@ -981,7 +1087,10 @@ function validateForm() {
             cardFields = cardFields.concat([
                 { fid: 'actividadVcm', label: 'Actividad (Solicitud ' + num + ')' },
                 { fid: 'financiamientoVcm', label: '¿Cuenta con financiamiento? (Solicitud ' + num + ')' },
-                { fid: 'fechaVcm', label: 'Fecha (Solicitud ' + num + ')' },
+                // { fid: 'fechaVcm', label: 'Fecha (Solicitud ' + num + ')' },
+                // calendario inicio y fin 
+                { fid: 'fechaInicioVcm', label: 'Fecha de inicio (Solicitud ' + num + ')' },
+                { fid: 'fechaTerminoVcm', label: 'Fecha de término (Solicitud ' + num + ')' },
                 { fid: 'responsableVcm', label: 'Responsable (Solicitud ' + num + ')' }
             ]);
         }
@@ -1212,6 +1321,9 @@ function buildPayload(id) {
 
         // payload.convenioVcm = cval(id, 'convenioVcm');
         payload.convenioVcm = getRadio(id, 'convenioVcm');
+        // payload.institucionConvenioVcm = cval(id, 'institucionConvenioVcm');
+        var instConvenio = cval(id, 'institucionConvenioVcm');
+        payload.institucionConvenioVcm = instConvenio === 'Otra institución' ? cval(id, 'institucionConvenioOtroVcm') : instConvenio;
 
 
         payload.contraparteVcm = cval(id, 'contraparteVcm');
@@ -1229,7 +1341,12 @@ function buildPayload(id) {
 
 
         payload.montoVcm = cval(id, 'montoVcm');
-        payload.fechaVcm = cval(id, 'fechaVcm');
+        // payload.fechaVcm = cval(id, 'fechaVcm');
+
+        // agrrgar calendario de inicio y fin
+        payload.fechaInicioVcm = cval(id, 'fechaInicioVcm');
+        payload.fechaTerminoVcm = cval(id, 'fechaTerminoVcm');
+
         payload.objetivoVcm = cval(id, 'objetivoVcm');
         payload.responsableVcm = cval(id, 'responsableVcm');
         payload.cursoVcm = cval(id, 'cursoVcm');
