@@ -4,7 +4,9 @@ var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
 var SHEET_GENERAL = 'pruebas-VCM';
 
 var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw'
-var SHEET_GENERAL_VCM = 'pruebitas'
+// var SHEET_GENERAL_VCM = 'pruebitas'
+var SHEET_GENERAL_VCM = 'Registro-VcM'
+
 
 var DRIVE_FOLDER_ID = '114KG_idXui1SK3amPksnTVK5ejd8mted';
 
@@ -132,7 +134,8 @@ function enviarProyecto(payload) {
       row[3] = payload.convenioVcm;
       row[4] = payload.contraparteVcm;
       row[5] = payload.financiamientoVcm;
-      row[6] = payload.tipoFinanciamientoVcm;
+      // en la 6, se pone el tipo de financ, no importa si externo interno u otro
+      row[6] = payload.tipoFinanciamientoVcm || payload.fondoExternoVcm || payload.fondoInternoVcm;
       row[7] = payload.montoVcm;
       row[8] = payload.fechaVcm;
       row[9] = payload.objetivoVcm;
@@ -165,6 +168,37 @@ function enviarProyecto(payload) {
       if (sheetVcm) {
         sheetVcm.appendRow(row);
       }
+
+      MailApp.sendEmail({
+        to: 'santiago.gaete@mail.udp.cl, maria.faundez4@mail.udp.cl',
+        subject: '[FaAAD Diseño] Nueva actividad registrada: VcM',
+        htmlBody:
+          '<p>Estimado/a, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
+          '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
+          '<hr>' +
+          '<p><strong>Descripción de la actividad:</strong> ' + (payload.actividadVcm || '') + '</p>' +
+          '<p><strong>Nivel:</strong> ' + (payload.nivelVcm || '') + '</p>' +
+          '<p><strong>Línea estratégica:</strong> ' + (payload.lineaEstrategicaVcm || '') + '</p>' +
+          '<p><strong>Convenio:</strong> ' + (payload.convenioVcm || '') + '</p>' +
+          '<p><strong>Contraparte:</strong> ' + (payload.contraparteVcm || '') + '</p>' +
+          '<p><strong>Financiamiento:</strong> ' + (payload.financiamientoVcm || '') + '</p>' +
+          '<p><strong>Tipo de financiamiento:</strong> ' + (payload.tipoFinanciamientoVcm || '') + '</p>' +
+          '<p><strong>Fondo externo:</strong> ' + (payload.fondoExternoVcm || '') + '</p>' +
+          '<p><strong>Fondo interno:</strong> ' + (payload.fondoInternoVcm || '') + '</p>' +
+          '<p><strong>Monto:</strong> ' + (payload.montoVcm || '') + '</p>' +
+          '<p><strong>Fecha y hora:</strong> ' + (payload.fechaVcm || '') + '</p>' +
+          '<p><strong>Objetivo:</strong> ' + (payload.objetivoVcm || '') + '</p>' +
+          '<p><strong>Responsable:</strong> ' + (payload.responsableVcm || '') + '</p>' +
+          '<p><strong>Curso:</strong> ' + (payload.cursoVcm || '') + '</p>' +
+          '<p><strong>Resultado esperado (output):</strong> ' + (payload.outputVcm || '') + '</p>' +
+          '<p><strong>Resultado esperado (outcome):</strong> ' + (payload.outcomeVcm || '') + '</p>' +
+          '<p><strong>Indicador de actividad:</strong> ' + (payload.indicadorActividadVcm || '') + '</p>' +
+          '<p><strong>Indicador de resultado:</strong> ' + (payload.indicadorResultadoVcm || '') + '</p>' +
+          '<p><strong>Enviado por:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+          '<hr>' +
+          '<p><a href="https://docs.google.com/spreadsheets/d/1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw/edit?usp=sharing">Ver en la planilla</a></p>' +
+          '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+      });
     } else {
       var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
       if (sheetGeneral) {
@@ -178,3 +212,4 @@ function enviarProyecto(payload) {
     return { exito: false, mensaje: 'Error: ' + e.toString() };
   }
 }
+

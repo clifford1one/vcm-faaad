@@ -414,28 +414,117 @@ function buildCardHTML(id) {
         // ... campos vcm ...
 
         '<p class="section-title">Registro de actividades VCM</p>' +
-        '<div class="field"><label for="actividadVcm-' + id + '">Actividad <span class="req">*</span></label>' +
+        '<div class="field"><label for="actividadVcm-' + id + '">Descripción de la Actividad <span class="req">*</span></label>' +
         '<input type="text" id="actividadVcm-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-actividadVcm-' + id + '">Este campo es obligatorio.</p></div>' +
-        '<div class="field"><label for="nivelVcm-' + id + '">Nivel</label>' +
-        '<input type="text" id="nivelVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+
+
+        // '<div class="field"><label for="nivelVcm-' + id + '">Nivel</label>' +
+        // '<input type="text" id="nivelVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+        '<div class="field"><label>Nivel</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Inicial"><span>Inicial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Medio"><span>Medio</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Alto"><span>Alto</span></label>' +
+        '</div></div>' +
+
+
         '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
         '<input type="text" id="lineaEstrategicaVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="convenioVcm-' + id + '">Convenio</label>' +
-        '<input type="text" id="convenioVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+
+
+        // '<div class="field"><label for="convenioVcm-' + id + '">Convenio</label>' +
+        // '<input type="text" id="convenioVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '<div class="field"><label>Convenio</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
+        '</div></div>' +
+
+
+
         '<div class="field"><label for="contraparteVcm-' + id + '">Contraparte</label>' +
         '<input type="text" id="contraparteVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+
+
         '<div class="field"><label>¿Cuenta con financiamiento? <span class="req">*</span></label>' +
         '<div class="radio-chips" id="financiamientoVcm-' + id + '" data-required="true">' +
         '<label class="radio-chip"><input type="radio" name="financiamientoVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
         '<label class="radio-chip"><input type="radio" name="financiamientoVcm-' + id + '" value="No"><span>No</span></label>' +
         '</div>' +
         '<p class="field-error" id="err-financiamientoVcm-' + id + '">Selecciona una opción.</p></div>' +
-        '<div class="field"><label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
-        '<input type="text" id="tipoFinanciamientoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="montoVcm-' + id + '">Monto</label>' +
-        '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="fechaVcm-' + id + '">Fecha <span class="req">*</span></label>' +
+        // esto era cuando tipo de financimiento se repondía con texto
+        // '<div class="field"><label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
+        // '<input type="text" id="tipoFinanciamientoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '<div class="field"><label for="montoVcm-' + id + '">Monto</label>' +
+        // '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+
+        '<div class="field" id="financiamientoDetalleWrapVcm-' + id + '" style="display:none">' +
+        '<label>Tipo de financiamiento</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="tipoFinanciamientoVcm-' + id + '" value="Externo"><span>Externo</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="tipoFinanciamientoVcm-' + id + '" value="Interno"><span>Interno</span></label>' +
+        '</div>' +
+
+        '<div class="field" id="fondoExternoWrapVcm-' + id + '" style="display:none">' +
+        '<label>Fondo externo</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="fondoExternoVcm-' + id + '" value="Ciencia Pública"><span>Ciencia Pública</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="fondoExternoVcm-' + id + '" value="FONDART"><span>FONDART</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="fondoExternoVcm-' + id + '" value="Otro"><span>Otro</span></label>' +
+        '</div>' +
+        '<div class="field" id="fondoExternoOtroWrapVcm-' + id + '" style="display:none">' +
+        '<input type="text" id="fondoExternoOtroVcm-' + id + '" placeholder="Especifica el fondo externo">' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field" id="fondoInternoWrapVcm-' + id + '" style="display:none">' +
+        '<label>Fondo interno</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Vértice"><span>Vértice</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Innovación DOC"><span>Innovación DOC</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="fondoInternoVcm-' + id + '" value="Otro"><span>Otro</span></label>' +
+        '</div>' +
+        '<div class="field" id="fondoInternoOtroWrapVcm-' + id + '" style="display:none">' +
+        '<input type="text" id="fondoInternoOtroVcm-' + id + '" placeholder="Especifica el fondo interno">' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="montoVcm-' + id + '">Monto</label>' +
+        '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+        '</div>' +
+
+
+
+
+        '<div class="field" id="financiamientoDetalleWrapVcm-' + id + '" style="display:none">' +
+        '<label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="tipoFinanciamientoVcm-' + id + '" value="Público"><span>Público</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="tipoFinanciamientoVcm-' + id + '" value="Privado"><span>Privado</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="tipoFinanciamientoVcm-' + id + '" value="Otro"><span>Otro</span></label>' +
+        '</div>' +
+        '<div class="field" id="tipoFinanciamientoOtroWrapVcm-' + id + '" style="display:none">' +
+        '<input type="text" id="tipoFinanciamientoOtroVcm-' + id + '" placeholder="Especifica el tipo de financiamiento">' +
+        '</div>' +
+        '<div class="field">' +
+        '<label for="montoVcm-' + id + '">Monto</label>' +
+        '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+        '</div>' +
+
+
+
+
+
+        '<div class="field"><label for="fechaVcm-' + id + '">Fecha y Hora <span class="req">*</span></label>' +
         '<input type="text" class="datepicker" id="fechaVcm-' + id + '" placeholder="Seleccione fecha..." readonly required>' +
         '<p class="field-error" id="err-fechaVcm-' + id + '">Este campo es obligatorio.</p></div>' +
         '<div class="field"><label for="objetivoVcm-' + id + '">Objetivo</label>' +
@@ -452,7 +541,7 @@ function buildCardHTML(id) {
         '<div class="field"><label for="indicadorActividadVcm-' + id + '">Indicador de actividad</label>' +
         '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
-        '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>'+
+        '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
 
         '</div>'     // ← sin + , sigue siendo el último
     );
@@ -642,6 +731,47 @@ function wireCard(id) {
     wireDropZone('dropRegistroExtension-' + id, 'fileRegistroExtension-' + id, 'cntRegistroExtension-' + id, 'prevRegistroExtension-' + id);
     wireDropZone('dropRegistroExterna-' + id, 'fileRegistroExterna-' + id, 'cntRegistroExterna-' + id, 'prevRegistroExterna-' + id);
     wireDropZone('dropRegistroInvestigacion-' + id, 'fileRegistroInvestigacion-' + id, 'cntRegistroInvestigacion-' + id, 'prevRegistroInvestigacion-' + id);
+
+
+
+
+
+
+    // ¿Cuenta con financiamiento? → mostrar detalle
+    card.querySelectorAll('input[name="financiamientoVcm-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var wrap = document.getElementById('financiamientoDetalleWrapVcm-' + id);
+            if (wrap) wrap.style.display = this.value === 'Sí' ? 'block' : 'none';
+        });
+    });
+
+    // Externo o interno → mostrar el fondo correspondiente
+    card.querySelectorAll('input[name="tipoFinanciamientoVcm-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            document.getElementById('fondoExternoWrapVcm-' + id).style.display = this.value === 'Externo' ? 'block' : 'none';
+            document.getElementById('fondoInternoWrapVcm-' + id).style.display = this.value === 'Interno' ? 'block' : 'none';
+        });
+    });
+
+    // Fondo externo → Otro
+    card.querySelectorAll('input[name="fondoExternoVcm-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var otroWrap = document.getElementById('fondoExternoOtroWrapVcm-' + id);
+            if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+        });
+    });
+
+    // Fondo interno → Otro
+    card.querySelectorAll('input[name="fondoInternoVcm-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var otroWrap = document.getElementById('fondoInternoOtroWrapVcm-' + id);
+            if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+        });
+    });
+
+
+
+
 
     removeBtn.addEventListener('click', function () {
         if (cardOrder.length > 1 && confirm('¿Eliminar esta solicitud del formulario?')) {
@@ -1069,12 +1199,35 @@ function buildPayload(id) {
         payload.investigadoresColaboradoresInvestigacion = cval(id, 'investigadoresColaboradoresInvestigacion');
     } else if (tipo === 'vcm') {
         payload.actividadVcm = cval(id, 'actividadVcm');
-        payload.nivelVcm = cval(id, 'nivelVcm');
+
+
+
+        // payload.nivelVcm = cval(id, 'nivelVcm');
+        payload.nivelVcm = getRadio(id, 'nivelVcm');
+
+
+
         payload.lineaEstrategicaVcm = cval(id, 'lineaEstrategicaVcm');
-        payload.convenioVcm = cval(id, 'convenioVcm');
+
+
+        // payload.convenioVcm = cval(id, 'convenioVcm');
+        payload.convenioVcm = getRadio(id, 'convenioVcm');
+
+
         payload.contraparteVcm = cval(id, 'contraparteVcm');
         payload.financiamientoVcm = getRadio(id, 'financiamientoVcm');
-        payload.tipoFinanciamientoVcm = cval(id, 'tipoFinanciamientoVcm');
+
+
+
+        // payload.tipoFinanciamientoVcm = cval(id, 'tipoFinanciamientoVcm');
+        // esto era cuando tipo de financ se respondia con texto
+        // payload.tipoFinanciamientoVcm = getRadio(id, 'tipoFinanciamientoVcm');
+        var fondoExterno = getRadio(id, 'fondoExternoVcm');
+        payload.fondoExternoVcm = fondoExterno === 'Otro' ? cval(id, 'fondoExternoOtroVcm') : fondoExterno;
+        var fondoInterno = getRadio(id, 'fondoInternoVcm');
+        payload.fondoInternoVcm = fondoInterno === 'Otro' ? cval(id, 'fondoInternoOtroVcm') : fondoInterno;
+
+
         payload.montoVcm = cval(id, 'montoVcm');
         payload.fechaVcm = cval(id, 'fechaVcm');
         payload.objetivoVcm = cval(id, 'objetivoVcm');

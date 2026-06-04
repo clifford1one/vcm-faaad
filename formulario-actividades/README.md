@@ -20,3 +20,22 @@ Link del appscript
 
 - <https://script.google.com/d/1ilYLD5aOOhDJG-KC4mCjGIsPP79lHkVIzp9BDLfHE65Zn-sBRWWEYgZG/edit?usp=sharing>
 
+
+
+pruebaaa 
+
+```
+
+function testVcm() {
+  var payload = {
+    tipoSolicitud: 'vcm',
+    actividadVcm: 'Prueba actividad',
+    responsableVcm: 'Juan Pérez',
+    fechaVcm: '04-06-2026',
+    nombreResponsable: 'Juan Pérez',
+    emailResponsable: 'juan@mail.com'
+  };
+  var resultado = enviarProyecto(payload);
+  Logger.log(resultado);
+}
+```
