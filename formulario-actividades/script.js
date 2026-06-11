@@ -5,6 +5,7 @@ var STEP_LABELS = ['Autor', 'Solicitud', 'Enviar'];
 var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
 
 // ── HTML de cada tarjeta ─────────────────────────────────────
+// esta funcion se encarga de mostrar las preugntas al usuario.
 function buildCardHTML(id) {
     return (
         '<div class="project-card-header">' +
@@ -13,6 +14,11 @@ function buildCardHTML(id) {
         '</div>' +
 
         // Tipo de solicitud
+
+        //////////////////////////////////////////////////
+        /////////////////// GENERAAAAL ///////////////////
+        //////////////////////////////////////////////////
+
         '<div class="form-section" id="anchorProyecto-' + id + '">' +
         '<p class="section-title">Tipo de solicitud</p>' +
         '<div class="field">' +
@@ -20,21 +26,26 @@ function buildCardHTML(id) {
         '<select id="tipoSolicitud-' + id + '" required>' +
         '<option value="">Selecciona una opción</option>' +
         '<option value="extension">Iniciativas de extensión organizadas por UDP</option>' +
+        '<option value="extension2">Iniciativas de extensión UDP (v2)</option>' +
         '<option value="externa">Participación en instancias externas</option>' +
+        '<option value="externa2">Participación en instancias externas (v2)</option>' +
         '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
-
+        '<option value="investigacion2">Proyectos de Investigación (v2)</option>' +
         '<option value="vcm">Registro de Actividades VcM</option>' +
 
         '</select>' +
         '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
         '</div>' +
         '</div>' +
+        //////////////////////////////////////////////////
+        // Iniciativas de extensión organizadas por UDP //
+        //////////////////////////////////////////////////
 
-        // Iniciativas de extensión organizadas por UDP
         '<div class="form-section solicitud-extension" id="solicitud-extension-' + id + '" style="display:none">' +
         '<p class="section-title">Iniciativas de extensión organizadas por UDP</p>' +
         '<div class="field">' +
         '<label for="tituloExtension-' + id + '">Título <span class="req">*</span></label>' +
+        // ñññññññ
         '<input type="text" id="tituloExtension-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-tituloExtension-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
@@ -248,7 +259,139 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +
 
-        // Participación en instancias externas
+
+
+        //////////////////////////////////////////
+        // Participación en instancias externas v2//
+        //////////////////////////////////////////
+        // Extensión v2
+        '<div class="form-section solicitud-extension2" id="solicitud-extension2-' + id + '" style="display:none">' +
+        '<p class="section-title">Iniciativas de extensión organizadas por UDP</p>' +
+
+        '<div class="field">' +
+        '<label for="organizaExtension2-' + id + '">Organiza(n) <span class="req">*</span></label>' +
+        '<select id="organizaExtension2-' + id + '" required>' +
+        '<option value="">Selecciona una opción</option>' +
+        '<option value="Escuela de Diseño">Escuela de Diseño</option>' +
+        '<option value="Escuela de Arquitectura">Escuela de Arquitectura</option>' +
+        '<option value="Escuela de Arte">Escuela de Arte</option>' +
+        '<option value="Laboratorio de Interacción (LID)">Laboratorio de Interacción (LID)</option>' +
+        '<option value="LABORATORIO OTF">LABORATORIO OTF</option>' +
+        '<option value="LAB 360">LAB 360</option>' +
+        '<option value="CENTRO EDITORIAL">CENTRO EDITORIAL</option>' +
+        '<option value="Otro">Otro</option>' +
+        '</select>' +
+        '<p class="field-error" id="err-organizaExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '<div class="field" id="organizaOtroWrapExtension2-' + id + '" style="display:none">' +
+        '<input type="text" id="organizaOtroExtension2-' + id + '" placeholder="Especifica quién organiza">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="tituloExtension2-' + id + '">Título de la actividad <span class="req">*</span></label>' +
+        '<input type="text" id="tituloExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-tituloExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="cicloExtension2-' + id + '">Nombre del ciclo o proyecto al que pertenece</label>' +
+        '<input type="text" id="cicloExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="descripcionExtension2-' + id + '">Descripción del evento o iniciativa <span class="req">*</span></label>' +
+        '<input type="text" id="descripcionExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-descripcionExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="participanExtension2-' + id + '">Participan o colaboran</label>' +
+        '<input type="text" id="participanExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="reseñaParticipantesExtension2-' + id + '">Reseña de participantes e instituciones</label>' +
+        '<input type="text" id="reseñaParticipantesExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="fechaHoraExtension2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaHoraExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaHoraExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="lugarExtension2-' + id + '">Lugar <span class="req">*</span></label>' +
+        '<input type="text" id="lugarExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-lugarExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>Formato <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="formatoExtension2-' + id + '" data-required="true">' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Online"><span>Online</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
+        '</div>' +
+        '<p class="field-error" id="err-formatoExtension2-' + id + '">Selecciona una opción.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="publicoObjetivoExtension2-' + id + '">Público objetivo</label>' +
+        '<input type="text" id="publicoObjetivoExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="cantidadAsistentesExtension2-' + id + '">Cantidad de asistentes</label>' +
+        '<input type="text" id="cantidadAsistentesExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>¿Solicitas apoyo gráfico? <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="apoyoGraficoExtension2-' + id + '" data-required="true">' +
+        '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtension2-' + id + '" value="Sí"><span>Sí</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtension2-' + id + '" value="No"><span>No</span></label>' +
+        '</div>' +
+        '<p class="field-error" id="err-apoyoGraficoExtension2-' + id + '">Selecciona una opción.</p>' +
+        '</div>' +
+
+        '<div class="field" id="apoyoGraficoPanelExtension2-' + id + '" style="display:none">' +
+        '<div class="grafico-item">' +
+        '<div class="grafico-item-header"><span class="grafico-item-num">01</span><span class="grafico-item-label">Imágenes</span></div>' +
+        '<div class="drop-zone" id="dropImagenesExtension2-' + id + '" tabindex="0">' +
+        '<strong>Arrastra imágenes o haz clic para seleccionar</strong>' +
+        '<span>JPG, PNG, WEBP · Máx 10 MB por archivo</span>' +
+        '<input type="file" class="file-input-hidden" id="fileImagenesExtension2-' + id + '" multiple accept="image/*">' +
+        '<span class="drop-counter" id="cntImagenesExtension2-' + id + '"></span>' +
+        '</div>' +
+        '<div class="preview-grid" id="prevImagenesExtension2-' + id + '"></div>' +
+        '</div>' +
+        '<div class="grafico-item">' +
+        '<div class="grafico-item-header"><span class="grafico-item-num">02</span><span class="grafico-item-label">Logos</span></div>' +
+        '<div class="drop-zone" id="dropLogosExtension2-' + id + '" tabindex="0">' +
+        '<strong>Arrastra archivos o haz clic para seleccionar</strong>' +
+        '<span>PNG, SVG, AI, EPS · Máx 10 MB por archivo</span>' +
+        '<input type="file" class="file-input-hidden" id="fileLogosExtension2-' + id + '" multiple accept="image/*,.svg,.ai,.eps">' +
+        '<span class="drop-counter" id="cntLogosExtension2-' + id + '"></span>' +
+        '</div>' +
+        '<div class="preview-grid" id="prevLogosExtension2-' + id + '"></div>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+
+
+        '</div>' +
+
+
+
+
+
+
+
+        //////////////////////////////////////////
+        // Participación en instancias externas //
+        //////////////////////////////////////////
+
         '<div class="form-section solicitud-externa" id="solicitud-externa-' + id + '" style="display:none">' +
         '<p class="section-title">Participación en instancias externas</p>' +
         '<div class="field">' +
@@ -288,16 +431,12 @@ function buildCardHTML(id) {
         // '<p class="field-error" id="err-fechaHoraExterna-' + id + '">Este campo es obligatorio.</p>' +
         // '</div>' +
 
-
-
         '<div class="field">' +
         '<label for="fechaHoraExtension-' + id + '">Fecha y hora <span class="req">*</span></label>' +
         // Cambiamos type a "text" y agregamos la clase "datepicker"
         '<input type="text" class="datepicker" id="fechaHoraExterna-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
         '<p class="field-error" id="err-fechaHoraExtension-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
-
-
 
 
         '<div class="field">' +
@@ -325,7 +464,159 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +
 
-        // Proyectos de Investigación, creación e innovación
+        /////////////////////////////////////////////
+    // PARTICIPACION EN INSTANCIAS EXTERNAS V2 //
+    /////////////////////////////////////////////
+        // Instancias externas v2
+'<div class="form-section solicitud-externa2" id="solicitud-externa2-' + id + '" style="display:none">' +
+'<p class="section-title">Participación en instancias externas</p>' +
+
+'<div class="field">' +
+'<label for="organizaExterna2-' + id + '">Organiza(n) <span class="req">*</span></label>' +
+'<select id="organizaExterna2-' + id + '" required>' +
+'<option value="">Selecciona una opción</option>' +
+'<option value="Escuela de Diseño">Escuela de Diseño</option>' +
+'<option value="Escuela de Arquitectura">Escuela de Arquitectura</option>' +
+'<option value="Escuela de Arte">Escuela de Arte</option>' +
+'<option value="Laboratorio de Interacción (LID)">Laboratorio de Interacción (LID)</option>' +
+'<option value="Laboratorio OTF">Laboratorio OTF</option>' +
+'<option value="Lab360">Lab360</option>' +
+'<option value="Centro Editorial">Centro Editorial</option>' +
+'<option value="Otro">Otro</option>' +
+'</select>' +
+'<p class="field-error" id="err-organizaExterna2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+'<div class="field" id="organizaOtroWrapExterna2-' + id + '" style="display:none">' +
+'<input type="text" id="organizaOtroExterna2-' + id + '" placeholder="Especifica quién organiza">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="tituloExterna2-' + id + '">Título <span class="req">*</span></label>' +
+'<input type="text" id="tituloExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-tituloExterna2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="descripcionExterna2-' + id + '">Descripción de la iniciativa <span class="req">*</span></label>' +
+'<input type="text" id="descripcionExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-descripcionExterna2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="participanExterna2-' + id + '">Participan o colaboran</label>' +
+'<input type="text" id="participanExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="reseñaParticipantesExterna2-' + id + '">Reseña de los participantes</label>' +
+'<input type="text" id="reseñaParticipantesExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="enlacesExterna2-' + id + '">Enlaces</label>' +
+'<input type="text" id="enlacesExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="fechaHoraExterna2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+'<input type="text" class="datepicker" id="fechaHoraExterna2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+'<p class="field-error" id="err-fechaHoraExterna2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="lugarExterna2-' + id + '">Lugar <span class="req">*</span></label>' +
+'<input type="text" id="lugarExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-lugarExterna2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Formato <span class="req">*</span></label>' +
+'<div class="radio-chips" id="formatoExterna2-' + id + '" data-required="true">' +
+'<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
+'<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Online"><span>Online</span></label>' +
+'<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
+'</div>' +
+'<p class="field-error" id="err-formatoExterna2-' + id + '">Selecciona una opción.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="publicoObjetivoExterna2-' + id + '">Público objetivo</label>' +
+'<input type="text" id="publicoObjetivoExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="cantidadAsistentesExterna2-' + id + '">Cantidad de asistentes</label>' +
+'<input type="text" id="cantidadAsistentesExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Imágenes</label>' +
+'<div class="drop-zone" id="dropImagenesExterna2-' + id + '" tabindex="0">' +
+'<strong>Arrastra imágenes o haz clic para seleccionar</strong>' +
+'<span>JPG, PNG, WEBP · Máx 10 MB por archivo</span>' +
+'<input type="file" class="file-input-hidden" id="fileImagenesExterna2-' + id + '" multiple accept="image/*">' +
+'<span class="drop-counter" id="cntImagenesExterna2-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevImagenesExterna2-' + id + '"></div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Adjuntar logos (no FAAD)</label>' +
+'<div class="drop-zone" id="dropLogosExterna2-' + id + '" tabindex="0">' +
+'<strong>Arrastra archivos o haz clic para seleccionar</strong>' +
+'<span>PNG, SVG, AI, EPS · Máx 10 MB por archivo</span>' +
+'<input type="file" class="file-input-hidden" id="fileLogosExterna2-' + id + '" multiple accept="image/*,.svg,.ai,.eps">' +
+'<span class="drop-counter" id="cntLogosExterna2-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevLogosExterna2-' + id + '"></div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="hipervínculosExterna2-' + id + '">Hipervínculos</label>' +
+'<input type="text" id="hipervínculosExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Equipo técnico</label>' +
+'<div class="tags-grid">' +
+'<label class="tag-chip"><input type="checkbox" name="equipoTecnicoExterna2-' + id + '" value="Data"><span>Data</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="equipoTecnicoExterna2-' + id + '" value="Micrófono"><span>Micrófono</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="equipoTecnicoExterna2-' + id + '" value="Amplificador"><span>Amplificador</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="equipoTecnicoExterna2-' + id + '" value="Tele"><span>Tele</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="equipoTecnicoExterna2-' + id + '" value="Lápiz pantalla touch"><span>Lápiz pantalla touch</span></label>' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="disposicionSalaExterna2-' + id + '">Disposición de sala / auditorio</label>' +
+'<input type="text" id="disposicionSalaExterna2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Cobertura fotográfica, filmación o transmisión</label>' +
+'<div class="tags-grid">' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExterna2-' + id + '" value="Registro fotográfico"><span>Registro fotográfico</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExterna2-' + id + '" value="Filmación"><span>Filmación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExterna2-' + id + '" value="Transmisión en vivo"><span>Transmisión en vivo</span></label>' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Solicitudes especiales</label>' +
+'<div class="tags-grid">' +
+// '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Agua"><span>Agua</span></label>' +
+// '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Pasador de diapositivas"><span>Pasador de diapositivas</span></label>' +
+// '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Pantalla extra"><span>Pantalla extra</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Estacionamiento"><span>Estacionamiento</span></label>' +
+'</div>' +
+'</div>' +
+
+'</div>' +
+
+        ///////////////////////////////////////////////////////
+        // Proyectos de Investigación, creación e innovación //
+        ///////////////////////////////////////////////////////
+
         '<div class="form-section solicitud-investigacion" id="solicitud-investigacion-' + id + '" style="display:none">' +
         '<p class="section-title">Proyectos de Investigación, creación e innovación</p>' +
         '<div class="field">' +
@@ -412,7 +703,103 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +   // ← agrega el + aquí
 
-        // Registro de actividades VCM
+
+        ////////////////////////////////////////
+        //////// INVESTIGACIÓN V2 /////////
+        ////////////////////////////////////////
+
+        // Investigación v2
+'<div class="form-section solicitud-investigacion2" id="solicitud-investigacion2-' + id + '" style="display:none">' +
+'<p class="section-title">Proyectos de Investigación, creación e innovación</p>' +
+
+'<div class="field">' +
+'<label for="tituloInvestigacion2-' + id + '">Título del proyecto <span class="req">*</span></label>' +
+'<input type="text" id="tituloInvestigacion2-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-tituloInvestigacion2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>¿Este proyecto contó con financiamiento UDP? <span class="req">*</span></label>' +
+'<div class="radio-chips" id="financiamientoUdpInvestigacion2-' + id + '" data-required="true">' +
+'<label class="radio-chip"><input type="radio" name="financiamientoUdpInvestigacion2-' + id + '" value="Sí"><span>Sí</span></label>' +
+'<label class="radio-chip"><input type="radio" name="financiamientoUdpInvestigacion2-' + id + '" value="No"><span>No</span></label>' +
+'</div>' +
+'<p class="field-error" id="err-financiamientoUdpInvestigacion2-' + id + '">Selecciona una opción.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="reseñaInvestigacion2-' + id + '">Reseña</label>' +
+'<input type="text" id="reseñaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="agenciaInvestigacion2-' + id + '">Financiamiento - Agencia</label>' +
+'<input type="text" id="agenciaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="lineaProgramaInvestigacion2-' + id + '">Financiamiento - Línea / Programa</label>' +
+'<input type="text" id="lineaProgramaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="anioAdjudicacionInvestigacion2-' + id + '">Año de adjudicación</label>' +
+'<input type="text" id="anioAdjudicacionInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field-row">' +
+'<div class="field">' +
+'<label for="anioInicioInvestigacion2-' + id + '">Año de inicio</label>' +
+'<input type="text" id="anioInicioInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+'<div class="field">' +
+'<label for="anioTerminoInvestigacion2-' + id + '">Año de término</label>' +
+'<input type="text" id="anioTerminoInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="montoAdjudicadoInvestigacion2-' + id + '">Monto adjudicado</label>' +
+'<input type="text" id="montoAdjudicadoInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Rol UDP <span class="req">*</span></label>' +
+'<div class="radio-chips" id="rolUdpInvestigacion2-' + id + '" data-required="true">' +
+'<label class="radio-chip"><input type="radio" name="rolUdpInvestigacion2-' + id + '" value="Principal"><span>Principal</span></label>' +
+'<label class="radio-chip"><input type="radio" name="rolUdpInvestigacion2-' + id + '" value="Colaborador"><span>Colaborador</span></label>' +
+'</div>' +
+'<p class="field-error" id="err-rolUdpInvestigacion2-' + id + '">Selecciona una opción.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="investigadorResponsableInvestigacion2-' + id + '">Investigador/a responsable del proyecto <span class="req">*</span></label>' +
+'<input type="text" id="investigadorResponsableInvestigacion2-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-investigadorResponsableInvestigacion2-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="colaboradoresInvestigacion2-' + id + '">Colaboradores / equipo de trabajo</label>' +
+'<input type="text" id="colaboradoresInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Imagen representativa del proyecto</label>' +
+'<div class="drop-zone" id="dropImagenInvestigacion2-' + id + '" tabindex="0">' +
+'<strong>Arrastra una imagen o haz clic para seleccionar</strong>' +
+'<span>JPG, PNG, WEBP · Máx 10 MB</span>' +
+'<input type="file" class="file-input-hidden" id="fileImagenInvestigacion2-' + id + '" accept="image/*">' +
+'<span class="drop-counter" id="cntImagenInvestigacion2-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevImagenInvestigacion2-' + id + '"></div>' +
+'</div>' +
+
+'</div>' +
+
+        ////////////////////////////////////////
+        ///// Registro de actividades VCM /////
+        ////////////////////////////////////////
+
         '<div class="form-section solicitud-vcm" id="solicitud-vcm-' + id + '" style="display:none">' +
         // ... campos vcm ...
 
@@ -422,28 +809,13 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-actividadVcm-' + id + '">Este campo es obligatorio.</p></div>' +
 
 
-
-        // '<div class="field"><label for="nivelVcm-' + id + '">Nivel</label>' +
-        // '<input type="text" id="nivelVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-
-        // '<div class="field"><label>Nivel</label>' +
-        // '<div class="field"><label>Nivel <span class="tooltip-wrap"><span class="tooltip-icon">?</span><span class="tooltip-box">Texto explicativo del nivel aquí.</span></span></label>' +
         '<div class="field"><label>Nivel <span class="tooltip-icon">?</span><span class="tooltip-box" style="left:5vw">Inicial: actividades unidireccionales de impacto externo limitado en el medio y/o estudiantes. Ejemplos: salidas a terreno, visitas de profesionales externos a la sala de clases o talleres abiertos a la comunidad.<br><br>Medio: acciones unidireccionales o bidireccionales que generan un impacto en la comunidad y en los estudiantes como parte de un proceso formativo. Ejemplos: charlas, conversatorios, seminarios, trabajo con contrapartes en cursos teórico prácticos, participación en ferias o instancias de divulgación (podcast, vodcast, etc).<br><br>Alto: acciones bidireccionales, continuas y de alto impacto entre la escuela y su entorno. Ejemplos: desarrollo de exposiciones, actividades semestrales con contrapartes en cursos o taller, workshops y publicaciones académicas.</span></label>' +
-
-
 
         '<div class="radio-chips">' +
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Inicial"><span>Inicial</span></label>' +
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Medio"><span>Medio</span></label>' +
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Alto"><span>Alto</span></label>' +
         '</div></div>' +
-
-
-        // '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
-        // '<input type="text" id="lineaEstrategicaVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-
-        // desplegable linea estratégica
-        // '<div class="field"><label for="lineaEstrategicaVcm-' + id + '">Línea estratégica</label>' +
 
         '<div class="field"><label>Línea Estratégica<span class="tooltip-icon">?</span><span class="tooltip-box" style="left:13vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
         '<select id="lineaEstrategicaVcm-' + id + '">' +
@@ -453,17 +825,6 @@ function buildCardHTML(id) {
         '<option value="Desarrollo de proyectos y servicios comunitarios">3. Desarrollo de proyectos y servicios comunitarios</option>' +
         '<option value="Redes y posicionamiento disciplinar">4. Redes y posicionamiento disciplinar</option>' +
         '</select></div>' +
-
-
-        // '<div class="field"><label for="convenioVcm-' + id + '">Convenio</label>' +
-        // '<input type="text" id="convenioVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-
-        // '<div class="field"><label>Convenio</label>' +
-        // '<div class="radio-chips">' +
-        // '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
-        // '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
-        // '</div></div>' +
-
 
         '<div class="field"><label>Convenio</label>' +
         '<div class="radio-chips">' +
@@ -489,10 +850,7 @@ function buildCardHTML(id) {
         '<option value="Municipalidad de Recoleta">Municipalidad de Recoleta</option>' +
         '<option value="MOBIL Arquitectos">MOBIL Arquitectos</option>' +
         '<option value="Asociación de Oficinas de Arquitectura">Asociación de Oficinas de Arquitectura</option>' +
-        // '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
-        // '<option value="Otra institución">Otra institución</option>' +
-        // '</select>' +
-        // '</div>' +
+
         '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
         '<option value="Otra institución">Otra institución</option>' +
         '</select>' +
@@ -501,12 +859,8 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +
 
-
-
         '<div class="field"><label for="contraparteVcm-' + id + '">Nombre y Cargo Contraparte</label>' +
         '<input type="text" id="contraparteVcm-' + id + '" placeholder="Nombre, Cargo"></div>' +
-
-
 
         '<div class="field"><label>¿Cuenta con financiamiento? <span class="req">*</span></label>' +
         '<div class="radio-chips" id="financiamientoVcm-' + id + '" data-required="true">' +
@@ -514,12 +868,6 @@ function buildCardHTML(id) {
         '<label class="radio-chip"><input type="radio" name="financiamientoVcm-' + id + '" value="No"><span>No</span></label>' +
         '</div>' +
         '<p class="field-error" id="err-financiamientoVcm-' + id + '">Selecciona una opción.</p></div>' +
-        // esto era cuando tipo de financimiento se repondía con texto
-        // '<div class="field"><label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
-        // '<input type="text" id="tipoFinanciamientoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        // '<div class="field"><label for="montoVcm-' + id + '">Monto</label>' +
-        // '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-
 
         '<div class="field" id="financiamientoDetalleWrapVcm-' + id + '" style="display:none">' +
         '<label>Tipo de financiamiento</label>' +
@@ -557,10 +905,6 @@ function buildCardHTML(id) {
         '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
         '</div>' +
-
-
-
-
         '<div class="field" id="financiamientoDetalleWrapVcm-' + id + '" style="display:none">' +
         '<label for="tipoFinanciamientoVcm-' + id + '">Tipo de financiamiento</label>' +
         '<div class="radio-chips">' +
@@ -576,17 +920,6 @@ function buildCardHTML(id) {
         '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
         '</div>' +
-
-
-
-
-
-        // '<div class="field"><label for="fechaVcm-' + id + '">Fecha y Hora <span class="req">*</span></label>' +
-        // '<input type="text" class="datepicker" id="fechaVcm-' + id + '" placeholder="Seleccione fecha..." readonly required>' +
-        // '<p class="field-error" id="err-fechaVcm-' + id + '">Este campo es obligatorio.</p></div>' +
-
-
-
         // calendario inicio y fin
         '<div class="field-row">' +
         '<div class="field">' +
@@ -616,47 +949,14 @@ function buildCardHTML(id) {
         '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
         '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-
         '</div>'     // ← sin + , sigue siendo el último
+
+        ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////
+
     );
 }
-
-// // ── Agregar / eliminar tarjetas ──────────────────────────────
-// function addCard() {
-//     var id = nextCardId++;
-//     cardOrder.push(id);
-//     var container = document.getElementById('projectsContainer');
-//     var wrapper = document.createElement('div');
-//     wrapper.id = 'card-' + id;
-//     wrapper.className = 'project-card';
-//     wrapper.innerHTML = buildCardHTML(id);
-//     container.appendChild(wrapper);
-//     wireCard(id);
-//     // updateCardUI();
-
-
-//     // === ACTIVAR FLATPICKR AQUÍ ===
-//     // Buscamos cualquier input con la clase datepicker dentro de la tarjeta recién creada
-//     flatpickr(wrapper.querySelectorAll('.datepicker'), {
-//         enableTime: true,
-//         dateFormat: "d-m-Y H:i",
-//         minuteIncrement: 30,
-//         time_24hr: true,
-//         locale: {
-//             firstDayOfWeek: 1,
-//             weekdays: {
-//                 shorthand: ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'],
-//                 longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-//             },
-//             months: {
-//                 shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'],
-//                 longhand: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-//             },
-//         }
-//     });
-
-//     updateCardUI();
-// }
 
 
 // ── Agregar / eliminar tarjetas ──────────────────────────────
@@ -760,8 +1060,13 @@ function wireCard(id) {
     tipoSolicitud.addEventListener('change', function () {
         var val = this.value;
         document.getElementById('solicitud-extension-' + id).style.display = val === 'extension' ? 'block' : 'none';
+        document.getElementById('solicitud-extension2-' + id).style.display = val === 'extension2' ? 'block' : 'none';
+
         document.getElementById('solicitud-externa-' + id).style.display = val === 'externa' ? 'block' : 'none';
+        document.getElementById('solicitud-externa2-' + id).style.display = val === 'externa2' ? 'block' : 'none';
+
         document.getElementById('solicitud-investigacion-' + id).style.display = val === 'investigacion' ? 'block' : 'none';
+        document.getElementById('solicitud-investigacion2-' + id).style.display = val === 'investigacion2' ? 'block' : 'none';
 
         document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
 
@@ -784,6 +1089,34 @@ function wireCard(id) {
                 if (prefSel) prefSel.value = '';
             }
             hideFieldError('necesitaSalaExtension-' + id);
+        });
+    });
+
+    // ESTE ES LA CASILLA DE "OTRO" EN ORGANIZA EN EXNTENSION V2
+    var organizaEl = document.getElementById('organizaExtension2-' + id);
+    if (organizaEl) {
+        organizaEl.addEventListener('change', function () {
+            var otroWrap = document.getElementById('organizaOtroWrapExtension2-' + id);
+            if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+        });
+    }
+
+    // ESTE ES LA CASILLA DE "OTRO" EN ORGANIZA EN EXTERNO V2
+    var organizaExterna2El = document.getElementById('organizaExterna2-' + id);
+if (organizaExterna2El) {
+    organizaExterna2El.addEventListener('change', function() {
+        var otroWrap = document.getElementById('organizaOtroWrapExterna2-' + id);
+        if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+    });
+}
+
+
+    // QUERY DE APOYO GRAFICO EXTENSION V2
+    card.querySelectorAll('input[name="apoyoGraficoExtension2-' + id + '"]').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            var panel = document.getElementById('apoyoGraficoPanelExtension2-' + id);
+            if (panel) panel.style.display = this.value === 'Sí' ? 'block' : 'none';
+            if (this.value === 'Sí') wireDropZonesApoyo2(id);
         });
     });
 
@@ -822,9 +1155,11 @@ function wireCard(id) {
     wireDropZone('dropRegistroExterna-' + id, 'fileRegistroExterna-' + id, 'cntRegistroExterna-' + id, 'prevRegistroExterna-' + id);
     wireDropZone('dropRegistroInvestigacion-' + id, 'fileRegistroInvestigacion-' + id, 'cntRegistroInvestigacion-' + id, 'prevRegistroInvestigacion-' + id);
 
-
-
-
+// registros externa v2
+wireDropZone('dropImagenesExterna2-' + id, 'fileImagenesExterna2-' + id, 'cntImagenesExterna2-' + id, 'prevImagenesExterna2-' + id);
+wireDropZone('dropLogosExterna2-' + id, 'fileLogosExterna2-' + id, 'cntLogosExterna2-' + id, 'prevLogosExterna2-' + id);
+// registro investigación v2
+wireDropZone('dropImagenInvestigacion2-' + id, 'fileImagenInvestigacion2-' + id, 'cntImagenInvestigacion2-' + id, 'prevImagenInvestigacion2-' + id);
 
 
     // ¿Cuenta con financiamiento? → mostrar detalle
@@ -912,6 +1247,17 @@ function wireDropZonesApoyo(id) {
         ['dropHistoriasExtension-' + id, 'fileHistoriasExtension-' + id, 'cntHistoriasExtension-' + id, 'prevHistoriasExtension-' + id],
         ['dropLogosExtension-' + id, 'fileLogosExtension-' + id, 'cntLogosExtension-' + id, 'prevLogosExtension-' + id],
         ['dropCompExtension-' + id, 'fileCompExtension-' + id, 'cntCompExtension-' + id, 'prevCompExtension-' + id]
+    ];
+    slots.forEach(function (s) { wireDropZone(s[0], s[1], s[2], s[3]); });
+}
+
+var wiredApoyo2 = {};
+function wireDropZonesApoyo2(id) {
+    if (wiredApoyo2[id]) return;
+    wiredApoyo2[id] = true;
+    var slots = [
+        ['dropImagenesExtension2-' + id, 'fileImagenesExtension2-' + id, 'cntImagenesExtension2-' + id, 'prevImagenesExtension2-' + id],
+        ['dropLogosExtension2-' + id, 'fileLogosExtension2-' + id, 'cntLogosExtension2-' + id, 'prevLogosExtension2-' + id]
     ];
     slots.forEach(function (s) { wireDropZone(s[0], s[1], s[2], s[3]); });
 }
@@ -1020,6 +1366,7 @@ function updateCounter(cntId, prevId) {
 }
 
 // ── Validación ───────────────────────────────────────────────
+// esta funcion se encarga de revisar qeu estén rellenos los campos obligatorios, solo se deben agregar los campos obligatorios
 function validateForm() {
     clearErrors();
     var ok = true;
@@ -1050,6 +1397,7 @@ function validateForm() {
         if (tipo === 'extension') {
             cardFields = cardFields.concat([
                 { fid: 'tituloExtension', label: 'Título (Solicitud ' + num + ')' },
+                // ñññññññññññ
                 { fid: 'descripcionExtension', label: 'Descripción de la actividad (Solicitud ' + num + ')' },
                 { fid: 'convenioExtension', label: '¿Está en convenio? (Solicitud ' + num + ')' },
                 { fid: 'participantesNombreExtension', label: 'Nombre participante (Solicitud ' + num + ')' },
@@ -1060,6 +1408,16 @@ function validateForm() {
                 { fid: 'fechaHoraExtension', label: 'Fecha y hora (Solicitud ' + num + ')' },
                 { fid: 'necesitaSalaExtension', label: '¿Necesita una sala? (Solicitud ' + num + ')' },
                 { fid: 'apoyoGraficoExtension', label: 'Solicitud de apoyo gráfico (Solicitud ' + num + ')' }
+            ]);
+        } else if (tipo === 'extension2') {
+            cardFields = cardFields.concat([
+                { fid: 'organizaExtension2', label: 'Organiza(n) (Solicitud ' + num + ')' },
+                { fid: 'tituloExtension2', label: 'Título (Solicitud ' + num + ')' },
+                { fid: 'descripcionExtension2', label: 'Descripción (Solicitud ' + num + ')' },
+                { fid: 'fechaHoraExtension2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+                { fid: 'lugarExtension2', label: 'Lugar (Solicitud ' + num + ')' },
+                { fid: 'formatoExtension2', label: 'Formato (Solicitud ' + num + ')' },
+                { fid: 'apoyoGraficoExtension2', label: 'Apoyo gráfico (Solicitud ' + num + ')' }
             ]);
         } else if (tipo === 'externa') {
             cardFields = cardFields.concat([
@@ -1072,6 +1430,15 @@ function validateForm() {
                 { fid: 'lugarExterna', label: 'Lugar (Solicitud ' + num + ')' },
                 { fid: 'asistentesExterna', label: 'Cantidad de asistentes (Solicitud ' + num + ')' }
             ]);
+        } else if (tipo === 'externa2') {
+            cardFields = cardFields.concat([
+                { fid: 'organizaExterna2', label: 'Organiza(n) (Solicitud ' + num + ')' },
+                { fid: 'tituloExterna2', label: 'Título (Solicitud ' + num + ')' },
+                { fid: 'descripcionExterna2', label: 'Descripción (Solicitud ' + num + ')' },
+                { fid: 'fechaHoraExterna2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+                { fid: 'lugarExterna2', label: 'Lugar (Solicitud ' + num + ')' },
+                { fid: 'formatoExterna2', label: 'Formato (Solicitud ' + num + ')' }
+            ]);
         } else if (tipo === 'investigacion') {
             cardFields = cardFields.concat([
                 { fid: 'tituloInvestigacion', label: 'Título del proyecto (Solicitud ' + num + ')' },
@@ -1081,9 +1448,14 @@ function validateForm() {
                 { fid: 'rolUdpInvestigacion', label: 'Rol de la UDP (Solicitud ' + num + ')' },
                 { fid: 'investigadorResponsableInvestigacion', label: 'Investigador responsable y afiliación institucional (Solicitud ' + num + ')' }
             ]);
-        }
-
-        else if (tipo === 'vcm') {
+        } else if (tipo === 'investigacion2') {
+            cardFields = cardFields.concat([
+                { fid: 'tituloInvestigacion2', label: 'Título del proyecto (Solicitud ' + num + ')' },
+                { fid: 'financiamientoUdpInvestigacion2', label: '¿Financiamiento UDP? (Solicitud ' + num + ')' },
+                { fid: 'rolUdpInvestigacion2', label: 'Rol UDP (Solicitud ' + num + ')' },
+                { fid: 'investigadorResponsableInvestigacion2', label: 'Investigador responsable (Solicitud ' + num + ')' }
+            ]);
+        } else if (tipo === 'vcm') {
             cardFields = cardFields.concat([
                 { fid: 'actividadVcm', label: 'Actividad (Solicitud ' + num + ')' },
                 { fid: 'financiamientoVcm', label: '¿Cuenta con financiamiento? (Solicitud ' + num + ')' },
@@ -1200,8 +1572,11 @@ document.getElementById('projectForm').addEventListener('submit', function (e) {
     var capturedNames = cardOrder.map(function (id) {
         var tipo = document.getElementById('tipoSolicitud-' + id).value;
         if (tipo === 'extension') return cval(id, 'tituloExtension');
+        if (tipo === 'extension2') return cval(id, 'tituloExtension2');
         if (tipo === 'externa') return cval(id, 'tituloExterna');
+        if (tipo === 'externa2') return cval(id, 'tituloExterna2');
         if (tipo === 'investigacion') return cval(id, 'tituloInvestigacion');
+        if (tipo === 'investigacion2') return cval(id, 'tituloInvestigacion2');
 
         if (tipo === 'vcm') return cval(id, 'actividadVcm');
 
@@ -1258,6 +1633,7 @@ async function submitCards(index, results, projectNames, authorEmail) {
     }
 }
 
+// esta funcion se encarga de establecer la ocnexión entre el script.js y el code.gs
 function buildPayload(id) {
     var tipo = cval(id, 'tipoSolicitud');
     var payload = {
@@ -1267,6 +1643,7 @@ function buildPayload(id) {
     };
     if (tipo === 'extension') {
         payload.tituloExtension = cval(id, 'tituloExtension');
+        // ññññññ
         payload.descripcionExtension = cval(id, 'descripcionExtension');
         payload.convenioExtension = getRadio(id, 'convenioExtension');
         payload.institucionConvenioExtension = cval(id, 'institucionConvenioExtension');
@@ -1282,6 +1659,22 @@ function buildPayload(id) {
         payload.preferenciaSalaExtension = salaVal === 'Otro' ? cval(id, 'preferenciaSalaOtroExtension') : salaVal;
         payload.apoyoGraficoExtension = getRadio(id, 'apoyoGraficoExtension');
         payload.solicitudesEspecialesExtension = getChecked(id, 'solicitudesEspecialesExtension');
+    } else if (tipo === 'extension2') {
+        // payload.organizaExtension2 = cval(id, 'organizaExtension2');
+        var organiza = cval(id, 'organizaExtension2');
+        payload.organizaExtension2 = organiza === 'Otro' ? cval(id, 'organizaOtroExtension2') : organiza;
+
+        payload.tituloExtension2 = cval(id, 'tituloExtension2');
+        payload.cicloExtension2 = cval(id, 'cicloExtension2');
+        payload.descripcionExtension2 = cval(id, 'descripcionExtension2');
+        payload.participanExtension2 = cval(id, 'participanExtension2');
+        payload.reseñaParticipantesExtension2 = cval(id, 'reseñaParticipantesExtension2');
+        payload.fechaHoraExtension2 = cval(id, 'fechaHoraExtension2');
+        payload.lugarExtension2 = cval(id, 'lugarExtension2');
+        payload.formatoExtension2 = getRadio(id, 'formatoExtension2');
+        payload.publicoObjetivoExtension2 = cval(id, 'publicoObjetivoExtension2');
+        payload.cantidadAsistentesExtension2 = cval(id, 'cantidadAsistentesExtension2');
+        payload.apoyoGraficoExtension2 = getRadio(id, 'apoyoGraficoExtension2');
     } else if (tipo === 'externa') {
         payload.institucionExterna = cval(id, 'institucionExterna');
         payload.tituloExterna = cval(id, 'tituloExterna');
@@ -1292,7 +1685,25 @@ function buildPayload(id) {
         payload.fechaHoraExterna = cval(id, 'fechaHoraExterna');
         payload.lugarExterna = cval(id, 'lugarExterna');
         payload.asistentesExterna = cval(id, 'asistentesExterna');
-    } else if (tipo === 'investigacion') {
+    }  else if (tipo === 'externa2') {
+    var organizaE2 = cval(id, 'organizaExterna2');
+    payload.organizaExterna2 = organizaE2 === 'Otro' ? cval(id, 'organizaOtroExterna2') : organizaE2;
+    payload.tituloExterna2 = cval(id, 'tituloExterna2');
+    payload.descripcionExterna2 = cval(id, 'descripcionExterna2');
+    payload.participanExterna2 = cval(id, 'participanExterna2');
+    payload.reseñaParticipantesExterna2 = cval(id, 'reseñaParticipantesExterna2');
+    payload.enlacesExterna2 = cval(id, 'enlacesExterna2');
+    payload.fechaHoraExterna2 = cval(id, 'fechaHoraExterna2');
+    payload.lugarExterna2 = cval(id, 'lugarExterna2');
+    payload.formatoExterna2 = getRadio(id, 'formatoExterna2');
+    payload.publicoObjetivoExterna2 = cval(id, 'publicoObjetivoExterna2');
+    payload.cantidadAsistentesExterna2 = cval(id, 'cantidadAsistentesExterna2');
+    payload.hipervínculosExterna2 = cval(id, 'hipervínculosExterna2');
+    payload.equipoTecnicoExterna2 = getChecked(id, 'equipoTecnicoExterna2');
+    payload.disposicionSalaExterna2 = cval(id, 'disposicionSalaExterna2');
+    payload.coberturaExterna2 = getChecked(id, 'coberturaExterna2');
+    payload.solicitudesEspecialesExterna2 = getChecked(id, 'solicitudesEspecialesExterna2');
+}else if (tipo === 'investigacion') {
         payload.tituloInvestigacion = cval(id, 'tituloInvestigacion');
         payload.descripcionInvestigacion = cval(id, 'descripcionInvestigacion');
         payload.financiamientoUdpInvestigacion = getRadio(id, 'financiamientoUdpInvestigacion');
@@ -1306,7 +1717,20 @@ function buildPayload(id) {
         payload.rolUdpInvestigacion = getRadio(id, 'rolUdpInvestigacion');
         payload.investigadorResponsableInvestigacion = cval(id, 'investigadorResponsableInvestigacion');
         payload.investigadoresColaboradoresInvestigacion = cval(id, 'investigadoresColaboradoresInvestigacion');
-    } else if (tipo === 'vcm') {
+    } else if (tipo === 'investigacion2') {
+    payload.tituloInvestigacion2 = cval(id, 'tituloInvestigacion2');
+    payload.financiamientoUdpInvestigacion2 = getRadio(id, 'financiamientoUdpInvestigacion2');
+    payload.reseñaInvestigacion2 = cval(id, 'reseñaInvestigacion2');
+    payload.agenciaInvestigacion2 = cval(id, 'agenciaInvestigacion2');
+    payload.lineaProgramaInvestigacion2 = cval(id, 'lineaProgramaInvestigacion2');
+    payload.anioAdjudicacionInvestigacion2 = cval(id, 'anioAdjudicacionInvestigacion2');
+    payload.anioInicioInvestigacion2 = cval(id, 'anioInicioInvestigacion2');
+    payload.anioTerminoInvestigacion2 = cval(id, 'anioTerminoInvestigacion2');
+    payload.montoAdjudicadoInvestigacion2 = cval(id, 'montoAdjudicadoInvestigacion2');
+    payload.rolUdpInvestigacion2 = getRadio(id, 'rolUdpInvestigacion2');
+    payload.investigadorResponsableInvestigacion2 = cval(id, 'investigadorResponsableInvestigacion2');
+    payload.colaboradoresInvestigacion2 = cval(id, 'colaboradoresInvestigacion2');
+}else if (tipo === 'vcm') {
         payload.actividadVcm = cval(id, 'actividadVcm');
 
 
