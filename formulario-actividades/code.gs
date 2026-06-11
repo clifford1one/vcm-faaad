@@ -9,6 +9,11 @@ var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw';
 var SHEET_GENERAL_VCM = 'Registro-VcM';
 
 
+// spreadsheet emi - para proyectoooos
+var SPREADSHEET_ID_PROYECTOS = '1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks';
+var SHEET_PROYECTOS = 'Proyectos';
+
+
 var DRIVE_FOLDER_ID = '114KG_idXui1SK3amPksnTVK5ejd8mted';
 
 function doGet() {

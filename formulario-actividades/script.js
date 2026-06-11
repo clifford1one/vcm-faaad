@@ -32,6 +32,7 @@ function buildCardHTML(id) {
         '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
         '<option value="investigacion2">Proyectos de Investigación (v2)</option>' +
         '<option value="vcm">Registro de Actividades VcM</option>' +
+        '<option value="publicacion">Publicación de proyecto</option>' +
 
         '</select>' +
         '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
@@ -261,9 +262,9 @@ function buildCardHTML(id) {
 
 
 
-        //////////////////////////////////////////
+        ////////////////////////////////////////////
         // Participación en instancias externas v2//
-        //////////////////////////////////////////
+        ////////////////////////////////////////////
         // Extensión v2
         '<div class="form-section solicitud-extension2" id="solicitud-extension2-' + id + '" style="display:none">' +
         '<p class="section-title">Iniciativas de extensión organizadas por UDP</p>' +
@@ -949,6 +950,184 @@ function buildCardHTML(id) {
         '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
         '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+'</div>'+
+
+        ////////////////////////////////////
+        ////////// PROYECTOOOOOS ///////////
+        ////////////////////////////////////
+
+// Publicación de proyecto
+'<div class="form-section solicitud-publicacion" id="solicitud-publicacion-' + id + '" style="display:none">' +
+'<p class="section-title">Publicación de proyecto</p>' +
+
+'<div class="field">' +
+'<label for="nombreProyectoPublicacion-' + id + '">Nombre del proyecto <span class="req">*</span></label>' +
+'<input type="text" id="nombreProyectoPublicacion-' + id + '" placeholder="Respuesta corta" required>' +
+'<p class="field-error" id="err-nombreProyectoPublicacion-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="fechaProyectoPublicacion-' + id + '">Fecha del proyecto <span class="req">*</span></label>' +
+'<input type="text" class="datepicker-fecha" id="fechaProyectoPublicacion-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
+'<p class="field-error" id="err-fechaProyectoPublicacion-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="tipoProyectoPublicacion-' + id + '">Tipo de proyecto <span class="req">*</span></label>' +
+'<select id="tipoProyectoPublicacion-' + id + '" required>' +
+'<option value="">Selecciona una opción</option>' +
+'<option value="Pregrado">Pregrado</option>' +
+'<option value="Postgrado">Postgrado</option>' +
+'<option value="Docente / Investigación">Docente / Investigación</option>' +
+'<option value="Extensión">Extensión</option>' +
+'<option value="Alumni">Alumni</option>' +
+'<option value="Colaboradores/as externos/as">Colaboradores/as externos/as</option>' +
+'</select>' +
+'<p class="field-error" id="err-tipoProyectoPublicacion-' + id + '">Selecciona una opción.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="descripcionPublicacion-' + id + '">Descripción del proyecto <span class="req">*</span></label>' +
+// '<textarea id="descripcionPublicacion-' + id + '" rows="6" placeholder="Describe el proyecto, su contexto y objetivos." required></textarea>' +
+'<input type="text" id="descripcionPublicacion-' + id + '" placeholder="Describe el proyecto, su contexto y objetivos." required>' +
+'<p class="field-error" id="err-descripcionPublicacion-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Mención <span class="req">*</span></label>' +
+'<div class="radio-chips" id="mencionPublicacion-' + id + '" data-required="true">' +
+'<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Gráfico"><span>Diseño Gráfico</span></label>' +
+'<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Industrial"><span>Diseño Industrial</span></label>' +
+'<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño de Interacción"><span>Diseño de Interacción</span></label>' +
+'<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Textil e Indumentaria"><span>Diseño Textil e Indumentaria</span></label>' +
+'</div>' +
+'<p class="field-error" id="err-mencionPublicacion-' + id + '">Selecciona una opción.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Etiquetas</label>' +
+'<div class="tags-grid">' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Publicaciones"><span>Publicaciones</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Creación"><span>Creación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Edición"><span>Edición</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Exposición colectiva"><span>Exposición colectiva</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Exposición individual"><span>Exposición individual</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Innovación"><span>Innovación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Innovación docente"><span>Innovación docente</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Investigación"><span>Investigación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Mediación"><span>Mediación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Reconocimiento"><span>Reconocimiento</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Otros"><span>Otros</span></label>' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="coleccionPublicacion-' + id + '">Colección / Muestra</label>' +
+'<select id="coleccionPublicacion-' + id + '">' +
+'<option value="No aplica">No aplica</option>' +
+'<option value="Exposición fin de semestre">Exposición fin de semestre</option>' +
+'<option value="Taller Internacional / Latitud Sur">Taller Internacional / Latitud Sur</option>' +
+'<option value="Proyecto de Título">Proyecto de Título</option>' +
+'<option value="Intercambio Internacional">Intercambio Internacional</option>' +
+'<option value="Residencia Artística">Residencia Artística</option>' +
+'<option value="Investigación Aplicada">Investigación Aplicada</option>' +
+'<option value="Muestra permanente">Muestra permanente</option>' +
+'</select>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="rolPublicacion-' + id + '">Rol</label>' +
+'<select id="rolPublicacion-' + id + '">' +
+'<option value="">Selecciona un rol</option>' +
+'<option value="Estudiante pregrado">Estudiante pregrado</option>' +
+'<option value="Estudiante postgrado">Estudiante postgrado</option>' +
+'<option value="Docente">Docente</option>' +
+'<option value="Investigador/a">Investigador/a</option>' +
+'<option value="Invitado/a externo/a">Invitado/a externo/a</option>' +
+'<option value="Alumni">Alumni</option>' +
+'</select>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="paisPublicacion-' + id + '">País <span class="req">*</span></label>' +
+'<select id="paisPublicacion-' + id + '" required>' +
+'<option value="">Selecciona un país</option>' +
+'<optgroup label="América Latina">' +
+'<option value="Chile">Chile</option>' +
+'<option value="México">México</option>' +
+'<option value="Argentina">Argentina</option>' +
+'<option value="Colombia">Colombia</option>' +
+'<option value="Brasil">Brasil</option>' +
+'<option value="Perú">Perú</option>' +
+'<option value="Venezuela">Venezuela</option>' +
+'<option value="Uruguay">Uruguay</option>' +
+'<option value="Ecuador">Ecuador</option>' +
+'<option value="Bolivia">Bolivia</option>' +
+'<option value="Paraguay">Paraguay</option>' +
+'<option value="Costa Rica">Costa Rica</option>' +
+'<option value="Cuba">Cuba</option>' +
+'<option value="Guatemala">Guatemala</option>' +
+'<option value="Panamá">Panamá</option>' +
+'<option value="República Dominicana">República Dominicana</option>' +
+'<option value="El Salvador">El Salvador</option>' +
+'<option value="Honduras">Honduras</option>' +
+'<option value="Nicaragua">Nicaragua</option>' +
+'<option value="Puerto Rico">Puerto Rico</option>' +
+'<option value="Haití">Haití</option>' +
+'</optgroup>' +
+'<optgroup label="Otras regiones">' +
+'<option value="Norteamérica">Norteamérica</option>' +
+'<option value="Europa">Europa</option>' +
+'<option value="Asia">Asia</option>' +
+'<option value="África">África</option>' +
+'<option value="Oceanía">Oceanía</option>' +
+'</optgroup>' +
+'</select>' +
+'<p class="field-error" id="err-paisPublicacion-' + id + '">Este campo es obligatorio.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="palabrasClavePublicacion-' + id + '">Palabras clave</label>' +
+'<input type="text" id="palabrasClavePublicacion-' + id + '" placeholder="tipografía, identidad, textil…">' +
+'<p class="helper">Separadas por comas.</p>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="linkWebPublicacion-' + id + '">Link web</label>' +
+'<input type="text" id="linkWebPublicacion-' + id + '" placeholder="https://...">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="instagramPublicacion-' + id + '">Instagram</label>' +
+'<input type="text" id="instagramPublicacion-' + id + '" placeholder="https://instagram.com/usuario">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="youtubePublicacion-' + id + '">YouTube (canal)</label>' +
+'<input type="text" id="youtubePublicacion-' + id + '" placeholder="https://youtube.com/@canal">' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="otrasRedesPublicacion-' + id + '">Otras redes sociales</label>' +
+'<input type="text" id="otrasRedesPublicacion-' + id + '" placeholder="https://...">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Imágenes del proyecto <span class="req">*</span></label>' +
+'<div class="drop-zone" id="dropImagenesPublicacion-' + id + '" tabindex="0">' +
+'<strong>Arrastra imágenes o haz clic para seleccionar</strong>' +
+'<span>JPG, PNG, WEBP · Máx 10 MB por archivo</span>' +
+'<input type="file" class="file-input-hidden" id="fileImagenesPublicacion-' + id + '" multiple accept="image/*">' +
+'<span class="drop-counter" id="cntImagenesPublicacion-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevImagenesPublicacion-' + id + '"></div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="linkVideoPublicacion-' + id + '">Link de video YouTube del proyecto</label>' +
+'<input type="text" id="linkVideoPublicacion-' + id + '" placeholder="https://youtube.com/watch?v=...">' +
+'</div>' +
+
         '</div>'     // ← sin + , sigue siendo el último
 
         ///////////////////////////////////////////////////////
@@ -1070,6 +1249,8 @@ function wireCard(id) {
 
         document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
 
+        document.getElementById('solicitud-publicacion-' + id).style.display = val === 'publicacion' ? 'block' : 'none';
+
         this.classList.remove('error');
         hideFieldError('tipoSolicitud-' + id);
         hideErrorSummary();
@@ -1160,7 +1341,8 @@ wireDropZone('dropImagenesExterna2-' + id, 'fileImagenesExterna2-' + id, 'cntIma
 wireDropZone('dropLogosExterna2-' + id, 'fileLogosExterna2-' + id, 'cntLogosExterna2-' + id, 'prevLogosExterna2-' + id);
 // registro investigación v2
 wireDropZone('dropImagenInvestigacion2-' + id, 'fileImagenInvestigacion2-' + id, 'cntImagenInvestigacion2-' + id, 'prevImagenInvestigacion2-' + id);
-
+// drop de registro de proyectos
+wireDropZone('dropImagenesPublicacion-' + id, 'fileImagenesPublicacion-' + id, 'cntImagenesPublicacion-' + id, 'prevImagenesPublicacion-' + id);
 
     // ¿Cuenta con financiamiento? → mostrar detalle
     card.querySelectorAll('input[name="financiamientoVcm-' + id + '"]').forEach(function (radio) {
@@ -1465,7 +1647,16 @@ function validateForm() {
                 { fid: 'fechaTerminoVcm', label: 'Fecha de término (Solicitud ' + num + ')' },
                 { fid: 'responsableVcm', label: 'Responsable (Solicitud ' + num + ')' }
             ]);
-        }
+        } else if (tipo === 'publicacion') {
+    cardFields = cardFields.concat([
+        { fid: 'nombreProyectoPublicacion', label: 'Nombre del proyecto (Solicitud ' + num + ')' },
+        { fid: 'fechaProyectoPublicacion', label: 'Fecha del proyecto (Solicitud ' + num + ')' },
+        { fid: 'tipoProyectoPublicacion', label: 'Tipo de proyecto (Solicitud ' + num + ')' },
+        { fid: 'descripcionPublicacion', label: 'Descripción (Solicitud ' + num + ')' },
+        { fid: 'mencionPublicacion', label: 'Mención (Solicitud ' + num + ')' },
+        { fid: 'paisPublicacion', label: 'País (Solicitud ' + num + ')' }
+    ]);
+}
 
         cardFields.forEach(function (f) {
             var el = document.getElementById(f.fid + '-' + id);
@@ -1580,6 +1771,7 @@ document.getElementById('projectForm').addEventListener('submit', function (e) {
 
         if (tipo === 'vcm') return cval(id, 'actividadVcm');
 
+        if (tipo === 'publicacion') return cval(id, 'nombreProyectoPublicacion');
 
         return 'Sin título';
     });
@@ -1778,7 +1970,23 @@ function buildPayload(id) {
         payload.outcomeVcm = cval(id, 'outcomeVcm');
         payload.indicadorActividadVcm = cval(id, 'indicadorActividadVcm');
         payload.indicadorResultadoVcm = cval(id, 'indicadorResultadoVcm');
-    }
+    } else if (tipo === 'publicacion') {
+    payload.nombreProyectoPublicacion = cval(id, 'nombreProyectoPublicacion');
+    payload.fechaProyectoPublicacion = cval(id, 'fechaProyectoPublicacion');
+    payload.tipoProyectoPublicacion = cval(id, 'tipoProyectoPublicacion');
+    payload.descripcionPublicacion = cval(id, 'descripcionPublicacion');
+    payload.mencionPublicacion = getRadio(id, 'mencionPublicacion');
+    payload.etiquetasPublicacion = getChecked(id, 'etiquetasPublicacion');
+    payload.coleccionPublicacion = cval(id, 'coleccionPublicacion');
+    payload.rolPublicacion = cval(id, 'rolPublicacion');
+    payload.paisPublicacion = cval(id, 'paisPublicacion');
+    payload.palabrasClavePublicacion = cval(id, 'palabrasClavePublicacion');
+    payload.linkWebPublicacion = cval(id, 'linkWebPublicacion');
+    payload.instagramPublicacion = cval(id, 'instagramPublicacion');
+    payload.youtubePublicacion = cval(id, 'youtubePublicacion');
+    payload.otrasRedesPublicacion = cval(id, 'otrasRedesPublicacion');
+    payload.linkVideoPublicacion = cval(id, 'linkVideoPublicacion');
+}
     return payload;
 }
 
