@@ -75,7 +75,7 @@ function buildCardHTML(id) {
         '</select>' +
         '</div>' +
 
-      
+
 
         '<div class="field-row">' +
         '<div class="field">' +
@@ -494,12 +494,12 @@ function buildCardHTML(id) {
         // '</select>' +
         // '</div>' +
         '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
-'<option value="Otra institución">Otra institución</option>' +
-'</select>' +
-'<div id="institucionConvenioOtroWrapVcm-' + id + '" style="display:none">' +
-'<input type="text" id="institucionConvenioOtroVcm-' + id + '" placeholder="Especifica la institución">' +
-'</div>' +
-'</div>' +  
+        '<option value="Otra institución">Otra institución</option>' +
+        '</select>' +
+        '<div id="institucionConvenioOtroWrapVcm-' + id + '" style="display:none">' +
+        '<input type="text" id="institucionConvenioOtroVcm-' + id + '" placeholder="Especifica la institución">' +
+        '</div>' +
+        '</div>' +
 
 
 

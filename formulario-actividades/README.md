@@ -39,3 +39,40 @@ function testVcm() {
   Logger.log(resultado);
 }
 ```
+
+## nueva version
+
+hay 4 tipo de actividades.
+
+1. Iniciativas de Extensión Organizadas por UDP
+2. Participación en Instancias Externas
+3. Proyectos de Investigación, creación e innovación
+4. VcM
+
+4 va directo a merry, y a un sprradsheet de la merry
+
+1-3 van a un spreadsheet general, donde se rellena una pestaña general, y automáticamente se pasa a cada pestaña específica.
+
+la pestaña general contiene casillas para todas los tipos de solicitudes. Organizados de esta manera.
+
+```csv
+  GENERAL:
+  ESTADO, Marca temporal, Dirección de correo electrónico, ¿Qué tipo de iniciativa quieres registrar?
+
+  EXTENSIÓN:
+  Organiza(n),Título de la actividad,Nombre del ciclo o proyecto al que pertenece,Descripción del evento o iniciativa,Participan o colaboran,Reseña de participantes e instituciones,Fecha y Hora,Lugar,Formato,Público objetivo,Cantidad de asistentes,Solicitud de apoyo gráfico
+
+  EXTERNA:
+  Organiza(n),Título,Descripción de la iniciativa,Participan o colaboran,Reseña de los participantes,Enlaces,Fecha y Hora (opcional),Lugar,"Formato
+  En caso de ser online u híbrido es necesario tener la autorización de los invitados.",Público objetivo,Cantidad de asistentes,Imágenes,Adjuntar logos (no FAAD),Hipervínculos,Equipo técnico,Disposición de sala / auditorio,"Cobertura fotográfica, filmación o transmisión de la actividad",Solicitudes especiales
+
+  PUBLICACIONES:
+  Título,"En caso de ser un capítulo de libro, indicar el título del libro",Resumen o reseña (abstract),Año,País,ISBN / ISSN,Editorial o revista,Cita completa,DOI o URL,Indexación,Enlaces complementarios,Documento e imágenes,Comentarios adicionales,Título,Descripción,Biografía ,Documentos e imágenes
+
+  INVESTIGACIÓN:
+  Título del proyecto,¿Este proyecto contó con financiamiento UDP?,Reseña,Financiamiento - Agencia,Financiamiento - Línea / Programa,Año de adjudicación,Año de inicio,Año de termino,Monto adjudicado,Rol UDP,Investigador/a responsable del proyecto,Colaboradores / equipo de trabajo,Imagen representativa del proyecto
+
+  N.a:
+  Tipo de publicación,Link a aparición en prensa (URL),Unidad FaAAD de la actividad,Unidad FaAAD a la que está asociada la actividad,Imágenes,
+  
+```

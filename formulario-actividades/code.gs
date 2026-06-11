@@ -3,6 +3,7 @@
 var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
 var SHEET_GENERAL = 'pruebas-VCM';
 
+//spreadsheet vcm
 var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw';
 // var SHEET_GENERAL_VCM = 'pruebitas'
 var SHEET_GENERAL_VCM = 'Registro-VcM';
