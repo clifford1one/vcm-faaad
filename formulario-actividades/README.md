@@ -76,3 +76,9 @@ la pestaña general contiene casillas para todas los tipos de solicitudes. Organ
   Tipo de publicación,Link a aparición en prensa (URL),Unidad FaAAD de la actividad,Unidad FaAAD a la que está asociada la actividad,Imágenes,
   
 ```
+
+el de proyectos va a este excel <1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks>, y no manda mail
+
+el de vcm va a este <1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw>, llega mail a merry y a mi
+
+el de extension, externa e investigación va a este excel<18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA> y llega el mail a lo que salga en la pestaña de Destinatarios
