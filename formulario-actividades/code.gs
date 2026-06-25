@@ -14,7 +14,9 @@ var SPREADSHEET_ID_PROYECTOS = '1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks';
 var SHEET_PROYECTOS = 'Proyectos';
 
 
-var DRIVE_FOLDER_ID = '114KG_idXui1SK3amPksnTVK5ejd8mted';
+var DRIVE_FOLDER_ID = '1Qd9rSijCviNjZU6j7IeekKv-L56TWTm5'; // imagenes (solicitudes-general)
+var DRIVE_FOLDER_ID_PUBLICACION = '1_QqPOgXPq5u2xjR3NdJql7as17hcLyFj'; // imagenes (publicacion-proyectos)
+var DRIVE_FOLDER_ID_VCM = '1fuYLDH2Vhsix5i0fEAMFzLydDd6E-Y_b'; // imagenes (vcm)
 
 function doGet() {
   return HtmlService
@@ -31,7 +33,8 @@ function enviarProyecto(payload) {
     var datePrefix = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM-dd');
 
     // 1. Determinar el título para el nombre de la carpeta
-    var titulo = payload.tituloExtension || payload.tituloExterna || payload.tituloInvestigacion || "Sin Titulo";
+    // var titulo = payload.tituloExtension || payload.tituloExterna || payload.tituloInvestigacion || "Sin Titulo";
+    var titulo = payload.tituloExtension2 || payload.tituloExterna2 || payload.tituloInvestigacion2 || payload.actividadVcm || payload.nombreProyectoPublicacion || "Sin Titulo";
     var folderName = datePrefix + "-" + titulo;
 
     // // 2. Crear la carpeta en Drive
@@ -41,11 +44,18 @@ function enviarProyecto(payload) {
     // var imagesFolder = newFolder.createFolder("Imágenes");
 
     // 2. Crear la carpeta en Drive
-    var parentFolder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
+    // var parentFolder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
+
+    var folderIdToUse = DRIVE_FOLDER_ID;
+    if (payload.tipoSolicitud === 'publicacion') folderIdToUse = DRIVE_FOLDER_ID_PUBLICACION;
+    else if (payload.tipoSolicitud === 'vcm') folderIdToUse = DRIVE_FOLDER_ID_VCM;
+
+    var parentFolder = DriveApp.getFolderById(folderIdToUse);
+
     var tipoNombre = '';
-    if (payload.tipoSolicitud === 'extension') tipoNombre = '1. Extensión UDP';
-    if (payload.tipoSolicitud === 'externa') tipoNombre = '2. Participación externa';
-    if (payload.tipoSolicitud === 'investigacion') tipoNombre = '3. Investigación';
+    if (payload.tipoSolicitud === 'extension2') tipoNombre = '1. Extensión UDP';
+    if (payload.tipoSolicitud === 'externa2') tipoNombre = '2. Participación externa';
+    if (payload.tipoSolicitud === 'investigacion2') tipoNombre = '3. Investigación';
 
     var tipoFolders = parentFolder.getFoldersByName(tipoNombre);
     var tipoFolder = tipoFolders.hasNext() ? tipoFolders.next() : parentFolder.createFolder(tipoNombre);
@@ -86,107 +96,60 @@ function enviarProyecto(payload) {
     row[3] = payload.tipoSolicitud; // tipo de iniciativa
     // row[9] = folderUrl; // Columna J
 
-    if (payload.tipoSolicitud === 'extension') {
-      row[4] = payload.organizaExtension;
-      row[5] = payload.tituloExtension;
-      row[6] = payload.nombreCicloExtension;
-      row[7] = payload.descripcionExtension;
-      row[8] = (payload.participantesNombreExtension || "") + " " + (payload.participantesApellidoExtension || "");
-      row[9] = payload.biografiaExtension;   // J — reseña de participantes
-      row[10] = payload.fechaHoraExtension;
-      row[11] = payload.lugarExtension;
-      row[12] = payload.formatoExtension;
-      row[13] = payload.publicoObjetivoExtension;
-      row[14] = payload.cantidadAsistentesExtension;
-      row[15] = payload.apoyoGraficoExtension;
-    } else if (payload.tipoSolicitud === 'extension2') {
-  var organizaExt2 = payload.organizaExtension2;
-  row[4] = organizaExt2;
-  row[5] = payload.tituloExtension2;
-  row[6] = payload.cicloExtension2;
-  row[7] = payload.descripcionExtension2;
-  row[8] = payload.participanExtension2;
-  row[9] = payload.reseñaParticipantesExtension2;
-  row[10] = payload.fechaHoraExtension2;
-  row[11] = payload.lugarExtension2;
-  row[12] = payload.formatoExtension2;
-  row[13] = payload.publicoObjetivoExtension2;
-  row[14] = payload.cantidadAsistentesExtension2;
-  // row[15] = payload.apoyoGraficoExtension2;
-  row[15] = payload.apoyoGraficoExtension2 === 'Sí' ? folderUrl : payload.apoyoGraficoExtension2;
-}
-    
-    else if (payload.tipoSolicitud === 'externa') {
-      row[16] = payload.organizaExterna;
-      row[17] = payload.tituloExterna;
-      row[18] = payload.descripcionExterna;
-      row[19] = payload.participantesExterna;
-      row[20] = payload.biografiaExterna;
-      row[21] = payload.enlacesExterna;
-      row[22] = payload.fechaHoraExterna;
-      row[23] = payload.lugarExterna;
-      row[24] = payload.formatoExterna;
-      row[25] = payload.publicoObjetivoExterna;
-      row[26] = payload.asistentesExterna;
-      row[28] = payload.logosExterna;
-      row[29] = payload.hipervínculosExterna;
-      row[30] = payload.equipoTecnicoExterna;
-      row[31] = payload.preferenciaSalaExterna;
-      row[32] = payload.coberturaExterna;
-      row[33] = payload.solicitudesEspecialesExterna;
-    }else if (payload.tipoSolicitud === 'externa2') {
-  row[16] = payload.organizaExterna2;
-  row[17] = payload.tituloExterna2;
-  row[18] = payload.descripcionExterna2;
-  row[19] = payload.participanExterna2;
-  row[20] = payload.reseñaParticipantesExterna2;
-  row[21] = payload.enlacesExterna2;
-  row[22] = payload.fechaHoraExterna2;
-  row[23] = payload.lugarExterna2;
-  row[24] = payload.formatoExterna2;
-  row[25] = payload.publicoObjetivoExterna2;
-  row[26] = payload.cantidadAsistentesExterna2;
-  row[27] = folderUrl; // imágenes (link a la carpeta de Drive)
-  row[28] = folderUrl; // logos (mismo link, ya que van en la misma carpeta)
-  row[29] = payload.hipervínculosExterna2;
-  row[30] = payload.equipoTecnicoExterna2 ? payload.equipoTecnicoExterna2.join(', ') : '';
-  row[31] = payload.disposicionSalaExterna2;
-  row[32] = payload.coberturaExterna2 ? payload.coberturaExterna2.join(', ') : '';
-  row[33] = payload.solicitudesEspecialesExterna2 ? payload.solicitudesEspecialesExterna2.join(', ') : '';
-}    else if (payload.tipoSolicitud === 'investigacion') {
-      row[51] = payload.tituloInvestigacion;
-      row[52] = payload.financiamientoUdpInvestigacion;
-      row[53] = payload.descripcionInvestigacion;
-      row[54] = payload.agenciaFinancieraInvestigacion;
-      row[55] = payload.lineaProgramaInvestigacion;
-      row[56] = payload.anioAdjudicacionInvestigacion;
-      row[57] = payload.anioInicioInvestigacion;
-      row[58] = payload.anioTerminoInvestigacion;
-      row[59] = payload.montoAdjudicadoInvestigacion;
-      row[60] = payload.rolUdpInvestigacion;
-      row[61] = payload.investigadorResponsableInvestigacion;
-      row[62] = payload.colaboradoresInvestigacion;
-    }else if (payload.tipoSolicitud === 'investigacion2') {
-  row[51] = payload.tituloInvestigacion2;
-  row[52] = payload.financiamientoUdpInvestigacion2;
-  row[53] = payload.reseñaInvestigacion2;
-  row[54] = payload.agenciaInvestigacion2;
-  row[55] = payload.lineaProgramaInvestigacion2;
-  row[56] = payload.anioAdjudicacionInvestigacion2;
-  row[57] = payload.anioInicioInvestigacion2;
-  row[58] = payload.anioTerminoInvestigacion2;
-  row[59] = payload.montoAdjudicadoInvestigacion2;
-  row[60] = payload.rolUdpInvestigacion2;
-  row[61] = payload.investigadorResponsableInvestigacion2;
-  row[62] = payload.colaboradoresInvestigacion2;
-  row[63] = folderUrl;
-}else if (payload.tipoSolicitud === 'vcm') {
-
+    if (payload.tipoSolicitud === 'extension2') {
+      var organizaExt2 = payload.organizaExtension2;
+      row[4] = organizaExt2;
+      row[5] = payload.tituloExtension2;
+      row[6] = payload.cicloExtension2;
+      row[7] = payload.descripcionExtension2;
+      row[8] = payload.participanExtension2;
+      row[9] = payload.reseñaParticipantesExtension2;
+      row[10] = payload.fechaHoraExtension2;
+      row[11] = payload.lugarExtension2;
+      row[12] = payload.formatoExtension2;
+      row[13] = payload.publicoObjetivoExtension2;
+      row[14] = payload.cantidadAsistentesExtension2;
+      // row[15] = payload.apoyoGraficoExtension2;
+      row[15] = payload.apoyoGraficoExtension2 === 'Sí' ? folderUrl : payload.apoyoGraficoExtension2;
+    } else if (payload.tipoSolicitud === 'externa2') {
+      row[16] = payload.organizaExterna2;
+      row[17] = payload.tituloExterna2;
+      row[18] = payload.descripcionExterna2;
+      row[19] = payload.participanExterna2;
+      row[20] = payload.reseñaParticipantesExterna2;
+      row[21] = payload.enlacesExterna2;
+      row[22] = payload.fechaHoraExterna2;
+      row[23] = payload.lugarExterna2;
+      row[24] = payload.formatoExterna2;
+      row[25] = payload.publicoObjetivoExterna2;
+      row[26] = payload.cantidadAsistentesExterna2;
+      row[27] = folderUrl; // imágenes (link a la carpeta de Drive)
+      row[28] = folderUrl; // logos (mismo link, ya que van en la misma carpeta)
+      row[29] = payload.hipervínculosExterna2;
+      row[30] = payload.equipoTecnicoExterna2 ? payload.equipoTecnicoExterna2.join(', ') : '';
+      row[31] = payload.disposicionSalaExterna2;
+      row[32] = payload.coberturaExterna2 ? payload.coberturaExterna2.join(', ') : '';
+      row[33] = payload.solicitudesEspecialesExterna2 ? payload.solicitudesEspecialesExterna2.join(', ') : '';
+    } else if (payload.tipoSolicitud === 'investigacion2') {
+      row[51] = payload.tituloInvestigacion2;
+      row[52] = payload.financiamientoUdpInvestigacion2;
+      row[53] = payload.reseñaInvestigacion2;
+      row[54] = payload.agenciaInvestigacion2;
+      row[55] = payload.lineaProgramaInvestigacion2;
+      row[56] = payload.anioAdjudicacionInvestigacion2;
+      row[57] = payload.anioInicioInvestigacion2;
+      row[58] = payload.anioTerminoInvestigacion2;
+      row[59] = payload.montoAdjudicadoInvestigacion2;
+      row[60] = payload.rolUdpInvestigacion2;
+      row[61] = payload.investigadorResponsableInvestigacion2;
+      row[62] = payload.colaboradoresInvestigacion2;
+      row[63] = folderUrl;
+    } else if (payload.tipoSolicitud === 'vcm') {
       row[0] = payload.actividadVcm;
       row[1] = payload.nivelVcm;
       row[2] = payload.lineaEstrategicaVcm;
       row[3] = payload.convenioVcm;
-      row[4]= payload.institucionConvenioVcm;
+      row[4] = payload.institucionConvenioVcm;
       row[5] = payload.contraparteVcm;
       row[6] = payload.financiamientoVcm;
       // en la 6, se pone el tipo de financ, no importa si externo interno u otro
@@ -194,8 +157,6 @@ function enviarProyecto(payload) {
       row[8] = payload.montoVcm;
       // row[8] = payload.fechaVcm;
       row[9] = (payload.fechaInicioVcm || '') + ' - ' + (payload.fechaTerminoVcm || '');
-
-
       row[10] = payload.objetivoVcm;
       row[11] = payload.responsableVcm;
       row[12] = payload.cursoVcm;
@@ -257,7 +218,7 @@ function enviarProyecto(payload) {
           '<p><a href="https://docs.google.com/spreadsheets/d/1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw/edit?usp=sharing">Ver en la planilla</a></p>' +
           '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
       });
-       } else if (payload.tipoSolicitud === 'publicacion') {
+    } else if (payload.tipoSolicitud === 'publicacion') {
       var ssPub = SpreadsheetApp.openById(SPREADSHEET_ID_PROYECTOS);
       var sheetPub = ssPub.getSheetByName(SHEET_PROYECTOS);
       if (sheetPub) {
@@ -278,45 +239,81 @@ function enviarProyecto(payload) {
           'Pendiente'
         ];
         sheetPub.appendRow(rowPub);
-      }
-    } else {
-  var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
-  if (sheetGeneral) {
-    sheetGeneral.appendRow(row);
-  }
 
-  // Buscar destinatario según tipo de solicitud
-  var sheetDestinatarios = ss.getSheetByName('Destinatarios');
-  if (sheetDestinatarios) {
-    var columnaTipo = '';
-    if (payload.tipoSolicitud === 'extension' || payload.tipoSolicitud === 'extension2') columnaTipo = 'B';
-    else if (payload.tipoSolicitud === 'externa' || payload.tipoSolicitud === 'externa2') columnaTipo = 'C';
-    // else if (payload.tipoSolicitud === 'publicacion') columnaTipo = 'D'; // publicación académica
-    // E = prensa (no tiene tipo de solicitud asociado todavía)
-    else if (payload.tipoSolicitud === 'investigacion' || payload.tipoSolicitud === 'investigacion2') columnaTipo = 'F';
-
-    Logger.log('tipoSolicitud: ' + payload.tipoSolicitud);
-            Logger.log('columnaTipo: ' + columnaTipo);
-            Logger.log('sheetDestinatarios existe: ' + (sheetDestinatarios !== null));
-
-    if (columnaTipo !== '') {
-      var destinatario = sheetDestinatarios.getRange(columnaTipo + '4').getValue();
-      if (destinatario) {
         MailApp.sendEmail({
-          to: destinatario,
-          subject: '[FaAAD Diseño] Nueva actividad registrada',
+          to: 'comunicaciones.diseno@mail.udp.cl',
+          subject: '[FaAAD Diseño] Nuevo proyecto para publicación: ' + (payload.nombreProyectoPublicacion || 'Sin título'),
           htmlBody:
-            '<p>Estimado/a, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD.</p>' +
-            '<p>Tipo de solicitud: ' + payload.tipoSolicitud + '</p>' +
-            '<p>Enviado por: ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+            '<p>Se ha registrado un nuevo proyecto para publicación.</p>' +
             '<hr>' +
-            '<p><a href="URL_DE_TU_PLANILLA">Ver en la planilla</a></p>'
-            
+            '<p><strong>Nombre del proyecto:</strong> ' + (payload.nombreProyectoPublicacion || '') + '</p>' +
+            '<p><strong>Autor:</strong> ' + payload.nombreResponsable + '</p>' +
+            '<p><strong>Email:</strong> ' + payload.emailResponsable + '</p>' +
+            '<p><strong>Tipo:</strong> ' + (payload.tipoProyectoPublicacion || '') + '</p>' +
+            '<p><strong>Colección/Muestra:</strong> ' + (payload.coleccionPublicacion || '') + '</p>' +
+            '<p><strong>Descripción:</strong> ' + (payload.descripcionPublicacion || '') + '</p>' +
+            '<p><strong>Palabras clave:</strong> ' + (payload.palabrasClavePublicacion || '') + '</p>' +
+            '<hr>' +
+            '<p><a href="' + folderUrl + '">Ver carpeta de imágenes en Drive</a></p>'
         });
       }
+    } else {
+      var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
+      if (sheetGeneral) {
+        sheetGeneral.appendRow(row);
+      }
+
+      // Buscar destinatario según tipo de solicitud
+      var sheetDestinatarios = ss.getSheetByName('Destinatarios');
+      if (sheetDestinatarios) {
+        var columnaTipo = '';
+        if (payload.tipoSolicitud === 'extension2') columnaTipo = 'B';
+        else if (payload.tipoSolicitud === 'externa2') columnaTipo = 'C';
+        // else if (payload.tipoSolicitud === 'publicacion') columnaTipo = 'D'; // publicación académica
+        // E = prensa (no tiene tipo de solicitud asociado todavía)
+        else if (payload.tipoSolicitud === 'investigacion2') columnaTipo = 'F';
+
+        Logger.log('tipoSolicitud: ' + payload.tipoSolicitud);
+        Logger.log('columnaTipo: ' + columnaTipo);
+        Logger.log('sheetDestinatarios existe: ' + (sheetDestinatarios !== null));
+
+        if (columnaTipo !== '') {
+          var destinatario = sheetDestinatarios.getRange(columnaTipo + '4').getValue();
+          if (destinatario) {
+            MailApp.sendEmail({
+              to: destinatario,
+              subject: '[FaAAD Diseño] Nueva actividad registrada',
+              htmlBody:
+                // '<p>Estimado/a, te llega este correo porque se ha registrado un nuevo proyecto para publicación en el formulario de Diseño UDP. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
+                //   '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
+                //   '<hr>' +
+                //   '<p><strong>Nombre del proyecto:</strong> ' + (payload.nombreProyectoPublicacion || '') + '</p>' +
+                //   '<p><strong>Autor:</strong> ' + payload.nombreResponsable + '</p>' +
+                //   '<p><strong>Email:</strong> ' + payload.emailResponsable + '</p>' +
+                //   '<p><strong>Tipo:</strong> ' + (payload.tipoProyectoPublicacion || '') + '</p>' +
+                //   '<p><strong>Colección/Muestra:</strong> ' + (payload.coleccionPublicacion || '') + '</p>' +
+                //   '<p><strong>Descripción:</strong> ' + (payload.descripcionPublicacion || '') + '</p>' +
+                //   '<p><strong>Palabras clave:</strong> ' + (payload.palabrasClavePublicacion || '') + '</p>' +
+                //   '<hr>' +
+                //   '<p><a href="' + folderUrl + '">Ver carpeta de imágenes en Drive</a></p>' +
+                //   '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID_PROYECTOS + '/edit">Ver en la planilla</a></p>' +
+                //   '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+
+                '<p>Estimado/a, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
+                '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
+                '<hr>' +
+                '<p><strong>Tipo de solicitud:</strong> ' + (payload.tipoSolicitud || '') + '</p>' +
+                '<p><strong>Título:</strong> ' + (payload.tituloExtension2 || payload.tituloExterna2 || payload.tituloInvestigacion2 || '') + '</p>' +
+                '<p><strong>Descripción:</strong> ' + (payload.descripcionExtension2 || payload.descripcionExterna2 || payload.reseñaInvestigacion2 || '') + '</p>' +
+                '<p><strong>Responsable:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+                '<hr>' +
+                '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
+                '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+            });
+          }
+        }
+      }
     }
-  }
-}
 
     return { exito: true, mensaje: 'Solicitud guardada con éxito.' };
 
@@ -324,4 +321,3 @@ function enviarProyecto(payload) {
     return { exito: false, mensaje: 'Error: ' + e.toString() };
   }
 }
-
