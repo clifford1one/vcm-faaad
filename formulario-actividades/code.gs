@@ -1,6 +1,7 @@
 // a partir de aca, es codigo nuevo que lo separa en las pestañas
 // spreadsheet oficial
-var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
+// var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
+var SPREADSHEET_ID = '1zuFTho0-2zNFo2zzrFC3w_5hehucmAgJzHeWb1y6uRU';
 var SHEET_GENERAL = 'Respuestas de Formulario 1';
 
 //spreadsheet vcm
@@ -315,7 +316,18 @@ function enviarProyecto(payload) {
       }
     }
 
-    return { exito: true, mensaje: 'Solicitud guardada con éxito.' };
+MailApp.sendEmail({
+  to: payload.emailResponsable,
+  subject: '[FaAAD Diseño] Hemos recibido tu solicitud',
+  htmlBody:
+    '<p>Hola ' + (payload.nombreResponsable || '') + ',</p>' +
+    '<p>Gracias por completar el formulario de actividades de FaAAD UDP. Hemos recibido tu solicitud correctamente y será revisada por el equipo correspondiente.</p>' +
+    // '<p>Si necesitas hacer algún cambio o tienes consultas, puedes responder a este correo.</p>' +
+    '<hr>' +
+    '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+});
+
+    return { exito: true, mensaje: 'Solicitud guardada con éxito.'};
 
   } catch (e) {
     return { exito: false, mensaje: 'Error: ' + e.toString() };
