@@ -123,9 +123,3 @@ El link de cada carpeta se guarda automáticamente en la fila correspondiente de
 | Carpeta Drive — Solicitudes General | `imagenes` | `1Qd9rSijCviNjZU6j7IeekKv-L56TWTm5` |
 | Carpeta Drive — Publicación de Proyectos | `imagenes` | `1_QqPOgXPq5u2xjR3NdJql7as17hcLyFj` |
 | Carpeta Drive — VcM | `imagenes` | `1fuYLDH2Vhsix5i0fEAMFzLydDd6E-Y_b` |
-
-## Pendientes / notas de implementación
-
-- Verificar permisos de la cuenta oficial (VcM) sobre todos los spreadsheets y carpetas: cada recurso debe compartirse explícitamente con esa cuenta, no basta con moverlo a una carpeta compartida.
-- Confirmar columna E (Aparición en prensa) en la pestaña Destinatarios — actualmente no tiene un tipo de solicitud asociado en el formulario.
-- Mail de confirmación al responsable ("Gracias por completar el formulario") implementado para todos los tipos.

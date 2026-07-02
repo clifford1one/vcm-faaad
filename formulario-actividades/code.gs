@@ -237,7 +237,8 @@ function enviarProyecto(payload) {
           payload.linkVideoPublicacion,
           folderUrl,
           payload.archivos ? payload.archivos.length : 0,
-          'Pendiente'
+          'Pendiente',
+          payload.mencionPublicacion ? payload.mencionPublicacion.join(', ') : '' // O - MENCIÓN
         ];
         sheetPub.appendRow(rowPub);
 

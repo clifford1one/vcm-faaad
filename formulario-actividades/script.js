@@ -1,4 +1,5 @@
-var cardOrder = [];
+
+    var cardOrder = [];
 var nextCardId = 0;
 
 var STEP_LABELS = ['Autor', 'Solicitud', 'Enviar'];
@@ -592,12 +593,13 @@ function buildCardHTML(id) {
         '</div>' +
 
         '<div class="field">' +
-        '<label>Mención <span class="req">*</span></label>' +
+        '<label>Línea con la que se identifica el proyecto <span class="req">*</span></label>' +
         '<div class="radio-chips" id="mencionPublicacion-' + id + '" data-required="true">' +
-        '<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Gráfico"><span>Diseño Gráfico</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Industrial"><span>Diseño Industrial</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño de Interacción"><span>Diseño de Interacción</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Diseño Textil e Indumentaria"><span>Diseño Textil e Indumentaria</span></label>' +
+        // '<label class="radio-chip"><input type="radio" name="mencionPublicacion-' + id + '" value="Plan Común"><span>Plan Común</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="mencionPublicacion-' + id + '" value="Diseño Gráfico"><span>Diseño Gráfico</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="mencionPublicacion-' + id + '" value="Diseño Industrial"><span>Diseño Industrial</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="mencionPublicacion-' + id + '" value="Diseño de Interacción"><span>Diseño de Interacción</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="mencionPublicacion-' + id + '" value="Diseño Textil e Indumentaria"><span>Diseño Textil e Indumentaria</span></label>' +
         '</div>' +
         '<p class="field-error" id="err-mencionPublicacion-' + id + '">Selecciona una opción.</p>' +
         '</div>' +
@@ -1251,9 +1253,16 @@ function validateForm() {
                 { fid: 'fechaProyectoPublicacion', label: 'Fecha del proyecto (Solicitud ' + num + ')' },
                 { fid: 'tipoProyectoPublicacion', label: 'Tipo de proyecto (Solicitud ' + num + ')' },
                 { fid: 'descripcionPublicacion', label: 'Descripción (Solicitud ' + num + ')' },
-                { fid: 'mencionPublicacion', label: 'Mención (Solicitud ' + num + ')' },
+                // { fid: 'mencionPublicacion', label: 'Mención (Solicitud ' + num + ')' },
                 { fid: 'paisPublicacion', label: 'País (Solicitud ' + num + ')' }
             ]);
+            
+                var mencionChecked = document.querySelectorAll('input[name="mencionPublicacion-' + id + '"]:checked');
+                if (mencionChecked.length === 0) {
+                showFieldError('mencionPublicacion-' + id);
+                ok = false;
+                errFields.push({ label: 'Mención (Solicitud ' + num + ')', id: 'mencionPublicacion-' + id });
+                }
         }
 
         cardFields.forEach(function (f) {
@@ -1573,7 +1582,7 @@ function buildPayload(id) {
         payload.fechaProyectoPublicacion = cval(id, 'fechaProyectoPublicacion');
         payload.tipoProyectoPublicacion = cval(id, 'tipoProyectoPublicacion');
         payload.descripcionPublicacion = cval(id, 'descripcionPublicacion');
-        payload.mencionPublicacion = getRadio(id, 'mencionPublicacion');
+        payload.mencionPublicacion = getChecked(id, 'mencionPublicacion');
         payload.etiquetasPublicacion = getChecked(id, 'etiquetasPublicacion');
         payload.coleccionPublicacion = cval(id, 'coleccionPublicacion');
         payload.rolPublicacion = cval(id, 'rolPublicacion');
