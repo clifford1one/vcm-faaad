@@ -94,8 +94,16 @@ function enviarProyecto(payload) {
     row[0] = "Pendiente";
     row[1] = timestamp;
     row[2] = payload.emailResponsable;
-    row[3] = payload.tipoSolicitud; // tipo de iniciativa
-    // row[9] = folderUrl; // Columna J
+    // row[3] = payload.tipoSolicitud; // tipo de iniciativa
+    var tipoNombreDisplay = {
+      'extension2': 'Iniciativas de extensión organizadas por UDP',
+      'externa2': 'Participación en instancias externas',
+      'investigacion2': 'Proyectos de Investigación, creación e innovación',
+      'vcm': 'Registro de Actividades VcM',
+      'publicacion': 'Publicación de proyecto'
+    };
+    row[3] = tipoNombreDisplay[payload.tipoSolicitud] || payload.tipoSolicitud;
+
 
     if (payload.tipoSolicitud === 'extension2') {
       var organizaExt2 = payload.organizaExtension2;
@@ -193,7 +201,7 @@ function enviarProyecto(payload) {
         to: 'santiago.gaete@mail.udp.cl, maria.faundez4@mail.udp.cl',
         subject: '[FaAAD Diseño] Nueva actividad registrada: VcM',
         htmlBody:
-          '<p>Estimado/a, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
+          '<p>Estimad-, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
           '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
           '<hr>' +
           '<p><strong>Descripción de la actividad:</strong> ' + (payload.actividadVcm || '') + '</p>' +
@@ -282,32 +290,73 @@ function enviarProyecto(payload) {
         if (columnaTipo !== '') {
           var destinatario = sheetDestinatarios.getRange(columnaTipo + '4').getValue();
           if (destinatario) {
+            var bodyContent = '';
+            // mail solicitudes externas
+            if (payload.tipoSolicitud === 'extension2') {
+              bodyContent =
+                (payload.organizaExtension2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExtension2 + '</p>' : '') +
+                (payload.tituloExtension2 ? '<p><strong>Título:</strong> ' + payload.tituloExtension2 + '</p>' : '') +
+                (payload.cicloExtension2 ? '<p><strong>Ciclo o proyecto:</strong> ' + payload.cicloExtension2 + '</p>' : '') +
+                (payload.descripcionExtension2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExtension2 + '</p>' : '') +
+                (payload.participanExtension2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExtension2 + '</p>' : '') +
+                (payload.reseñaParticipantesExtension2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExtension2 + '</p>' : '') +
+                (payload.fechaHoraExtension2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExtension2 + '</p>' : '') +
+                (payload.lugarExtension2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExtension2 + '</p>' : '') +
+                (payload.formatoExtension2 ? '<p><strong>Formato:</strong> ' + payload.formatoExtension2 + '</p>' : '') +
+                (payload.publicoObjetivoExtension2 ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExtension2 + '</p>' : '') +
+                (payload.cantidadAsistentesExtension2 ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExtension2 + '</p>' : '') +
+                (payload.apoyoGraficoExtension2 ? '<p><strong>Apoyo gráfico:</strong> ' + payload.apoyoGraficoExtension2 + '</p>' : '');
+            }
+
+            // mail solicitudes extensión
+            else if (payload.tipoSolicitud === 'externa2') {
+              bodyContent =
+                (payload.organizaExterna2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExterna2 + '</p>' : '') +
+                (payload.tituloExterna2 ? '<p><strong>Título:</strong> ' + payload.tituloExterna2 + '</p>' : '') +
+                (payload.descripcionExterna2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExterna2 + '</p>' : '') +
+                (payload.participanExterna2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExterna2 + '</p>' : '') +
+                (payload.reseñaParticipantesExterna2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExterna2 + '</p>' : '') +
+                (payload.enlacesExterna2 ? '<p><strong>Enlaces:</strong> ' + payload.enlacesExterna2 + '</p>' : '') +
+                (payload.fechaHoraExterna2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExterna2 + '</p>' : '') +
+                (payload.lugarExterna2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExterna2 + '</p>' : '') +
+                (payload.formatoExterna2 ? '<p><strong>Formato:</strong> ' + payload.formatoExterna2 + '</p>' : '') +
+                (payload.publicoObjetivoExterna2 ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExterna2 + '</p>' : '') +
+                (payload.cantidadAsistentesExterna2 ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExterna2 + '</p>' : '') +
+                (payload.hipervínculosExterna2 ? '<p><strong>Hipervínculos:</strong> ' + payload.hipervínculosExterna2 + '</p>' : '') +
+                (payload.equipoTecnicoExterna2 && payload.equipoTecnicoExterna2.length ? '<p><strong>Equipo técnico:</strong> ' + payload.equipoTecnicoExterna2.join(', ') + '</p>' : '') +
+                (payload.disposicionSalaExterna2 ? '<p><strong>Disposición de sala:</strong> ' + payload.disposicionSalaExterna2 + '</p>' : '') +
+                (payload.coberturaExterna2 && payload.coberturaExterna2.length ? '<p><strong>Cobertura:</strong> ' + payload.coberturaExterna2.join(', ') + '</p>' : '') +
+                (payload.solicitudesEspecialesExterna2 && payload.solicitudesEspecialesExterna2.length ? '<p><strong>Solicitudes especiales:</strong> ' + payload.solicitudesEspecialesExterna2.join(', ') + '</p>' : '');
+            }
+            // mail solicitudes investigación
+
+            else if (payload.tipoSolicitud === 'investigacion2') {
+              bodyContent =
+                (payload.tituloInvestigacion2 ? '<p><strong>Título del proyecto:</strong> ' + payload.tituloInvestigacion2 + '</p>' : '') +
+                (payload.financiamientoUdpInvestigacion2 ? '<p><strong>Financiamiento UDP:</strong> ' + payload.financiamientoUdpInvestigacion2 + '</p>' : '') +
+                (payload.reseñaInvestigacion2 ? '<p><strong>Reseña:</strong> ' + payload.reseñaInvestigacion2 + '</p>' : '') +
+                (payload.agenciaInvestigacion2 ? '<p><strong>Agencia financiera:</strong> ' + payload.agenciaInvestigacion2 + '</p>' : '') +
+                (payload.lineaProgramaInvestigacion2 ? '<p><strong>Línea / Programa:</strong> ' + payload.lineaProgramaInvestigacion2 + '</p>' : '') +
+                (payload.anioAdjudicacionInvestigacion2 ? '<p><strong>Año adjudicación:</strong> ' + payload.anioAdjudicacionInvestigacion2 + '</p>' : '') +
+                (payload.anioInicioInvestigacion2 ? '<p><strong>Año inicio:</strong> ' + payload.anioInicioInvestigacion2 + '</p>' : '') +
+                (payload.anioTerminoInvestigacion2 ? '<p><strong>Año término:</strong> ' + payload.anioTerminoInvestigacion2 + '</p>' : '') +
+                (payload.montoAdjudicadoInvestigacion2 ? '<p><strong>Monto adjudicado:</strong> ' + payload.montoAdjudicadoInvestigacion2 + '</p>' : '') +
+                (payload.rolUdpInvestigacion2 ? '<p><strong>Rol UDP:</strong> ' + payload.rolUdpInvestigacion2 + '</p>' : '') +
+                (payload.investigadorResponsableInvestigacion2 ? '<p><strong>Investigador responsable:</strong> ' + payload.investigadorResponsableInvestigacion2 + '</p>' : '') +
+                (payload.colaboradoresInvestigacion2 ? '<p><strong>Colaboradores:</strong> ' + payload.colaboradoresInvestigacion2 + '</p>' : '');
+            }
+
             MailApp.sendEmail({
               to: destinatario,
               subject: '[FaAAD Diseño] Nueva actividad registrada',
               htmlBody:
-                // '<p>Estimado/a, te llega este correo porque se ha registrado un nuevo proyecto para publicación en el formulario de Diseño UDP. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
-                //   '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
-                //   '<hr>' +
-                //   '<p><strong>Nombre del proyecto:</strong> ' + (payload.nombreProyectoPublicacion || '') + '</p>' +
-                //   '<p><strong>Autor:</strong> ' + payload.nombreResponsable + '</p>' +
-                //   '<p><strong>Email:</strong> ' + payload.emailResponsable + '</p>' +
-                //   '<p><strong>Tipo:</strong> ' + (payload.tipoProyectoPublicacion || '') + '</p>' +
-                //   '<p><strong>Colección/Muestra:</strong> ' + (payload.coleccionPublicacion || '') + '</p>' +
-                //   '<p><strong>Descripción:</strong> ' + (payload.descripcionPublicacion || '') + '</p>' +
-                //   '<p><strong>Palabras clave:</strong> ' + (payload.palabrasClavePublicacion || '') + '</p>' +
-                //   '<hr>' +
-                //   '<p><a href="' + folderUrl + '">Ver carpeta de imágenes en Drive</a></p>' +
-                //   '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID_PROYECTOS + '/edit">Ver en la planilla</a></p>' +
-                //   '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
-
-                '<p>Estimado/a, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas. A continuación encontrarás el detalle. Si necesitas más información, puedes revisar la planilla completa al final del mensaje.</p>' +
-                '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar. Si por algún motivo la persona actualiza la respuesta, solo verás esa diferencia indicada en la planilla.</p>' +
+                '<p>Estimad-, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas.</p>' +
+                '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar.</p>' +
                 '<hr>' +
-                '<p><strong>Tipo de solicitud:</strong> ' + (payload.tipoSolicitud || '') + '</p>' +
-                '<p><strong>Título:</strong> ' + (payload.tituloExtension2 || payload.tituloExterna2 || payload.tituloInvestigacion2 || '') + '</p>' +
-                '<p><strong>Descripción:</strong> ' + (payload.descripcionExtension2 || payload.descripcionExterna2 || payload.reseñaInvestigacion2 || '') + '</p>' +
-                '<p><strong>Responsable:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+                '<p><strong>Tipo de solicitud:</strong> ' + (tipoNombreDisplay[payload.tipoSolicitud] || payload.tipoSolicitud) + '</p>' +
+                '<p><strong>Enviado por:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+                '<hr>' +
+                bodyContent +
                 '<hr>' +
                 '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
                 '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
@@ -317,18 +366,18 @@ function enviarProyecto(payload) {
       }
     }
 
-MailApp.sendEmail({
-  to: payload.emailResponsable,
-  subject: '[FaAAD Diseño] Hemos recibido tu solicitud',
-  htmlBody:
-    '<p>Hola ' + (payload.nombreResponsable || '') + ',</p>' +
-    '<p>Gracias por completar el formulario de actividades de FaAAD UDP. Hemos recibido tu solicitud correctamente y será revisada por el equipo correspondiente.</p>' +
-    // '<p>Si necesitas hacer algún cambio o tienes consultas, puedes responder a este correo.</p>' +
-    '<hr>' +
-    '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
-});
+    MailApp.sendEmail({
+      to: payload.emailResponsable,
+      subject: '[FaAAD Diseño] Hemos recibido tu solicitud',
+      htmlBody:
+        '<p>Hola ' + (payload.nombreResponsable || '') + ',</p>' +
+        '<p>Gracias por completar el formulario de actividades de FaAAD UDP. Hemos recibido tu solicitud correctamente y será revisada por el equipo correspondiente.</p>' +
+        // '<p>Si necesitas hacer algún cambio o tienes consultas, puedes responder a este correo.</p>' +
+        '<hr>' +
+        '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+    });
 
-    return { exito: true, mensaje: 'Solicitud guardada con éxito.'};
+    return { exito: true, mensaje: 'Solicitud guardada con éxito.' };
 
   } catch (e) {
     return { exito: false, mensaje: 'Error: ' + e.toString() };

@@ -117,7 +117,7 @@ El link de cada carpeta se guarda automáticamente en la fila correspondiente de
 
 | Recurso | Destino | Enlace / ID |
 |---|---|---|
-| Spreadsheet general (Extensión, Externa, Investigación) | Pestaña general + Destinatarios | `18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA` |
+| Spreadsheet general (Extensión, Externa, Investigación) | Pestaña general + Destinatarios | `1zuFTho0-2zNFo2zzrFC3w_5hehucmAgJzHeWb1y6uRU` |
 | Spreadsheet VcM | Registro-VcM | `1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw` |
 | Spreadsheet Proyectos (Publicación) | Proyectos | `1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks` |
 | Carpeta Drive — Solicitudes General | `imagenes` | `1Qd9rSijCviNjZU6j7IeekKv-L56TWTm5` |
