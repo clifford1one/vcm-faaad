@@ -1,5 +1,5 @@
 
-    var cardOrder = [];
+var cardOrder = [];
 var nextCardId = 0;
 
 var STEP_LABELS = ['Autor', 'Solicitud', 'Enviar'];
@@ -27,13 +27,13 @@ function buildCardHTML(id) {
         '<select id="tipoSolicitud-' + id + '" required>' +
         '<option value="">Selecciona una opción</option>' +
         // '<option value="extension">Iniciativas de extensión organizadas por UDP</option>' +
-        '<option value="extension2">Iniciativas de extensión UDP</option>' +
+        '<option value="extension2">Iniciativas de Extensión UDP - FaAAD UDP</option>' +
         // '<option value="externa">Participación en instancias externas</option>' +
-        '<option value="externa2">Participación en instancias externas</option>' +
+        '<option value="externa2">Participación en Instancias Externas - FaAAD UDP</option>' +
         // '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
-        '<option value="investigacion2">Proyectos de Investigación</option>' +
-        '<option value="vcm">Registro de Actividades VcM</option>' +
-        '<option value="publicacion">Publicación de proyecto</option>' +
+        '<option value="investigacion2">Proyectos de Investigación - FaAAD UDP</option>' +
+        '<option value="vcm">Registro de Actividades VcM - Escuela de Diseño</option>' +
+        '<option value="publicacion">Publicación de Proyecto en Página web - Escuela de Diseño</option>' +
 
         '</select>' +
         '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
@@ -46,6 +46,43 @@ function buildCardHTML(id) {
         // Extensión v2
         '<div class="form-section solicitud-extension2" id="solicitud-extension2-' + id + '" style="display:none">' +
         '<p class="section-title">Iniciativas de extensión organizadas por UDP</p>' +
+
+
+        '<div class="field">' +
+        '<label for="tituloExtension2-' + id + '">Título de la actividad <span class="req">*</span></label>' +
+        '<input type="text" id="tituloExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-tituloExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="descripcionExtension2-' + id + '">Descripción del evento o iniciativa <span class="req">*</span></label>' +
+        '<input type="text" id="descripcionExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-descripcionExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field-row">' +
+        '<div class="field">' +
+        '<label for="fechaHoraExtension2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaHoraExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaHoraExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="lugarExtension2-' + id + '">Lugar <span class="req">*</span></label>' +
+        '<input type="text" id="lugarExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-lugarExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>Formato <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="formatoExtension2-' + id + '" data-required="true">' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Online"><span>Online</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
+        '</div>' +
+        '<p class="field-error" id="err-formatoExtension2-' + id + '">Selecciona una opción.</p>' +
+        '</div>' +
 
         '<div class="field">' +
         '<label for="organizaExtension2-' + id + '">Organiza(n) <span class="req">*</span></label>' +
@@ -67,22 +104,11 @@ function buildCardHTML(id) {
         '</div>' +
 
         '<div class="field">' +
-        '<label for="tituloExtension2-' + id + '">Título de la actividad <span class="req">*</span></label>' +
-        '<input type="text" id="tituloExtension2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-tituloExtension2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
-        '<div class="field">' +
         '<label for="cicloExtension2-' + id + '">Nombre del ciclo o proyecto al que pertenece</label>' +
         '<input type="text" id="cicloExtension2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="descripcionExtension2-' + id + '">Descripción del evento o iniciativa <span class="req">*</span></label>' +
-        '<input type="text" id="descripcionExtension2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-descripcionExtension2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="participanExtension2-' + id + '">Participan o colaboran</label>' +
         '<input type="text" id="participanExtension2-' + id + '" placeholder="Respuesta corta">' +
@@ -92,29 +118,12 @@ function buildCardHTML(id) {
         '<label for="reseñaParticipantesExtension2-' + id + '">Reseña de participantes e instituciones</label>' +
         '<input type="text" id="reseñaParticipantesExtension2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
-
-        '<div class="field">' +
-        '<label for="fechaHoraExtension2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker" id="fechaHoraExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
-        '<p class="field-error" id="err-fechaHoraExtension2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="lugarExtension2-' + id + '">Lugar <span class="req">*</span></label>' +
-        '<input type="text" id="lugarExtension2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-lugarExtension2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
 
-        '<div class="field">' +
-        '<label>Formato <span class="req">*</span></label>' +
-        '<div class="radio-chips" id="formatoExtension2-' + id + '" data-required="true">' +
-        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Online"><span>Online</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="formatoExtension2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
-        '</div>' +
-        '<p class="field-error" id="err-formatoExtension2-' + id + '">Selecciona una opción.</p>' +
-        '</div>' +
 
+
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="publicoObjetivoExtension2-' + id + '">Público objetivo</label>' +
         '<input type="text" id="publicoObjetivoExtension2-' + id + '" placeholder="Respuesta corta">' +
@@ -123,6 +132,7 @@ function buildCardHTML(id) {
         '<div class="field">' +
         '<label for="cantidadAsistentesExtension2-' + id + '">Cantidad de asistentes</label>' +
         '<input type="text" id="cantidadAsistentesExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
         '</div>' +
 
         '<div class="field">' +
@@ -166,6 +176,43 @@ function buildCardHTML(id) {
         '<p class="section-title">Participación en instancias externas</p>' +
 
         '<div class="field">' +
+        '<label for="tituloExterna2-' + id + '">Título <span class="req">*</span></label>' +
+        '<input type="text" id="tituloExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-tituloExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="descripcionExterna2-' + id + '">Descripción de la iniciativa <span class="req">*</span></label>' +
+        '<input type="text" id="descripcionExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-descripcionExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field-row">' +
+        '<div class="field">' +
+        '<label for="fechaHoraExterna2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaHoraExterna2-' + id + '" placeholder="Seleccione fecha y hora" readonly required>' +
+        '<p class="field-error" id="err-fechaHoraExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="lugarExterna2-' + id + '">Lugar <span class="req">*</span></label>' +
+        '<input type="text" id="lugarExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-lugarExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>Formato <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="formatoExterna2-' + id + '" data-required="true">' +
+        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Online"><span>Online</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
+        '</div>' +
+        '<p class="field-error" id="err-formatoExterna2-' + id + '">Selecciona una opción.</p>' +
+        '</div>' +
+
+
+        '<div class="field">' +
         '<label for="organizaExterna2-' + id + '">Organiza(n) <span class="req">*</span></label>' +
         '<select id="organizaExterna2-' + id + '" required>' +
         '<option value="">Selecciona una opción</option>' +
@@ -184,18 +231,7 @@ function buildCardHTML(id) {
         '<input type="text" id="organizaOtroExterna2-' + id + '" placeholder="Especifica quién organiza">' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="tituloExterna2-' + id + '">Título <span class="req">*</span></label>' +
-        '<input type="text" id="tituloExterna2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-tituloExterna2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
-        '<div class="field">' +
-        '<label for="descripcionExterna2-' + id + '">Descripción de la iniciativa <span class="req">*</span></label>' +
-        '<input type="text" id="descripcionExterna2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-descripcionExterna2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="participanExterna2-' + id + '">Participan o colaboran</label>' +
         '<input type="text" id="participanExterna2-' + id + '" placeholder="Respuesta corta">' +
@@ -205,34 +241,10 @@ function buildCardHTML(id) {
         '<label for="reseñaParticipantesExterna2-' + id + '">Reseña de los participantes</label>' +
         '<input type="text" id="reseñaParticipantesExterna2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
-
-        '<div class="field">' +
-        '<label for="enlacesExterna2-' + id + '">Enlaces</label>' +
-        '<input type="text" id="enlacesExterna2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="fechaHoraExterna2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker" id="fechaHoraExterna2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
-        '<p class="field-error" id="err-fechaHoraExterna2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
 
-        '<div class="field">' +
-        '<label for="lugarExterna2-' + id + '">Lugar <span class="req">*</span></label>' +
-        '<input type="text" id="lugarExterna2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-lugarExterna2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
-        '<div class="field">' +
-        '<label>Formato <span class="req">*</span></label>' +
-        '<div class="radio-chips" id="formatoExterna2-' + id + '" data-required="true">' +
-        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Presencial"><span>Presencial</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Online"><span>Online</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="formatoExterna2-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
-        '</div>' +
-        '<p class="field-error" id="err-formatoExterna2-' + id + '">Selecciona una opción.</p>' +
-        '</div>' +
-
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="publicoObjetivoExterna2-' + id + '">Público objetivo</label>' +
         '<input type="text" id="publicoObjetivoExterna2-' + id + '" placeholder="Respuesta corta">' +
@@ -241,6 +253,13 @@ function buildCardHTML(id) {
         '<div class="field">' +
         '<label for="cantidadAsistentesExterna2-' + id + '">Cantidad de asistentes</label>' +
         '<input type="text" id="cantidadAsistentesExterna2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+        '</div>' +
+
+
+        '<div class="field">' +
+        '<label for="enlacesExterna2-' + id + '">Enlaces</label>' +
+        '<input type="text" id="enlacesExterna2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
 
         '<div class="field">' +
@@ -255,7 +274,7 @@ function buildCardHTML(id) {
         '</div>' +
 
         '<div class="field">' +
-        '<label>Adjuntar logos (no FAAD)</label>' +
+        '<label>Adjuntar logos (no FaAAD)</label>' +
         '<div class="drop-zone" id="dropLogosExterna2-' + id + '" tabindex="0">' +
         '<strong>Arrastra archivos o haz clic para seleccionar</strong>' +
         '<span>PNG, SVG, AI, EPS · Máx 10 MB por archivo</span>' +
@@ -266,7 +285,7 @@ function buildCardHTML(id) {
         '</div>' +
 
         '<div class="field">' +
-        '<label for="hipervínculosExterna2-' + id + '">Hipervínculos</label>' +
+        '<label for="hipervínculosExterna2-' + id + '">Enlaces Imágenes</label>' +
         '<input type="text" id="hipervínculosExterna2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
 
@@ -319,6 +338,24 @@ function buildCardHTML(id) {
         '</div>' +
 
         '<div class="field">' +
+        '<label for="reseñaInvestigacion2-' + id + '">Reseña</label>' +
+        '<input type="text" id="reseñaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field-row">' +
+        '<div class="field">' +
+        '<label for="investigadorResponsableInvestigacion2-' + id + '">Investigador/a responsable del proyecto <span class="req">*</span></label>' +
+        '<input type="text" id="investigadorResponsableInvestigacion2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-investigadorResponsableInvestigacion2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="colaboradoresInvestigacion2-' + id + '">Colaboradores / equipo de trabajo</label>' +
+        '<input type="text" id="colaboradoresInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
         '<label>¿Este proyecto contó con financiamiento UDP? <span class="req">*</span></label>' +
         '<div class="radio-chips" id="financiamientoUdpInvestigacion2-' + id + '" data-required="true">' +
         '<label class="radio-chip"><input type="radio" name="financiamientoUdpInvestigacion2-' + id + '" value="Sí"><span>Sí</span></label>' +
@@ -327,11 +364,8 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-financiamientoUdpInvestigacion2-' + id + '">Selecciona una opción.</p>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="reseñaInvestigacion2-' + id + '">Reseña</label>' +
-        '<input type="text" id="reseñaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
-        '</div>' +
 
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="agenciaInvestigacion2-' + id + '">Financiamiento - Agencia</label>' +
         '<input type="text" id="agenciaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
@@ -341,6 +375,13 @@ function buildCardHTML(id) {
         '<label for="lineaProgramaInvestigacion2-' + id + '">Financiamiento - Línea / Programa</label>' +
         '<input type="text" id="lineaProgramaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="montoAdjudicadoInvestigacion2-' + id + '">Monto adjudicado</label>' +
+        '<input type="text" id="montoAdjudicadoInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
 
         '<div class="field">' +
         '<label for="anioAdjudicacionInvestigacion2-' + id + '">Año de adjudicación</label>' +
@@ -358,10 +399,6 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="montoAdjudicadoInvestigacion2-' + id + '">Monto adjudicado</label>' +
-        '<input type="text" id="montoAdjudicadoInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
-        '</div>' +
 
         '<div class="field">' +
         '<label>Rol UDP <span class="req">*</span></label>' +
@@ -372,16 +409,6 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-rolUdpInvestigacion2-' + id + '">Selecciona una opción.</p>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="investigadorResponsableInvestigacion2-' + id + '">Investigador/a responsable del proyecto <span class="req">*</span></label>' +
-        '<input type="text" id="investigadorResponsableInvestigacion2-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-investigadorResponsableInvestigacion2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-
-        '<div class="field">' +
-        '<label for="colaboradoresInvestigacion2-' + id + '">Colaboradores / equipo de trabajo</label>' +
-        '<input type="text" id="colaboradoresInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
-        '</div>' +
 
         '<div class="field">' +
         '<label>Imagen representativa del proyecto</label>' +
@@ -408,59 +435,24 @@ function buildCardHTML(id) {
         '<input type="text" id="actividadVcm-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-actividadVcm-' + id + '">Este campo es obligatorio.</p></div>' +
 
+        '<div class="field"><label for="responsableVcm-' + id + '">Responsable UDP<span class="req">*</span></label>' +
+        '<input type="text" id="responsableVcm-' + id + '" placeholder="Respuesta corta" required>' +
+        '<p class="field-error" id="err-responsableVcm-' + id + '">Este campo es obligatorio.</p></div>' +
 
-        '<div class="field"><label>Nivel <span class="tooltip-icon">?</span><span class="tooltip-box" style="left:5vw">Inicial: actividades unidireccionales de impacto externo limitado en el medio y/o estudiantes. Ejemplos: salidas a terreno, visitas de profesionales externos a la sala de clases o talleres abiertos a la comunidad.<br><br>Medio: acciones unidireccionales o bidireccionales que generan un impacto en la comunidad y en los estudiantes como parte de un proceso formativo. Ejemplos: charlas, conversatorios, seminarios, trabajo con contrapartes en cursos teórico prácticos, participación en ferias o instancias de divulgación (podcast, vodcast, etc).<br><br>Alto: acciones bidireccionales, continuas y de alto impacto entre la escuela y su entorno. Ejemplos: desarrollo de exposiciones, actividades semestrales con contrapartes en cursos o taller, workshops y publicaciones académicas.</span></label>' +
 
-        '<div class="radio-chips">' +
-        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Inicial"><span>Inicial</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Medio"><span>Medio</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Alto"><span>Alto</span></label>' +
-        '</div></div>' +
-
-        '<div class="field"><label>Línea Estratégica<span class="tooltip-icon">?</span><span class="tooltip-box" style="left:13vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
-        '<select id="lineaEstrategicaVcm-' + id + '">' +
-        '<option value="">Selecciona una opción</option>' +
-        '<option value="Docencia vinculada al medio">1. Docencia vinculada al medio</option>' +
-        '<option value="Extensión académica y cultural">2. Extensión académica y cultural</option>' +
-        '<option value="Desarrollo de proyectos y servicios comunitarios">3. Desarrollo de proyectos y servicios comunitarios</option>' +
-        '<option value="Redes y posicionamiento disciplinar">4. Redes y posicionamiento disciplinar</option>' +
-        '</select></div>' +
-
-        '<div class="field"><label>Convenio</label>' +
-        '<div class="radio-chips">' +
-        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
-        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
-        '</div></div>' +
-        '<div class="field" id="institucionConvenioWrapVcm-' + id + '" style="display:none">' +
-        '<label for="institucionConvenioVcm-' + id + '">Institución con convenio</label>' +
-        '<select id="institucionConvenioVcm-' + id + '">' +
-        '<option value="">Selecciona una institución</option>' +
-        '<option value="Museo de la Solidaridad Salvador Allende">Museo de la Solidaridad Salvador Allende</option>' +
-        '<option value="Centro Cultural CEINA">Centro Cultural CEINA</option>' +
-        '<option value="Museo Nacional de Bellas Artes">Museo Nacional de Bellas Artes</option>' +
-        '<option value="Biblioteca Nacional de Chile">Biblioteca Nacional de Chile</option>' +
-        '<option value="Teatro Municipal de Santiago">Teatro Municipal de Santiago</option>' +
-        '<option value="Museo Interactivo Mirador">Museo Interactivo Mirador</option>' +
-        '<option value="Museo de Artes Visuales">Museo de Artes Visuales</option>' +
-        '<option value="Museo Artequín">Museo Artequín</option>' +
-        '<option value="Empresa de Ferrocarriles del Estado">Empresa de Ferrocarriles del Estado</option>' +
-        '<option value="Museo de la Memoria y los Derechos Humanos">Museo de la Memoria y los Derechos Humanos</option>' +
-        '<option value="Museo de la Educación Gabriela Mistral">Museo de la Educación Gabriela Mistral</option>' +
-        '<option value="Fundación TECHO Chile">Fundación TECHO Chile</option>' +
-        '<option value="Municipalidad de Recoleta">Municipalidad de Recoleta</option>' +
-        '<option value="MOBIL Arquitectos">MOBIL Arquitectos</option>' +
-        '<option value="Asociación de Oficinas de Arquitectura">Asociación de Oficinas de Arquitectura</option>' +
-
-        '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
-        '<option value="Otra institución">Otra institución</option>' +
-        '</select>' +
-        '<div id="institucionConvenioOtroWrapVcm-' + id + '" style="display:none">' +
-        '<input type="text" id="institucionConvenioOtroVcm-' + id + '" placeholder="Especifica la institución">' +
+        // calendario inicio y fin
+        '<div class="field-row">' +
+        '<div class="field">' +
+        '<label for="fechaInicioVcm-' + id + '">Fecha de inicio <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker-fecha" id="fechaInicioVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
+        '<p class="field-error" id="err-fechaInicioVcm-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '<div class="field">' +
+        '<label for="fechaTerminoVcm-' + id + '">Fecha de término <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker-fecha" id="fechaTerminoVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
+        '<p class="field-error" id="err-fechaTerminoVcm-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
         '</div>' +
-
-        '<div class="field"><label for="contraparteVcm-' + id + '">Nombre y Cargo Contraparte</label>' +
-        '<input type="text" id="contraparteVcm-' + id + '" placeholder="Nombre, Cargo"></div>' +
 
         '<div class="field"><label>¿Cuenta con financiamiento? <span class="req">*</span></label>' +
         '<div class="radio-chips" id="financiamientoVcm-' + id + '" data-required="true">' +
@@ -520,35 +512,80 @@ function buildCardHTML(id) {
         '<input type="text" id="montoVcm-' + id + '" placeholder="Respuesta corta">' +
         '</div>' +
         '</div>' +
-        // calendario inicio y fin
-        '<div class="field-row">' +
-        '<div class="field">' +
-        '<label for="fechaInicioVcm-' + id + '">Fecha de inicio <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker-fecha" id="fechaInicioVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
-        '<p class="field-error" id="err-fechaInicioVcm-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
-        '<div class="field">' +
-        '<label for="fechaTerminoVcm-' + id + '">Fecha de término <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker-fecha" id="fechaTerminoVcm-' + id + '" placeholder="aaaa/mm/dd" readonly required>' +
-        '<p class="field-error" id="err-fechaTerminoVcm-' + id + '">Este campo es obligatorio.</p>' +
+
+        '<div class="field"><label>Nivel <span class="tooltip-icon">?</span><span class="tooltip-box" style="left:5vw">Inicial: actividades unidireccionales de impacto externo limitado en el medio y/o estudiantes. Ejemplos: salidas a terreno, visitas de profesionales externos a la sala de clases o talleres abiertos a la comunidad.<br><br>Medio: acciones unidireccionales o bidireccionales que generan un impacto en la comunidad y en los estudiantes como parte de un proceso formativo. Ejemplos: charlas, conversatorios, seminarios, trabajo con contrapartes en cursos teórico prácticos, participación en ferias o instancias de divulgación (podcast, vodcast, etc).<br><br>Alto: acciones bidireccionales, continuas y de alto impacto entre la escuela y su entorno. Ejemplos: desarrollo de exposiciones, actividades semestrales con contrapartes en cursos o taller, workshops y publicaciones académicas.</span></label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Inicial"><span>Inicial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Medio"><span>Medio</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Alto"><span>Alto</span></label>' +
+        '</div></div>' +
+
+        '<div class="field"><label>Línea Estratégica<span class="tooltip-icon">?</span><span class="tooltip-box" style="left:13vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
+        '<select id="lineaEstrategicaVcm-' + id + '">' +
+        '<option value="">Selecciona una opción</option>' +
+        '<option value="Docencia vinculada al medio">1. Docencia vinculada al medio</option>' +
+        '<option value="Extensión académica y cultural">2. Extensión académica y cultural</option>' +
+        '<option value="Desarrollo de proyectos y servicios comunitarios">3. Desarrollo de proyectos y servicios comunitarios</option>' +
+        '<option value="Redes y posicionamiento disciplinar">4. Redes y posicionamiento disciplinar</option>' +
+        '</select></div>' +
+
+        '<div class="field"><label>Convenio</label>' +
+        '<div class="radio-chips">' +
+        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="Sí"><span>Sí</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="convenioVcm-' + id + '" value="No"><span>No</span></label>' +
+        '</div></div>' +
+        '<div class="field" id="institucionConvenioWrapVcm-' + id + '" style="display:none">' +
+        '<label for="institucionConvenioVcm-' + id + '">Institución con convenio</label>' +
+        '<select id="institucionConvenioVcm-' + id + '">' +
+        '<option value="">Selecciona una institución</option>' +
+        '<option value="Museo de la Solidaridad Salvador Allende">Museo de la Solidaridad Salvador Allende</option>' +
+        '<option value="Centro Cultural CEINA">Centro Cultural CEINA</option>' +
+        '<option value="Museo Nacional de Bellas Artes">Museo Nacional de Bellas Artes</option>' +
+        '<option value="Biblioteca Nacional de Chile">Biblioteca Nacional de Chile</option>' +
+        '<option value="Teatro Municipal de Santiago">Teatro Municipal de Santiago</option>' +
+        '<option value="Museo Interactivo Mirador">Museo Interactivo Mirador</option>' +
+        '<option value="Museo de Artes Visuales">Museo de Artes Visuales</option>' +
+        '<option value="Museo Artequín">Museo Artequín</option>' +
+        '<option value="Empresa de Ferrocarriles del Estado">Empresa de Ferrocarriles del Estado</option>' +
+        '<option value="Museo de la Memoria y los Derechos Humanos">Museo de la Memoria y los Derechos Humanos</option>' +
+        '<option value="Museo de la Educación Gabriela Mistral">Museo de la Educación Gabriela Mistral</option>' +
+        '<option value="Fundación TECHO Chile">Fundación TECHO Chile</option>' +
+        '<option value="Municipalidad de Recoleta">Municipalidad de Recoleta</option>' +
+        '<option value="MOBIL Arquitectos">MOBIL Arquitectos</option>' +
+        '<option value="Asociación de Oficinas de Arquitectura">Asociación de Oficinas de Arquitectura</option>' +
+
+        '<option value="Galería Isabel Croxatto">Galería Isabel Croxatto</option>' +
+        '<option value="Otra institución">Otra institución</option>' +
+        '</select>' +
+        '<div id="institucionConvenioOtroWrapVcm-' + id + '" style="display:none">' +
+        '<input type="text" id="institucionConvenioOtroVcm-' + id + '" placeholder="Especifica la institución">' +
         '</div>' +
         '</div>' +
 
+        '<div class="field"><label for="contraparteVcm-' + id + '">Nombre y Cargo Contraparte</label>' +
+        '<input type="text" id="contraparteVcm-' + id + '" placeholder="Nombre, Cargo"></div>' +
+
+
+
         '<div class="field"><label for="objetivoVcm-' + id + '">Objetivo</label>' +
         '<input type="text" id="objetivoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="responsableVcm-' + id + '">Responsable UDP<span class="req">*</span></label>' +
-        '<input type="text" id="responsableVcm-' + id + '" placeholder="Respuesta corta" required>' +
-        '<p class="field-error" id="err-responsableVcm-' + id + '">Este campo es obligatorio.</p></div>' +
+
         '<div class="field"><label for="cursoVcm-' + id + '">Curso Asociado</label>' +
         '<input type="text" id="cursoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+
+        '<div class="field-row">' +
         '<div class="field"><label for="outputVcm-' + id + '">Resultado esperado (output)</label>' +
         '<input type="text" id="outputVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="outcomeVcm-' + id + '">Resultado esperado (outcome)</label>' +
         '<input type="text" id="outcomeVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '</div>' +
+
+        '<div class="field-row">' +
         '<div class="field"><label for="indicadorActividadVcm-' + id + '">Indicador de actividad</label>' +
         '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
         '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        '</div>' +
         '</div>' +
 
         ////////////////////////////////////
@@ -563,6 +600,13 @@ function buildCardHTML(id) {
         '<label for="nombreProyectoPublicacion-' + id + '">Nombre del proyecto <span class="req">*</span></label>' +
         '<input type="text" id="nombreProyectoPublicacion-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-nombreProyectoPublicacion-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="descripcionPublicacion-' + id + '">Descripción del proyecto <span class="req">*</span></label>' +
+        // '<textarea id="descripcionPublicacion-' + id + '" rows="6" placeholder="Describe el proyecto, su contexto y objetivos." required></textarea>' +
+        '<input type="text" id="descripcionPublicacion-' + id + '" placeholder="Describe el proyecto, su contexto y objetivos." required>' +
+        '<p class="field-error" id="err-descripcionPublicacion-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
         '<div class="field">' +
@@ -583,13 +627,6 @@ function buildCardHTML(id) {
         '<option value="Colaboradores/as externos/as">Colaboradores/as externos/as</option>' +
         '</select>' +
         '<p class="field-error" id="err-tipoProyectoPublicacion-' + id + '">Selecciona una opción.</p>' +
-        '</div>' +
-
-        '<div class="field">' +
-        '<label for="descripcionPublicacion-' + id + '">Descripción del proyecto <span class="req">*</span></label>' +
-        // '<textarea id="descripcionPublicacion-' + id + '" rows="6" placeholder="Describe el proyecto, su contexto y objetivos." required></textarea>' +
-        '<input type="text" id="descripcionPublicacion-' + id + '" placeholder="Describe el proyecto, su contexto y objetivos." required>' +
-        '<p class="field-error" id="err-descripcionPublicacion-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
         '<div class="field">' +
@@ -619,6 +656,12 @@ function buildCardHTML(id) {
         '<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Reconocimiento"><span>Reconocimiento</span></label>' +
         '<label class="tag-chip"><input type="checkbox" name="etiquetasPublicacion-' + id + '" value="Otros"><span>Otros</span></label>' +
         '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="palabrasClavePublicacion-' + id + '">Palabras clave</label>' +
+        '<input type="text" id="palabrasClavePublicacion-' + id + '" placeholder="tipografía, identidad, textil…">' +
+        '<p class="helper">Separadas por comas.</p>' +
         '</div>' +
 
         '<div class="field">' +
@@ -686,30 +729,36 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-paisPublicacion-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="palabrasClavePublicacion-' + id + '">Palabras clave</label>' +
-        '<input type="text" id="palabrasClavePublicacion-' + id + '" placeholder="tipografía, identidad, textil…">' +
-        '<p class="helper">Separadas por comas.</p>' +
-        '</div>' +
+
 
         '<div class="field">' +
         '<label for="linkWebPublicacion-' + id + '">Link web</label>' +
         '<input type="text" id="linkWebPublicacion-' + id + '" placeholder="https://...">' +
         '</div>' +
 
+        '<div class="field-row">' +
         '<div class="field">' +
         '<label for="instagramPublicacion-' + id + '">Instagram</label>' +
         '<input type="text" id="instagramPublicacion-' + id + '" placeholder="https://instagram.com/usuario">' +
         '</div>' +
 
         '<div class="field">' +
+        '<label for="otrasRedesPublicacion-' + id + '">Otras redes sociales</label>' +
+        '<input type="text" id="otrasRedesPublicacion-' + id + '" placeholder="https://...">' +
+        '</div>' +
+        '</div>' +
+
+
+        '<div class="field-row">' +
+        '<div class="field">' +
         '<label for="youtubePublicacion-' + id + '">YouTube (canal)</label>' +
         '<input type="text" id="youtubePublicacion-' + id + '" placeholder="https://youtube.com/@canal">' +
         '</div>' +
 
         '<div class="field">' +
-        '<label for="otrasRedesPublicacion-' + id + '">Otras redes sociales</label>' +
-        '<input type="text" id="otrasRedesPublicacion-' + id + '" placeholder="https://...">' +
+        '<label for="linkVideoPublicacion-' + id + '">Link de video YouTube del proyecto</label>' +
+        '<input type="text" id="linkVideoPublicacion-' + id + '" placeholder="https://youtube.com/watch?v=...">' +
+        '</div>' +
         '</div>' +
 
         '<div class="field">' +
@@ -723,10 +772,7 @@ function buildCardHTML(id) {
         '<div class="preview-grid" id="prevImagenesPublicacion-' + id + '"></div>' +
         '</div>' +
 
-        '<div class="field">' +
-        '<label for="linkVideoPublicacion-' + id + '">Link de video YouTube del proyecto</label>' +
-        '<input type="text" id="linkVideoPublicacion-' + id + '" placeholder="https://youtube.com/watch?v=...">' +
-        '</div>' +
+
 
         '</div>'     // ← sin + , sigue siendo el último
 
@@ -1256,13 +1302,13 @@ function validateForm() {
                 // { fid: 'mencionPublicacion', label: 'Mención (Solicitud ' + num + ')' },
                 { fid: 'paisPublicacion', label: 'País (Solicitud ' + num + ')' }
             ]);
-            
-                var mencionChecked = document.querySelectorAll('input[name="mencionPublicacion-' + id + '"]:checked');
-                if (mencionChecked.length === 0) {
+
+            var mencionChecked = document.querySelectorAll('input[name="mencionPublicacion-' + id + '"]:checked');
+            if (mencionChecked.length === 0) {
                 showFieldError('mencionPublicacion-' + id);
                 ok = false;
                 errFields.push({ label: 'Mención (Solicitud ' + num + ')', id: 'mencionPublicacion-' + id });
-                }
+            }
         }
 
         cardFields.forEach(function (f) {
@@ -1682,26 +1728,20 @@ function hideStatus() {
     s.className = 'status'; s.textContent = '';
 }
 
-// ── Barra de progreso: IntersectionObserver ──────────────────
-function setActiveStep(idx) {
-    // Nav escritorio
-    document.querySelectorAll('.step-btn').forEach(function (btn, i) {
-        btn.classList.toggle('active', i === idx);
-        btn.textContent = STEP_LABELS[i];
-    });
-    // Nav móvil bottom bar
-    document.querySelectorAll('.mob-step-btn').forEach(function (btn, i) {
-        btn.classList.toggle('active', i === idx);
-    });
-}
+// // ── Barra de progreso: IntersectionObserver ──────────────────
+// function setActiveStep(idx) {
+//     // Nav escritorio
+//     document.querySelectorAll('.step-btn').forEach(function (btn, i) {
+//         btn.classList.toggle('active', i === idx);
+//         btn.textContent = STEP_LABELS[i];
+//     });
+//     // Nav móvil bottom bar
+//     document.querySelectorAll('.mob-step-btn').forEach(function (btn, i) {
+//         btn.classList.toggle('active', i === idx);
+//     });
+// }
 
-// IDs de destino por índice de paso (0=Autor, 1=Solicitud, 2=Enviar)
-// Los IDs con sufijo -0 apuntan siempre a la primera tarjeta
-var STEP_ANCHOR_IDS = [
-    'anchorAutor',
-    'anchorProyecto-0',
-    'anchorRevision'
-];
+
 
 function isMobile() {
     return window.innerWidth <= 600;
@@ -1724,68 +1764,59 @@ function goToMobPage(pageIdx) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// ── Nav escritorio: scroll a sección ────────────────────────
-function scrollToStep(idx) {
-    var targetId = STEP_ANCHOR_IDS[idx];
-    var target = document.getElementById(targetId);
-    if (!target) return;
-    var barH = document.getElementById('progressSteps').offsetHeight;
-    var top = target.getBoundingClientRect().top + window.pageYOffset - barH - 12;
-    window.scrollTo({ top: top, behavior: 'smooth' });
-}
 
-function initProgressObserver() {
-    // Click handlers — nav escritorio (solo desktop)
-    document.querySelectorAll('.step-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            var idx = parseInt(btn.getAttribute('data-step'), 10);
-            setActiveStep(idx);
-            scrollToStep(idx);
-        });
-    });
+// function initProgressObserver() {
+//     // Click handlers — nav escritorio (solo desktop)
+//     document.querySelectorAll('.step-btn').forEach(function (btn) {
+//         btn.addEventListener('click', function () {
+//             var idx = parseInt(btn.getAttribute('data-step'), 10);
+//             setActiveStep(idx);
+//             scrollToStep(idx);
+//         });
+//     });
 
-    // Click handlers — bottom bar móvil (data-page)
-    document.querySelectorAll('.mob-step-btn').forEach(function (btn) {
-        btn.addEventListener('click', function () {
-            if (!isMobile()) return;
-            var page = parseInt(btn.getAttribute('data-page'), 10);
-            goToMobPage(page);
-        });
-    });
+//     // Click handlers — bottom bar móvil (data-page)
+//     document.querySelectorAll('.mob-step-btn').forEach(function (btn) {
+//         btn.addEventListener('click', function () {
+//             if (!isMobile()) return;
+//             var page = parseInt(btn.getAttribute('data-page'), 10);
+//             goToMobPage(page);
+//         });
+//     });
 
-    // Click handlers — botones Siguiente / Anterior entre páginas
-    document.addEventListener('click', function (e) {
-        var btn = e.target.closest('.mob-nav-btn');
-        if (!btn) return;
-        var to = parseInt(btn.getAttribute('data-to'), 10);
-        goToMobPage(to);
-    });
+//     // Click handlers — botones Siguiente / Anterior entre páginas
+//     document.addEventListener('click', function (e) {
+//         var btn = e.target.closest('.mob-nav-btn');
+//         if (!btn) return;
+//         var to = parseInt(btn.getAttribute('data-to'), 10);
+//         goToMobPage(to);
+//     });
 
-    // Obtiene la posición absoluta de un elemento desde el tope del documento
-    function absTop(el) {
-        var top = 0;
-        while (el) { top += el.offsetTop; el = el.offsetParent; }
-        return top;
-    }
+//     // Obtiene la posición absoluta de un elemento desde el tope del documento
+//     function absTop(el) {
+//         var top = 0;
+//         while (el) { top += el.offsetTop; el = el.offsetParent; }
+//         return top;
+//     }
 
-    // Scroll listener — solo para el nav de escritorio
-    function updateActiveStep() {
-        if (isMobile()) return; // en móvil la paginación maneja el estado
-        var barH = document.getElementById('progressSteps').offsetHeight;
-        var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-        var active = 0;
-        for (var i = STEP_ANCHOR_IDS.length - 1; i >= 0; i--) {
-            var el = document.getElementById(STEP_ANCHOR_IDS[i]);
-            if (!el) continue;
-            if (scrollY >= absTop(el) - barH - 16) { active = i; break; }
-        }
-        setActiveStep(active);
-    }
+//     // Scroll listener — solo para el nav de escritorio
+//     function updateActiveStep() {
+//         if (isMobile()) return; // en móvil la paginación maneja el estado
+//         var barH = document.getElementById('progressSteps').offsetHeight;
+//         var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+//         var active = 0;
+//         for (var i = STEP_ANCHOR_IDS.length - 1; i >= 0; i--) {
+//             var el = document.getElementById(STEP_ANCHOR_IDS[i]);
+//             if (!el) continue;
+//             if (scrollY >= absTop(el) - barH - 16) { active = i; break; }
+//         }
+//         setActiveStep(active);
+//     }
 
-    window.addEventListener('scroll', updateActiveStep, { passive: true });
-    updateActiveStep();
-}
+//     window.addEventListener('scroll', updateActiveStep, { passive: true });
+//     updateActiveStep();
+// }
 
 // ── Init ─────────────────────────────────────────────────────
 addCard();
-initProgressObserver();
+// initProgressObserver();

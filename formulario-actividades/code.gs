@@ -23,6 +23,7 @@ function doGet() {
   return HtmlService
     .createHtmlOutputFromFile('index')
     .setTitle('Formulario de Actividades — FaAAD UDP')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1')
     .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
@@ -270,6 +271,10 @@ function enviarProyecto(payload) {
     } else {
       var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
       if (sheetGeneral) {
+        var filtroActivo = sheetGeneral.getFilter();
+        if (filtroActivo) {
+          filtroActivo.remove();
+        }
         sheetGeneral.appendRow(row);
       }
 
@@ -294,15 +299,15 @@ function enviarProyecto(payload) {
             // mail solicitudes externas
             if (payload.tipoSolicitud === 'extension2') {
               bodyContent =
-                (payload.organizaExtension2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExtension2 + '</p>' : '') +
                 (payload.tituloExtension2 ? '<p><strong>Título:</strong> ' + payload.tituloExtension2 + '</p>' : '') +
-                (payload.cicloExtension2 ? '<p><strong>Ciclo o proyecto:</strong> ' + payload.cicloExtension2 + '</p>' : '') +
                 (payload.descripcionExtension2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExtension2 + '</p>' : '') +
-                (payload.participanExtension2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExtension2 + '</p>' : '') +
-                (payload.reseñaParticipantesExtension2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExtension2 + '</p>' : '') +
                 (payload.fechaHoraExtension2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExtension2 + '</p>' : '') +
                 (payload.lugarExtension2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExtension2 + '</p>' : '') +
                 (payload.formatoExtension2 ? '<p><strong>Formato:</strong> ' + payload.formatoExtension2 + '</p>' : '') +
+                (payload.organizaExtension2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExtension2 + '</p>' : '') +
+                (payload.cicloExtension2 ? '<p><strong>Ciclo o proyecto:</strong> ' + payload.cicloExtension2 + '</p>' : '') +
+                (payload.participanExtension2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExtension2 + '</p>' : '') +
+                (payload.reseñaParticipantesExtension2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExtension2 + '</p>' : '') +
                 (payload.publicoObjetivoExtension2 ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExtension2 + '</p>' : '') +
                 (payload.cantidadAsistentesExtension2 ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExtension2 + '</p>' : '') +
                 (payload.apoyoGraficoExtension2 ? '<p><strong>Apoyo gráfico:</strong> ' + payload.apoyoGraficoExtension2 + '</p>' : '');
@@ -311,17 +316,17 @@ function enviarProyecto(payload) {
             // mail solicitudes extensión
             else if (payload.tipoSolicitud === 'externa2') {
               bodyContent =
-                (payload.organizaExterna2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExterna2 + '</p>' : '') +
                 (payload.tituloExterna2 ? '<p><strong>Título:</strong> ' + payload.tituloExterna2 + '</p>' : '') +
                 (payload.descripcionExterna2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExterna2 + '</p>' : '') +
-                (payload.participanExterna2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExterna2 + '</p>' : '') +
-                (payload.reseñaParticipantesExterna2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExterna2 + '</p>' : '') +
-                (payload.enlacesExterna2 ? '<p><strong>Enlaces:</strong> ' + payload.enlacesExterna2 + '</p>' : '') +
                 (payload.fechaHoraExterna2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExterna2 + '</p>' : '') +
                 (payload.lugarExterna2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExterna2 + '</p>' : '') +
                 (payload.formatoExterna2 ? '<p><strong>Formato:</strong> ' + payload.formatoExterna2 + '</p>' : '') +
+                (payload.organizaExterna2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExterna2 + '</p>' : '') +
+                (payload.participanExterna2 ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExterna2 + '</p>' : '') +
+                (payload.reseñaParticipantesExterna2 ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExterna2 + '</p>' : '') +
                 (payload.publicoObjetivoExterna2 ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExterna2 + '</p>' : '') +
                 (payload.cantidadAsistentesExterna2 ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExterna2 + '</p>' : '') +
+                (payload.enlacesExterna2 ? '<p><strong>Enlaces:</strong> ' + payload.enlacesExterna2 + '</p>' : '') +
                 (payload.hipervínculosExterna2 ? '<p><strong>Hipervínculos:</strong> ' + payload.hipervínculosExterna2 + '</p>' : '') +
                 (payload.equipoTecnicoExterna2 && payload.equipoTecnicoExterna2.length ? '<p><strong>Equipo técnico:</strong> ' + payload.equipoTecnicoExterna2.join(', ') + '</p>' : '') +
                 (payload.disposicionSalaExterna2 ? '<p><strong>Disposición de sala:</strong> ' + payload.disposicionSalaExterna2 + '</p>' : '') +
@@ -333,17 +338,17 @@ function enviarProyecto(payload) {
             else if (payload.tipoSolicitud === 'investigacion2') {
               bodyContent =
                 (payload.tituloInvestigacion2 ? '<p><strong>Título del proyecto:</strong> ' + payload.tituloInvestigacion2 + '</p>' : '') +
-                (payload.financiamientoUdpInvestigacion2 ? '<p><strong>Financiamiento UDP:</strong> ' + payload.financiamientoUdpInvestigacion2 + '</p>' : '') +
                 (payload.reseñaInvestigacion2 ? '<p><strong>Reseña:</strong> ' + payload.reseñaInvestigacion2 + '</p>' : '') +
+                (payload.investigadorResponsableInvestigacion2 ? '<p><strong>Investigador responsable:</strong> ' + payload.investigadorResponsableInvestigacion2 + '</p>' : '') +
+                (payload.colaboradoresInvestigacion2 ? '<p><strong>Colaboradores:</strong> ' + payload.colaboradoresInvestigacion2 + '</p>' : '') +
+              (payload.financiamientoUdpInvestigacion2 ? '<p><strong>Financiamiento UDP:</strong> ' + payload.financiamientoUdpInvestigacion2 + '</p>' : '') +
                 (payload.agenciaInvestigacion2 ? '<p><strong>Agencia financiera:</strong> ' + payload.agenciaInvestigacion2 + '</p>' : '') +
                 (payload.lineaProgramaInvestigacion2 ? '<p><strong>Línea / Programa:</strong> ' + payload.lineaProgramaInvestigacion2 + '</p>' : '') +
+                (payload.montoAdjudicadoInvestigacion2 ? '<p><strong>Monto adjudicado:</strong> ' + payload.montoAdjudicadoInvestigacion2 + '</p>' : '') +
                 (payload.anioAdjudicacionInvestigacion2 ? '<p><strong>Año adjudicación:</strong> ' + payload.anioAdjudicacionInvestigacion2 + '</p>' : '') +
                 (payload.anioInicioInvestigacion2 ? '<p><strong>Año inicio:</strong> ' + payload.anioInicioInvestigacion2 + '</p>' : '') +
                 (payload.anioTerminoInvestigacion2 ? '<p><strong>Año término:</strong> ' + payload.anioTerminoInvestigacion2 + '</p>' : '') +
-                (payload.montoAdjudicadoInvestigacion2 ? '<p><strong>Monto adjudicado:</strong> ' + payload.montoAdjudicadoInvestigacion2 + '</p>' : '') +
-                (payload.rolUdpInvestigacion2 ? '<p><strong>Rol UDP:</strong> ' + payload.rolUdpInvestigacion2 + '</p>' : '') +
-                (payload.investigadorResponsableInvestigacion2 ? '<p><strong>Investigador responsable:</strong> ' + payload.investigadorResponsableInvestigacion2 + '</p>' : '') +
-                (payload.colaboradoresInvestigacion2 ? '<p><strong>Colaboradores:</strong> ' + payload.colaboradoresInvestigacion2 + '</p>' : '');
+                (payload.rolUdpInvestigacion2 ? '<p><strong>Rol UDP:</strong> ' + payload.rolUdpInvestigacion2 + '</p>' : '') 
             }
 
             MailApp.sendEmail({
