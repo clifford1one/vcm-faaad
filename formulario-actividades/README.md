@@ -2,6 +2,8 @@
 
 Formulario web (Google Apps Script) que recopila solicitudes de actividades de la Facultad de Arquitectura, Arte y Diseño (FaAAD) y las distribuye automáticamente a distintos spreadsheets, carpetas de Drive y correos según el tipo de solicitud.
 
+Aplicar filtros sobre el spreadsheet puede generar errores. Por esto, cada vez que se manda una solicitud, se eliminan todos los filtros aplicados.
+
 ## Tipos de solicitud
 
 El formulario contempla 4 tipos de actividad:
