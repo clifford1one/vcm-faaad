@@ -1573,3 +1573,24 @@
  .tooltip-icon:hover+.tooltip-box {
    display: block;
  }
+
+ /* estilo tipo de solicitud */
+ .tipo-descripcion {
+    font-family: 'WorkSans', sans-serif;
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.55;
+    margin-top: 14px;
+    padding: 14px 16px;
+    border-left: 2px solid var(--fg);
+    background: rgba(17, 17, 17, 0.03);
+    white-space: pre-line
+}
+
+.tipo-descripcion-destacado{
+     font-family: 'NectoMono', monospace;
+
+  margin-left:1vw;
+  font-size:0.8rem;
+  font-weight: 800;
+}

@@ -27,7 +27,7 @@ function buildCardHTML(id) {
         '<select id="tipoSolicitud-' + id + '" required>' +
         '<option value="">Selecciona una opción</option>' +
         // '<option value="extension">Iniciativas de extensión organizadas por UDP</option>' +
-        '<option value="extension2">Iniciativas de Extensión UDP - FaAAD UDP</option>' +
+        '<option value="extension2">Iniciativas de Extensión - FaAAD UDP</option>' +
         // '<option value="externa">Participación en instancias externas</option>' +
         '<option value="externa2">Participación en Instancias Externas - FaAAD UDP</option>' +
         // '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
@@ -36,9 +36,17 @@ function buildCardHTML(id) {
         '<option value="publicacion">Publicación de Proyecto en Página web - Escuela de Diseño</option>' +
 
         '</select>' +
-        '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
+        // '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
+        //textbox explica tipo de solicitud
+        // '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
+        // '<div class="tipo-descripcion" id="tipoDescripcion-' + id + '" style="display:none"></div>' +
+
+        '<div class="tipo-descripcion" id="tipoDescripcion-' + id + '" style="display:none"></div>' +
+'<div class="tipo-descripcion-destacado" id="tipoDescripcionDestacado-' + id + '" style="display:none"></div>' +
         '</div>' +
         '</div>' +
+        // '</div>' +
+        // '</div>' +
 
         ////////////////////////////////////////////
         // Participación en instancias externas v2//
@@ -520,7 +528,7 @@ function buildCardHTML(id) {
         '<label class="radio-chip"><input type="radio" name="nivelVcm-' + id + '" value="Alto"><span>Alto</span></label>' +
         '</div></div>' +
 
-        '<div class="field"><label>Línea Estratégica<span class="tooltip-icon">?</span><span class="tooltip-box" style="left:13vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
+        '<div class="field"><label>Línea Estratégica <span class="tooltip-icon">?</span><span class="tooltip-box" style="left:5vw">1. Integrar sistemáticamente actores, problemas y contextos reales en el proceso formativo, fortaleciendo el aprendizaje situado y las competencias profesionales.<br><br>2. Posicionar a la Escuela como actor cultural y disciplinar relevante mediante una agenda pública de actividades coherente y sostenida.<br><br>3. Desarrollar proyectos de diseño con instituciones y comunidades que generen impacto social, territorial o institucional.<br><br>4. Fortalecer la inserción de la Escuela en redes profesionales, académicas y culturales, consolidando su posicionamiento disciplinar.</span></label>' +
         '<select id="lineaEstrategicaVcm-' + id + '">' +
         '<option value="">Selecciona una opción</option>' +
         '<option value="Docencia vinculada al medio">1. Docencia vinculada al medio</option>' +
@@ -573,18 +581,18 @@ function buildCardHTML(id) {
         '<div class="field"><label for="cursoVcm-' + id + '">Curso Asociado</label>' +
         '<input type="text" id="cursoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
 
-        '<div class="field-row">' +
-        '<div class="field"><label for="outputVcm-' + id + '">Resultado esperado (output)</label>' +
-        '<input type="text" id="outputVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="outcomeVcm-' + id + '">Resultado esperado (outcome)</label>' +
-        '<input type="text" id="outcomeVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '</div>' +
+        // '<div class="field-row">' +
+        // '<div class="field"><label for="outputVcm-' + id + '">Resultado esperado (output)</label>' +
+        // '<input type="text" id="outputVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '<div class="field"><label for="outcomeVcm-' + id + '">Resultado esperado (outcome)</label>' +
+        // '<input type="text" id="outcomeVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '</div>' +
 
-        '<div class="field-row">' +
-        '<div class="field"><label for="indicadorActividadVcm-' + id + '">Indicador de actividad</label>' +
-        '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
-        '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
-        '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '<div class="field-row">' +
+        // '<div class="field"><label for="indicadorActividadVcm-' + id + '">Indicador de actividad</label>' +
+        // '<input type="text" id="indicadorActividadVcm-' + id + '" placeholder="Respuesta corta"></div>' +
+        // '<div class="field"><label for="indicadorResultadoVcm-' + id + '">Indicador de resultado</label>' +
+        // '<input type="text" id="indicadorResultadoVcm-' + id + '" placeholder="Respuesta corta"></div>' +
         '</div>' +
         '</div>' +
 
@@ -774,6 +782,85 @@ function buildCardHTML(id) {
 
 
 
+        //aca lo extra si quieres q se publique como iniciativa extension tbn
+
+        '<div class="field" style="border-top:1px dashed var(--gray); margin-top:32px; padding-top:28px">' +
+        '<label for="tambienExtensionPublicacion-' + id + '" style="display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-bottom:0">' +
+        '<span>Registrar como Iniciativa de extensión UDP</span>' +
+        '<input type="checkbox" id="tambienExtensionPublicacion-' + id + '" style="width:auto; margin:0">' +
+        '</label>' +
+        '</div>' +
+
+        '<div id="camposExtensionPublicacion-' + id + '" style="display:none">' +
+        '<p class="section-subtitle" style="margin-bottom:20px">Campos adicionales para extensión</p>' +
+
+        '<div class="field">' +
+        '<label for="organizaExtPub-' + id + '">Organiza(n) <span class="req">*</span></label>' +
+        '<select id="organizaExtPub-' + id + '">' +
+        '<option value="">Selecciona una opción</option>' +
+        '<option value="Escuela de Diseño">Escuela de Diseño</option>' +
+        '<option value="Escuela de Arquitectura">Escuela de Arquitectura</option>' +
+        '<option value="Escuela de Arte">Escuela de Arte</option>' +
+        '<option value="Laboratorio de Interacción (LID)">Laboratorio de Interacción (LID)</option>' +
+        '<option value="Laboratorio OTF">Laboratorio OTF</option>' +
+        '<option value="Lab360">Lab360</option>' +
+        '<option value="Centro Editorial">Centro Editorial</option>' +
+        '<option value="Otro">Otro</option>' +
+        '</select>' +
+        '</div>' +
+        '<div class="field" id="organizaOtroWrapExtPub-' + id + '" style="display:none">' +
+        '<input type="text" id="organizaOtroExtPub-' + id + '" placeholder="Especifica quién organiza">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="cicloExtPub-' + id + '">Nombre del ciclo o proyecto al que pertenece</label>' +
+        '<input type="text" id="cicloExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="participanExtPub-' + id + '">Participan o colaboran</label>' +
+        '<input type="text" id="participanExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="reseñaParticipantesExtPub-' + id + '">Reseña de participantes e instituciones</label>' +
+        '<input type="text" id="reseñaParticipantesExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="lugarExtPub-' + id + '">Lugar <span class="req">*</span></label>' +
+        '<input type="text" id="lugarExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>Formato <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="formatoExtPub-' + id + '">' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtPub-' + id + '" value="Presencial"><span>Presencial</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtPub-' + id + '" value="Online"><span>Online</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="formatoExtPub-' + id + '" value="Híbrido"><span>Híbrido</span></label>' +
+        '</div>' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="publicoObjetivoExtPub-' + id + '">Público objetivo</label>' +
+        '<input type="text" id="publicoObjetivoExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label for="cantidadAsistentesExtPub-' + id + '">Cantidad de asistentes</label>' +
+        '<input type="text" id="cantidadAsistentesExtPub-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>¿Solicitas apoyo gráfico? <span class="req">*</span></label>' +
+        '<div class="radio-chips" id="apoyoGraficoExtPub-' + id + '">' +
+        '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtPub-' + id + '" value="Sí"><span>Sí</span></label>' +
+        '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtPub-' + id + '" value="No"><span>No</span></label>' +
+        '</div>' +
+        '</div>' +
+
+        '</div>' +
+
         '</div>'     // ← sin + , sigue siendo el último
 
         ///////////////////////////////////////////////////////
@@ -883,6 +970,8 @@ function wireCard(id) {
 
     // Mostrar/ocultar secciones basadas en tipo de solicitud
     tipoSolicitud.addEventListener('change', function () {
+
+
         var val = this.value;
         // document.getElementById('solicitud-extension-' + id).style.display = val === 'extension' ? 'block' : 'none';
         document.getElementById('solicitud-extension2-' + id).style.display = val === 'extension2' ? 'block' : 'none';
@@ -900,7 +989,75 @@ function wireCard(id) {
         this.classList.remove('error');
         hideFieldError('tipoSolicitud-' + id);
         hideErrorSummary();
+
+       
     });
+
+    tipoSolicitud.addEventListener('change', function () {
+    var val = this.value;
+    document.getElementById('solicitud-extension2-' + id).style.display = val === 'extension2' ? 'block' : 'none';
+    document.getElementById('solicitud-externa2-' + id).style.display = val === 'externa2' ? 'block' : 'none';
+    document.getElementById('solicitud-investigacion2-' + id).style.display = val === 'investigacion2' ? 'block' : 'none';
+    document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
+    document.getElementById('solicitud-publicacion-' + id).style.display = val === 'publicacion' ? 'block' : 'none';
+
+  var descripciones = {
+    'extension2': 'Registro de actividades unidireccionales que tienen como propósito ampliar el acceso al conocimiento, las reflexiones y los resultados de investigación, innovación y creación. Se incluyen acciones como: salidas a terreno, visitas de profesionales, charlas, conversatorios, seminarios, workshops, talleres y otros.',
+    'externa2': 'Registro de actividades externas a la UDP que hayan contado con participación de docentes de la Escuela de Diseño. Se incluyen acciones como: participación en charlas, conversatorios, seminarios, workwhops, talleres, exposiciones y otros. Tanto dentro como fuera del país.',
+    'investigacion2': 'Registro de proyectos de investigación con financiamiento interno o externo, donde se declara filiación UDP.',
+    'vcm': 'Registro de proyectos bidireccionales de docencia donde se integran actores, problemas y contextos reales en el proceso formativo. Los proyectos cuentan con una contraparte formal que acompaña el proceso de aprendizaje durante el semestre.',
+    'publicacion': ''
+};
+
+var destacados = {
+    'extension2': '· Permite: Solicitar apoyo gráfico.',
+    'externa2': '· Solicitar cobertura fotográfica, filmación o transmición, solicitar estacionamiento, solicitar disposición de sala/auditorio.',
+    // 'investigacion2': '',
+    // 'vcm': '· Implica: Reserva Sala, solicita apoyo gráfico.',
+    // 'publicacion': ''
+};
+
+var descEl = document.getElementById('tipoDescripcion-' + id);
+if (descEl) {
+    if (descripciones[val]) {
+        descEl.textContent = descripciones[val];
+        descEl.style.display = 'block';
+    } else {
+        descEl.style.display = 'none';
+    }
+}
+
+var destEl = document.getElementById('tipoDescripcionDestacado-' + id);
+if (destEl) {
+    if (destacados[val]) {
+        destEl.textContent = destacados[val];
+        destEl.style.display = 'block';
+    } else {
+        destEl.style.display = 'none';
+    }
+}
+
+    this.classList.remove('error');
+    hideFieldError('tipoSolicitud-' + id);
+    hideErrorSummary();
+});
+
+// fuera del listener, junto a los demás
+var chkExtPub = document.getElementById('tambienExtensionPublicacion-' + id);
+if (chkExtPub) {
+    chkExtPub.addEventListener('change', function () {
+        var wrap = document.getElementById('camposExtensionPublicacion-' + id);
+        if (wrap) wrap.style.display = this.checked ? 'block' : 'none';
+    });
+}
+
+var organizaExtPubEl = document.getElementById('organizaExtPub-' + id);
+if (organizaExtPubEl) {
+    organizaExtPubEl.addEventListener('change', function () {
+        var otroWrap = document.getElementById('organizaOtroWrapExtPub-' + id);
+        if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+    });
+}
 
     // ── necesitaSala (radio-chips) ────────────────────────────
     card.querySelectorAll('input[name="necesitaSalaExtension-' + id + '"]').forEach(function (radio) {
@@ -1023,7 +1180,7 @@ function wireCard(id) {
     });
 
 
-
+   
 
 
     removeBtn.addEventListener('click', function () {
@@ -1062,6 +1219,25 @@ function wireCard(id) {
             if (otroWrap) otroWrap.style.display = this.value === 'Otra institución' ? 'block' : 'none';
         });
     }
+
+    // descripciones tipo de solicitud
+    var descripciones = {
+    'extension2': '',
+    'externa2': 'Registro de actividades externas a la UDP que hayan contado con participación de docentes de la Escuela de Diseño. Se incluyen acciones como: participación en charlas, conversatorios, seminarios, workwhops, talleres, exposiciones y otros. Tanto dentro como fuera del país.',
+    'investigacion2': '',
+    'vcm': '',
+    'publicacion': ''
+};
+
+var descEl = document.getElementById('tipoDescripcion-' + id);
+if (descEl) {
+    if (descripciones[val]) {
+        descEl.textContent = descripciones[val];
+        descEl.style.display = 'block';
+    } else {
+        descEl.style.display = 'none';
+    }
+}
 }
 
 // Wire apoyo gráfico drop zones (called lazily when panel opens)
@@ -1619,10 +1795,7 @@ function buildPayload(id) {
         payload.objetivoVcm = cval(id, 'objetivoVcm');
         payload.responsableVcm = cval(id, 'responsableVcm');
         payload.cursoVcm = cval(id, 'cursoVcm');
-        payload.outputVcm = cval(id, 'outputVcm');
-        payload.outcomeVcm = cval(id, 'outcomeVcm');
-        payload.indicadorActividadVcm = cval(id, 'indicadorActividadVcm');
-        payload.indicadorResultadoVcm = cval(id, 'indicadorResultadoVcm');
+
     } else if (tipo === 'publicacion') {
         payload.nombreProyectoPublicacion = cval(id, 'nombreProyectoPublicacion');
         payload.fechaProyectoPublicacion = cval(id, 'fechaProyectoPublicacion');
@@ -1639,6 +1812,25 @@ function buildPayload(id) {
         payload.youtubePublicacion = cval(id, 'youtubePublicacion');
         payload.otrasRedesPublicacion = cval(id, 'otrasRedesPublicacion');
         payload.linkVideoPublicacion = cval(id, 'linkVideoPublicacion');
+
+
+
+        //extras iniciativas
+        var chkExt = document.getElementById('tambienExtensionPublicacion-' + id);
+        payload.tambienExtension = chkExt ? chkExt.checked : false;
+
+        if (payload.tambienExtension) {
+            var organizaEP = cval(id, 'organizaExtPub');
+            payload.organizaExtPub = organizaEP === 'Otro' ? cval(id, 'organizaOtroExtPub') : organizaEP;
+            payload.cicloExtPub = cval(id, 'cicloExtPub');
+            payload.participanExtPub = cval(id, 'participanExtPub');
+            payload.reseñaParticipantesExtPub = cval(id, 'reseñaParticipantesExtPub');
+            payload.lugarExtPub = cval(id, 'lugarExtPub');
+            payload.formatoExtPub = getRadio(id, 'formatoExtPub');
+            payload.publicoObjetivoExtPub = cval(id, 'publicoObjetivoExtPub');
+            payload.cantidadAsistentesExtPub = cval(id, 'cantidadAsistentesExtPub');
+            payload.apoyoGraficoExtPub = getRadio(id, 'apoyoGraficoExtPub');
+        }
     }
     return payload;
 }
