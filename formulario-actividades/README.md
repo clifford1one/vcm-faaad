@@ -10,7 +10,7 @@ El formulario contempla 4 tipos de actividad:
 
 | # | Tipo | Destino |
 |---|------|---------|
-| 1 | Iniciativas de Extensión Organizadas por UDP | Spreadsheet general |
+| 1 | Iniciativas de Extensión Organizadas por UDP | Spreadsheet general (+ pestaña Solicitudes-Extensión en VcM) |
 | 2 | Participación en Instancias Externas | Spreadsheet general |
 | 3 | Proyectos de Investigación, Creación e Innovación | Spreadsheet general |
 | 4 | Registro de Actividades VcM | Spreadsheet VcM (independiente) |
@@ -23,16 +23,19 @@ El formulario contempla 4 tipos de actividad:
 flowchart TD
     A[Usuario llena el formulario] --> B{Tipo de solicitud}
 
-    B -->|Extensión / Externa / Investigación| C[Spreadsheet General]
+    B -->|Extensión| C[Spreadsheet General]
+    B -->|Externa / Investigación| C
     B -->|VcM| D[Spreadsheet VcM]
     B -->|Publicación de Proyecto| E[Spreadsheet Proyectos]
 
     C --> F[Pestaña Destinatarios]
     F --> G[Mail a la unidad correspondiente]
 
+    B -->|Extensión: campos extra| X[Pestaña Solicitudes-Extensión en VcM]
+
     D --> H[Mail fijo a Merry y Santiago]
 
-    E --> I[Sin mail de notificación]
+    E --> I[Mail a comunicaciones.diseno]
 
     A --> J[Carpeta Drive según tipo]
     J --> K[Subcarpeta con fecha + título]
@@ -65,7 +68,22 @@ El mail no se envía a una dirección fija. En su lugar, se consulta la pestaña
 | **Diseño** | ✉️ | ✉️ | — *(no aplica)* | — *(no aplica)* | ✉️ |
 | Facultad | | | | | |
 
-El sistema lee la fila correspondiente a **Diseño** y manda el mail a la columna que corresponda al tipo de solicitud enviado.
+El sistema lee la fila correspondiente a **Diseño** (fila 4) y manda el mail a la columna que corresponda al tipo de solicitud enviado. El correo incluye un resumen con todos los campos no vacíos de la solicitud.
+
+### Pestaña Solicitudes-Extensión (en el spreadsheet VcM)
+
+Las solicitudes de tipo **Extensión** piden algunos campos que no caben en el spreadsheet general (cobertura fotográfica, disposición de sala y solicitudes especiales). Para no perder esa información, cada solicitud de extensión escribe **dos filas**:
+
+- Una en el **spreadsheet general** (columnas E–P, hasta apoyo gráfico).
+- Otra en la pestaña **Solicitudes-Extensión** del spreadsheet VcM, con todos los campos anteriores **más** los tres extra.
+
+```mermaid
+flowchart LR
+    A[Solicitud de Extensión] --> B[Spreadsheet General - campos base]
+    A --> C[VcM · Solicitudes-Extensión - campos base + extra]
+```
+
+Columnas de la pestaña Solicitudes-Extensión: Marca temporal, Email, Título, Descripción, Fecha y hora, Lugar, Formato, Organiza, Ciclo o proyecto, Participan, Reseña, Público objetivo, Cantidad de asistentes, Apoyo gráfico, **Cobertura**, **Disposición de sala**, **Solicitudes especiales**.
 
 ## Registro de Actividades VcM
 
@@ -73,7 +91,7 @@ Flujo independiente, con su propio spreadsheet y reglas de notificación fijas.
 
 ```mermaid
 flowchart LR
-    A[Formulario tipo VcM] --> B[Spreadsheet VcM]
+    A[Formulario tipo VcM] --> B[Spreadsheet VcM · Registro-VcM]
     A --> C[Carpeta Drive VcM]
     B --> D[Mail a santiago.gaete@mail.udp.cl]
     B --> E[Mail a maria.faundez4@mail.udp.cl]
@@ -84,16 +102,33 @@ flowchart LR
 
 ## Publicación de Proyecto
 
-Un quinto tipo de solicitud, separado del flujo FaAAD. Pensado para que estudiantes, docentes, egresados, etc. suban proyectos que eventualmente se publican en la web de Diseño UDP.
+Un quinto tipo de solicitud, separado del flujo FaAAD. Pensado para que estudiantes, docentes, egresados y colaboradores externos suban proyectos que eventualmente se publican en la web de Diseño UDP.
 
 ```mermaid
 flowchart LR
     A[Formulario tipo Publicación] --> B[Spreadsheet Proyectos]
     A --> C[Carpeta Drive Publicación]
-    B --> D[Sin notificación por mail]
+    B --> D[Mail a comunicaciones.diseno@mail.udp.cl]
 ```
 
 > No es responsabilidad del flujo de "Publicaciones académicas" mencionado en el spreadsheet general — son cosas distintas con nombres parecidos.
+
+### Casilla "También registrar como Iniciativa de extensión UDP"
+
+Como hay actividades que califican a la vez como proyecto y como extensión, el formulario de publicación incluye una casilla que, al marcarse, despliega los campos faltantes para registrarlo también como extensión (organiza, ciclo, participan, reseña, lugar, formato, público objetivo, cantidad de asistentes, apoyo gráfico con subida de imágenes, cobertura, disposición de sala y solicitudes especiales).
+
+Al enviar con la casilla marcada, la solicitud se guarda en **tres lugares** y dispara **dos correos**, sin que el usuario tenga que llenar el formulario dos veces:
+
+```mermaid
+flowchart TD
+    A[Publicación + casilla extensión marcada] --> B[Spreadsheet Proyectos]
+    A --> C[Spreadsheet General · fila de extensión]
+    A --> D[VcM · Solicitudes-Extensión]
+    B --> E[Mail a comunicaciones.diseno]
+    C --> F[Mail a destinatario de Extensión · columna B]
+```
+
+**Imágenes:** se suben **una sola vez** a la carpeta de publicación-proyectos. Las tres filas (Proyectos, General y Solicitudes-Extensión) guardan el **mismo link** de esa carpeta, de modo que las imágenes no se duplican pero quedan accesibles desde los tres spreadsheets.
 
 ## Estructura de carpetas en Drive
 
@@ -115,12 +150,29 @@ flowchart TD
 
 El link de cada carpeta se guarda automáticamente en la fila correspondiente del spreadsheet (cuando hay columna disponible para ello).
 
+## Notas de implementación (Apps Script)
+
+Google Apps Script ignora algunas etiquetas puestas directamente en el HTML. Por eso, ciertos ajustes se hacen desde `doGet()` en el `.gs`, no en el `<head>`:
+
+- **Viewport (responsive móvil):** se agrega con `.addMetaTag('viewport', 'width=device-width, initial-scale=1')`. Sin esto, el celular renderiza la página como escritorio.
+- **Favicon:** se agrega con `.setFaviconUrl(url)` y requiere una URL pública (no acepta Base64 ni archivos institucionales privados).
+
+```javascript
+function doGet() {
+  return HtmlService
+    .createHtmlOutputFromFile('index')
+    .setTitle('Formulario de Actividades — FaAAD UDP')
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+```
+
 ## Recursos y enlaces
 
 | Recurso | Destino | Enlace / ID |
 |---|---|---|
 | Spreadsheet general (Extensión, Externa, Investigación) | Pestaña general + Destinatarios | `1zuFTho0-2zNFo2zzrFC3w_5hehucmAgJzHeWb1y6uRU` |
-| Spreadsheet VcM | Registro-VcM | `1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw` |
+| Spreadsheet VcM | Registro-VcM + Solicitudes-Extensión | `1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw` |
 | Spreadsheet Proyectos (Publicación) | Proyectos | `1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks` |
 | Carpeta Drive — Solicitudes General | `imagenes` | `1Qd9rSijCviNjZU6j7IeekKv-L56TWTm5` |
 | Carpeta Drive — Publicación de Proyectos | `imagenes` | `1_QqPOgXPq5u2xjR3NdJql7as17hcLyFj` |
