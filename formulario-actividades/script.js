@@ -33,7 +33,7 @@ function buildCardHTML(id) {
         // '<option value="investigacion">Proyectos de Investigación, creación e innovación</option>' +
         '<option value="investigacion2">Proyectos de Investigación - FaAAD UDP</option>' +
         '<option value="vcm">Registro de Actividades VcM - Escuela de Diseño</option>' +
-        '<option value="publicacion">Publicación de Proyecto en Página web - Escuela de Diseño</option>' +
+        '<option value="publicacion">Publicación de Proyectos - Escuela de Diseño</option>' +
 
         '</select>' +
         // '<p class="field-error" id="err-tipoSolicitud-' + id + '">Selecciona una opción.</p>' +
@@ -42,14 +42,14 @@ function buildCardHTML(id) {
         // '<div class="tipo-descripcion" id="tipoDescripcion-' + id + '" style="display:none"></div>' +
 
         '<div class="tipo-descripcion" id="tipoDescripcion-' + id + '" style="display:none"></div>' +
-'<div class="tipo-descripcion-destacado" id="tipoDescripcionDestacado-' + id + '" style="display:none"></div>' +
+        '<div class="tipo-descripcion-destacado" id="tipoDescripcionDestacado-' + id + '" style="display:none"></div>' +
         '</div>' +
         '</div>' +
         // '</div>' +
         // '</div>' +
 
         ////////////////////////////////////////////
-        // Participación en instancias externas v2//
+        // Participación en extensión v2//
         ////////////////////////////////////////////
         // Extensión v2
         '<div class="form-section solicitud-extension2" id="solicitud-extension2-' + id + '" style="display:none">' +
@@ -174,10 +174,34 @@ function buildCardHTML(id) {
         '<div class="preview-grid" id="prevLogosExtension2-' + id + '"></div>' +
         '</div>' +
         '</div>' +
+
+        // extras que no aparecen en el excell general, solo en el de VcM
+        '<div class="field">' +
+        '<label>Cobertura fotográfica, filmación o transmisión</label>' +
+        '<div class="tags-grid">' +
+        '<label class="tag-chip"><input type="checkbox" name="coberturaExtension2-' + id + '" value="Registro fotográfico"><span>Registro fotográfico</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="coberturaExtension2-' + id + '" value="Filmación"><span>Filmación</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="coberturaExtension2-' + id + '" value="Transmisión en vivo"><span>Transmisión en vivo</span></label>' +
         '</div>' +
         '</div>' +
 
-        /////////////////////////////////////////////
+        '<div class="field">' +
+        '<label for="disposicionSalaExtension2-' + id + '">Disposición de sala / auditorio</label>' +
+        '<input type="text" id="disposicionSalaExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '</div>' +
+
+        '<div class="field">' +
+        '<label>Solicitudes especiales</label>' +
+        '<div class="tags-grid">' +
+        // '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Agua"><span>Agua</span></label>' +
+        // '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Pasador de diapositivas"><span>Pasador de diapositivas</span></label>' +
+        // '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExterna2-' + id + '" value="Pantalla extra"><span>Pantalla extra</span></label>' +
+        '<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExtension2-' + id + '" value="Estacionamiento"><span>Estacionamiento</span></label>' +
+        '</div>' +
+        '</div>' +
+        '</div>' +
+
+        /////////////////////////////////////////////a
         // PARTICIPACION EN INSTANCIAS EXTERNAS V2 //
         /////////////////////////////////////////////
         '<div class="form-section solicitud-externa2" id="solicitud-externa2-' + id + '" style="display:none">' +
@@ -857,7 +881,52 @@ function buildCardHTML(id) {
         '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtPub-' + id + '" value="Sí"><span>Sí</span></label>' +
         '<label class="radio-chip"><input type="radio" name="apoyoGraficoExtPub-' + id + '" value="No"><span>No</span></label>' +
         '</div>' +
-        '</div>' +
+
+'<div class="field" id="apoyoGraficoPanelExtPub-' + id + '" style="display:none">' +
+'<div class="grafico-item">' +
+'<div class="grafico-item-header"><span class="grafico-item-num">01</span><span class="grafico-item-label">Imágenes</span></div>' +
+'<div class="drop-zone" id="dropImagenesExtPub-' + id + '" tabindex="0">' +
+'<strong>Arrastra imágenes o haz clic para seleccionar</strong>' +
+'<span>JPG, PNG, WEBP · Máx 10 MB por archivo</span>' +
+'<input type="file" class="file-input-hidden" id="fileImagenesExtPub-' + id + '" multiple accept="image/*">' +
+'<span class="drop-counter" id="cntImagenesExtPub-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevImagenesExtPub-' + id + '"></div>' +
+'</div>' +
+'<div class="grafico-item">' +
+'<div class="grafico-item-header"><span class="grafico-item-num">02</span><span class="grafico-item-label">Logos</span></div>' +
+'<div class="drop-zone" id="dropLogosExtPub-' + id + '" tabindex="0">' +
+'<strong>Arrastra archivos o haz clic para seleccionar</strong>' +
+'<span>PNG, SVG, AI, EPS · Máx 10 MB por archivo</span>' +
+'<input type="file" class="file-input-hidden" id="fileLogosExtPub-' + id + '" multiple accept="image/*,.svg,.ai,.eps">' +
+'<span class="drop-counter" id="cntLogosExtPub-' + id + '"></span>' +
+'</div>' +
+'<div class="preview-grid" id="prevLogosExtPub-' + id + '"></div>' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Cobertura fotográfica, filmación o transmisión</label>' +
+'<div class="tags-grid">' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExtPub-' + id + '" value="Registro fotográfico"><span>Registro fotográfico</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExtPub-' + id + '" value="Filmación"><span>Filmación</span></label>' +
+'<label class="tag-chip"><input type="checkbox" name="coberturaExtPub-' + id + '" value="Transmisión en vivo"><span>Transmisión en vivo</span></label>' +
+'</div>' +
+'</div>' +
+
+'<div class="field">' +
+'<label for="disposicionSalaExtPub-' + id + '">Disposición de sala / auditorio</label>' +
+'<input type="text" id="disposicionSalaExtPub-' + id + '" placeholder="Respuesta corta">' +
+'</div>' +
+
+'<div class="field">' +
+'<label>Solicitudes especiales</label>' +
+'<div class="tags-grid">' +
+'<label class="tag-chip"><input type="checkbox" name="solicitudesEspecialesExtPub-' + id + '" value="Estacionamiento"><span>Estacionamiento</span></label>' +
+'</div>' +
+'</div>' +
+
+'</div>' +
 
         '</div>' +
 
@@ -990,74 +1059,86 @@ function wireCard(id) {
         hideFieldError('tipoSolicitud-' + id);
         hideErrorSummary();
 
-       
+
     });
 
     tipoSolicitud.addEventListener('change', function () {
-    var val = this.value;
-    document.getElementById('solicitud-extension2-' + id).style.display = val === 'extension2' ? 'block' : 'none';
-    document.getElementById('solicitud-externa2-' + id).style.display = val === 'externa2' ? 'block' : 'none';
-    document.getElementById('solicitud-investigacion2-' + id).style.display = val === 'investigacion2' ? 'block' : 'none';
-    document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
-    document.getElementById('solicitud-publicacion-' + id).style.display = val === 'publicacion' ? 'block' : 'none';
+        var val = this.value;
+        document.getElementById('solicitud-extension2-' + id).style.display = val === 'extension2' ? 'block' : 'none';
+        document.getElementById('solicitud-externa2-' + id).style.display = val === 'externa2' ? 'block' : 'none';
+        document.getElementById('solicitud-investigacion2-' + id).style.display = val === 'investigacion2' ? 'block' : 'none';
+        document.getElementById('solicitud-vcm-' + id).style.display = val === 'vcm' ? 'block' : 'none';
+        document.getElementById('solicitud-publicacion-' + id).style.display = val === 'publicacion' ? 'block' : 'none';
 
-  var descripciones = {
-    'extension2': 'Registro de actividades unidireccionales que tienen como propósito ampliar el acceso al conocimiento, las reflexiones y los resultados de investigación, innovación y creación. Se incluyen acciones como: salidas a terreno, visitas de profesionales, charlas, conversatorios, seminarios, workshops, talleres y otros.',
-    'externa2': 'Registro de actividades externas a la UDP que hayan contado con participación de docentes de la Escuela de Diseño. Se incluyen acciones como: participación en charlas, conversatorios, seminarios, workwhops, talleres, exposiciones y otros. Tanto dentro como fuera del país.',
-    'investigacion2': 'Registro de proyectos de investigación con financiamiento interno o externo, donde se declara filiación UDP.',
-    'vcm': 'Registro de proyectos bidireccionales de docencia donde se integran actores, problemas y contextos reales en el proceso formativo. Los proyectos cuentan con una contraparte formal que acompaña el proceso de aprendizaje durante el semestre.',
-    'publicacion': ''
-};
+        var descripciones = {
+            'extension2': 'Registro de actividades unidireccionales que tienen como propósito ampliar el acceso al conocimiento, las reflexiones y los resultados de investigación, innovación y creación. Se incluyen acciones como: salidas a terreno, visitas de profesionales, charlas, conversatorios, seminarios, workshops, talleres y otros.',
+            'externa2': 'Registro de actividades externas a la UDP que hayan contado con participación de docentes de la Escuela de Diseño. Se incluyen acciones como: participación en charlas, conversatorios, seminarios, workwhops, talleres, exposiciones y otros. Tanto dentro como fuera del país.',
+            'investigacion2': 'Registro de proyectos de investigación con financiamiento interno o externo, donde se declara filiación UDP.',
+            'vcm': 'Registro de proyectos bidireccionales de docencia donde se integran actores, problemas y contextos reales en el proceso formativo. Los proyectos cuentan con una contraparte formal que acompaña el proceso de aprendizaje durante el semestre.',
+            'publicacion': 'Registro de proyectos desarrollados por estudiantes, docentes, egresados o colaboradores externos para su eventual publicación en la página web de la Escuela de Diseño. Se incluyen trabajos de pregrado, postgrado, investigación, extensión y proyectos de título.'
+        };
 
-var destacados = {
-    'extension2': '· Permite: Solicitar apoyo gráfico.',
-    'externa2': '· Solicitar cobertura fotográfica, filmación o transmición, solicitar estacionamiento, solicitar disposición de sala/auditorio.',
-    // 'investigacion2': '',
-    // 'vcm': '· Implica: Reserva Sala, solicita apoyo gráfico.',
-    // 'publicacion': ''
-};
+        var destacados = {
+            'extension2': '· Permite: Solicitar apoyo gráfico, solicitar cobertura fotográfica, filmación o transmición, solicitar estacionamiento, solicitar disposición de sala/auditorio.',
+            'externa2': '· Permite: Solicitar cobertura fotográfica, filmación o transmición, solicitar estacionamiento, solicitar disposición de sala/auditorio.',
+            'investigacion2': '· Permite: Visibilizar tu trabajo frente a la Dirección de la Escuela.',
+            'vcm': '· Permite: Solicitar seguimiento del equipo de VcM y Proyección del desarrollo de  futuros proyectos.',
+            'publicacion': '· Permite: Visibilizar proyectos en la página web de la escuela.'
+        };
 
-var descEl = document.getElementById('tipoDescripcion-' + id);
-if (descEl) {
-    if (descripciones[val]) {
-        descEl.textContent = descripciones[val];
-        descEl.style.display = 'block';
-    } else {
-        descEl.style.display = 'none';
+        var descEl = document.getElementById('tipoDescripcion-' + id);
+        if (descEl) {
+            if (descripciones[val]) {
+                descEl.textContent = descripciones[val];
+                descEl.style.display = 'block';
+            } else {
+                descEl.style.display = 'none';
+            }
+        }
+
+        var destEl = document.getElementById('tipoDescripcionDestacado-' + id);
+        if (destEl) {
+            if (destacados[val]) {
+                destEl.textContent = destacados[val];
+                destEl.style.display = 'block';
+            } else {
+                destEl.style.display = 'none';
+            }
+        }
+
+        this.classList.remove('error');
+        hideFieldError('tipoSolicitud-' + id);
+        hideErrorSummary();
+    });
+
+    // fuera del listener, junto a los demás
+    var chkExtPub = document.getElementById('tambienExtensionPublicacion-' + id);
+    if (chkExtPub) {
+        chkExtPub.addEventListener('change', function () {
+            var wrap = document.getElementById('camposExtensionPublicacion-' + id);
+            if (wrap) wrap.style.display = this.checked ? 'block' : 'none';
+        });
     }
-}
-
-var destEl = document.getElementById('tipoDescripcionDestacado-' + id);
-if (destEl) {
-    if (destacados[val]) {
-        destEl.textContent = destacados[val];
-        destEl.style.display = 'block';
-    } else {
-        destEl.style.display = 'none';
-    }
-}
-
-    this.classList.remove('error');
-    hideFieldError('tipoSolicitud-' + id);
-    hideErrorSummary();
+    card.querySelectorAll('input[name="apoyoGraficoExtPub-' + id + '"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+        var panel = document.getElementById('apoyoGraficoPanelExtPub-' + id);
+        if (panel) panel.style.display = this.value === 'Sí' ? 'block' : 'none';
+        if (this.value === 'Sí') {
+            wireDropZone('dropImagenesExtPub-' + id, 'fileImagenesExtPub-' + id, 'cntImagenesExtPub-' + id, 'prevImagenesExtPub-' + id);
+            wireDropZone('dropLogosExtPub-' + id, 'fileLogosExtPub-' + id, 'cntLogosExtPub-' + id, 'prevLogosExtPub-' + id);
+        }
+    });
 });
 
-// fuera del listener, junto a los demás
-var chkExtPub = document.getElementById('tambienExtensionPublicacion-' + id);
-if (chkExtPub) {
-    chkExtPub.addEventListener('change', function () {
-        var wrap = document.getElementById('camposExtensionPublicacion-' + id);
-        if (wrap) wrap.style.display = this.checked ? 'block' : 'none';
-    });
-}
+    var organizaExtPubEl = document.getElementById('organizaExtPub-' + id);
+    if (organizaExtPubEl) {
+        organizaExtPubEl.addEventListener('change', function () {
+            var otroWrap = document.getElementById('organizaOtroWrapExtPub-' + id);
+            if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
+        });
+    }
 
-var organizaExtPubEl = document.getElementById('organizaExtPub-' + id);
-if (organizaExtPubEl) {
-    organizaExtPubEl.addEventListener('change', function () {
-        var otroWrap = document.getElementById('organizaOtroWrapExtPub-' + id);
-        if (otroWrap) otroWrap.style.display = this.value === 'Otro' ? 'block' : 'none';
-    });
-}
+
 
     // ── necesitaSala (radio-chips) ────────────────────────────
     card.querySelectorAll('input[name="necesitaSalaExtension-' + id + '"]').forEach(function (radio) {
@@ -1180,7 +1261,7 @@ if (organizaExtPubEl) {
     });
 
 
-   
+
 
 
     removeBtn.addEventListener('click', function () {
@@ -1220,24 +1301,17 @@ if (organizaExtPubEl) {
         });
     }
 
-    // descripciones tipo de solicitud
-    var descripciones = {
-    'extension2': '',
-    'externa2': 'Registro de actividades externas a la UDP que hayan contado con participación de docentes de la Escuela de Diseño. Se incluyen acciones como: participación en charlas, conversatorios, seminarios, workwhops, talleres, exposiciones y otros. Tanto dentro como fuera del país.',
-    'investigacion2': '',
-    'vcm': '',
-    'publicacion': ''
-};
-
-var descEl = document.getElementById('tipoDescripcion-' + id);
-if (descEl) {
-    if (descripciones[val]) {
-        descEl.textContent = descripciones[val];
-        descEl.style.display = 'block';
-    } else {
-        descEl.style.display = 'none';
-    }
-}
+    card.querySelectorAll('input[name="apoyoGraficoExtPub-' + id + '"]').forEach(function (radio) {
+    radio.addEventListener('change', function () {
+        var panel = document.getElementById('apoyoGraficoPanelExtPub-' + id);
+        if (panel) panel.style.display = this.value === 'Sí' ? 'block' : 'none';
+        if (this.value === 'Sí') {
+            wireDropZone('dropImagenesExtPub-' + id, 'fileImagenesExtPub-' + id, 'cntImagenesExtPub-' + id, 'prevImagenesExtPub-' + id);
+            wireDropZone('dropLogosExtPub-' + id, 'fileLogosExtPub-' + id, 'cntLogosExtPub-' + id, 'prevLogosExtPub-' + id);
+        }
+    });
+});
+ 
 }
 
 // Wire apoyo gráfico drop zones (called lazily when panel opens)
@@ -1680,6 +1754,7 @@ function buildPayload(id) {
         payload.preferenciaSalaExtension = salaVal === 'Otro' ? cval(id, 'preferenciaSalaOtroExtension') : salaVal;
         payload.apoyoGraficoExtension = getRadio(id, 'apoyoGraficoExtension');
         payload.solicitudesEspecialesExtension = getChecked(id, 'solicitudesEspecialesExtension');
+
     } else if (tipo === 'extension2') {
         // payload.organizaExtension2 = cval(id, 'organizaExtension2');
         var organiza = cval(id, 'organizaExtension2');
@@ -1696,6 +1771,10 @@ function buildPayload(id) {
         payload.publicoObjetivoExtension2 = cval(id, 'publicoObjetivoExtension2');
         payload.cantidadAsistentesExtension2 = cval(id, 'cantidadAsistentesExtension2');
         payload.apoyoGraficoExtension2 = getRadio(id, 'apoyoGraficoExtension2');
+        // campos que no aparecen en el general, si en el de VcM
+        payload.coberturaExtension2 = getChecked(id, 'coberturaExtension2');
+        payload.disposicionSalaExtension2 = cval(id, 'disposicionSalaExtension2');
+        payload.solicitudesEspecialesExtension2 = getChecked(id, 'solicitudesEspecialesExtension2');
     } else if (tipo === 'externa') {
         payload.institucionExterna = cval(id, 'institucionExterna');
         payload.tituloExterna = cval(id, 'tituloExterna');
@@ -1920,21 +1999,6 @@ function hideStatus() {
     s.className = 'status'; s.textContent = '';
 }
 
-// // ── Barra de progreso: IntersectionObserver ──────────────────
-// function setActiveStep(idx) {
-//     // Nav escritorio
-//     document.querySelectorAll('.step-btn').forEach(function (btn, i) {
-//         btn.classList.toggle('active', i === idx);
-//         btn.textContent = STEP_LABELS[i];
-//     });
-//     // Nav móvil bottom bar
-//     document.querySelectorAll('.mob-step-btn').forEach(function (btn, i) {
-//         btn.classList.toggle('active', i === idx);
-//     });
-// }
-
-
-
 function isMobile() {
     return window.innerWidth <= 600;
 }
@@ -1956,59 +2020,4 @@ function goToMobPage(pageIdx) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-
-// function initProgressObserver() {
-//     // Click handlers — nav escritorio (solo desktop)
-//     document.querySelectorAll('.step-btn').forEach(function (btn) {
-//         btn.addEventListener('click', function () {
-//             var idx = parseInt(btn.getAttribute('data-step'), 10);
-//             setActiveStep(idx);
-//             scrollToStep(idx);
-//         });
-//     });
-
-//     // Click handlers — bottom bar móvil (data-page)
-//     document.querySelectorAll('.mob-step-btn').forEach(function (btn) {
-//         btn.addEventListener('click', function () {
-//             if (!isMobile()) return;
-//             var page = parseInt(btn.getAttribute('data-page'), 10);
-//             goToMobPage(page);
-//         });
-//     });
-
-//     // Click handlers — botones Siguiente / Anterior entre páginas
-//     document.addEventListener('click', function (e) {
-//         var btn = e.target.closest('.mob-nav-btn');
-//         if (!btn) return;
-//         var to = parseInt(btn.getAttribute('data-to'), 10);
-//         goToMobPage(to);
-//     });
-
-//     // Obtiene la posición absoluta de un elemento desde el tope del documento
-//     function absTop(el) {
-//         var top = 0;
-//         while (el) { top += el.offsetTop; el = el.offsetParent; }
-//         return top;
-//     }
-
-//     // Scroll listener — solo para el nav de escritorio
-//     function updateActiveStep() {
-//         if (isMobile()) return; // en móvil la paginación maneja el estado
-//         var barH = document.getElementById('progressSteps').offsetHeight;
-//         var scrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-//         var active = 0;
-//         for (var i = STEP_ANCHOR_IDS.length - 1; i >= 0; i--) {
-//             var el = document.getElementById(STEP_ANCHOR_IDS[i]);
-//             if (!el) continue;
-//             if (scrollY >= absTop(el) - barH - 16) { active = i; break; }
-//         }
-//         setActiveStep(active);
-//     }
-
-//     window.addEventListener('scroll', updateActiveStep, { passive: true });
-//     updateActiveStep();
-// }
-
-// ── Init ─────────────────────────────────────────────────────
 addCard();
-// initProgressObserver();

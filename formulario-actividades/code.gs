@@ -4,6 +4,10 @@
 var SPREADSHEET_ID = '1zuFTho0-2zNFo2zzrFC3w_5hehucmAgJzHeWb1y6uRU';
 var SHEET_GENERAL = 'Respuestas de Formulario 1';
 
+// aca se duplica las de extension, y agrega algunos campos
+var SHEET_EXTENSION_VCM = 'Solicitudes-Extensión';
+
+
 //spreadsheet vcm
 var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw';
 // var SHEET_GENERAL_VCM = 'pruebitas'
@@ -63,12 +67,12 @@ function enviarProyecto(payload) {
     // var tipoFolder = tipoFolders.hasNext() ? tipoFolders.next() : parentFolder.createFolder(tipoNombre);
 
     var tipoFolder;
-if (tipoNombre === '') {
-  tipoFolder = parentFolder;
-} else {
-  var tipoFolders = parentFolder.getFoldersByName(tipoNombre);
-  tipoFolder = tipoFolders.hasNext() ? tipoFolders.next() : parentFolder.createFolder(tipoNombre);
-}
+    if (tipoNombre === '') {
+      tipoFolder = parentFolder;
+    } else {
+      var tipoFolders = parentFolder.getFoldersByName(tipoNombre);
+      tipoFolder = tipoFolders.hasNext() ? tipoFolders.next() : parentFolder.createFolder(tipoNombre);
+    }
 
 
     var newFolder = tipoFolder.createFolder(folderName);
@@ -187,19 +191,6 @@ if (tipoNombre === '') {
 
     row[90] = payload.nombreResponsable;
 
-    //     // 5. Guardar en la pestaña GENERAL
-    //     var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
-    //     if (sheetGeneral) {
-    //       sheetGeneral.appendRow(row);
-    //     }
-
-    //     return { exito: true, mensaje: 'Solicitud guardada con éxito.' };
-
-    //   } catch (e) {
-    //     return { exito: false, mensaje: 'Error: ' + e.toString() };
-    //   }
-    // }
-
     if (payload.tipoSolicitud === 'vcm') {
       var ssVcm = SpreadsheetApp.openById(SPREADSHEET_ID_VCM);
       var sheetVcm = ssVcm.getSheetByName('Registro-VcM');
@@ -278,68 +269,96 @@ if (tipoNombre === '') {
         });
       }
 
-        // Si además se marcó como extensión, guardar fila en el general y mandar mail
-        if (payload.tambienExtension) {
-          var rowExt = new Array(92).fill("");
-          rowExt[0] = "Pendiente";
-          rowExt[1] = timestamp;
-          rowExt[2] = payload.emailResponsable;
-          rowExt[3] = 'Iniciativas de extensión organizadas por UDP';
-          rowExt[4] = payload.organizaExtPub;
-          rowExt[5] = payload.nombreProyectoPublicacion;
-          rowExt[6] = payload.cicloExtPub;
-          rowExt[7] = payload.descripcionPublicacion;
-          rowExt[8] = payload.participanExtPub;
-          rowExt[9] = payload.reseñaParticipantesExtPub;
-          rowExt[10] = payload.fechaProyectoPublicacion;
-          rowExt[11] = payload.lugarExtPub;
-          rowExt[12] = payload.formatoExtPub;
-          rowExt[13] = payload.publicoObjetivoExtPub;
-          rowExt[14] = payload.cantidadAsistentesExtPub;
-          rowExt[15] = payload.apoyoGraficoExtPub === 'Sí' ? folderUrl : payload.apoyoGraficoExtPub;
-          rowExt[90] = payload.nombreResponsable;
+      // Si además se marcó como extensión, guardar fila en el general y mandar mail
+      if (payload.tambienExtension) {
+        var rowExt = new Array(92).fill("");
+        rowExt[0] = "Pendiente";
+        rowExt[1] = timestamp;
+        rowExt[2] = payload.emailResponsable;
+        rowExt[3] = 'Iniciativas de extensión organizadas por UDP';
+        rowExt[4] = payload.organizaExtPub;
+        rowExt[5] = payload.nombreProyectoPublicacion;
+        rowExt[6] = payload.cicloExtPub;
+        rowExt[7] = payload.descripcionPublicacion;
+        rowExt[8] = payload.participanExtPub;
+        rowExt[9] = payload.reseñaParticipantesExtPub;
+        rowExt[10] = payload.fechaProyectoPublicacion;
+        rowExt[11] = payload.lugarExtPub;
+        rowExt[12] = payload.formatoExtPub;
+        rowExt[13] = payload.publicoObjetivoExtPub;
+        rowExt[14] = payload.cantidadAsistentesExtPub;
+        rowExt[15] = payload.apoyoGraficoExtPub === 'Sí' ? folderUrl : payload.apoyoGraficoExtPub;
+        rowExt[90] = payload.nombreResponsable;
 
-          var sheetGen = ss.getSheetByName(SHEET_GENERAL);
-          if (sheetGen) {
-            var filtroGen = sheetGen.getFilter();
-            if (filtroGen) filtroGen.remove();
-            sheetGen.appendRow(rowExt);
-          }
+        var sheetGen = ss.getSheetByName(SHEET_GENERAL);
+        if (sheetGen) {
+          var filtroGen = sheetGen.getFilter();
+          if (filtroGen) filtroGen.remove();
+          sheetGen.appendRow(rowExt);
+        }
 
-          var sheetDest = ss.getSheetByName('Destinatarios');
-          if (sheetDest) {
-            var destExt = sheetDest.getRange('B4').getValue();
-            if (destExt) {
-              MailApp.sendEmail({
-                to: destExt,
-                subject: '[FaAAD Diseño] Nueva actividad registrada',
-                htmlBody:
-                  '<p>Estimad-, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas.</p>' +
-                  '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar.</p>' +
-                  '<hr>' +
-                  '<p><strong>Tipo de solicitud:</strong> Iniciativas de extensión organizadas por UDP</p>' +
-                  '<p><strong>Enviado por:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
-                  '<hr>' +
-                  (payload.organizaExtPub ? '<p><strong>Organiza:</strong> ' + payload.organizaExtPub + '</p>' : '') +
-                  '<p><strong>Título:</strong> ' + (payload.nombreProyectoPublicacion || '') + '</p>' +
-                  (payload.cicloExtPub ? '<p><strong>Ciclo o proyecto:</strong> ' + payload.cicloExtPub + '</p>' : '') +
-                  '<p><strong>Descripción:</strong> ' + (payload.descripcionPublicacion || '') + '</p>' +
-                  (payload.participanExtPub ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExtPub + '</p>' : '') +
-                  (payload.reseñaParticipantesExtPub ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExtPub + '</p>' : '') +
-                  '<p><strong>Fecha:</strong> ' + (payload.fechaProyectoPublicacion || '') + '</p>' +
-                  (payload.lugarExtPub ? '<p><strong>Lugar:</strong> ' + payload.lugarExtPub + '</p>' : '') +
-                  (payload.formatoExtPub ? '<p><strong>Formato:</strong> ' + payload.formatoExtPub + '</p>' : '') +
-                  (payload.publicoObjetivoExtPub ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExtPub + '</p>' : '') +
-                  (payload.cantidadAsistentesExtPub ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExtPub + '</p>' : '') +
-                  (payload.apoyoGraficoExtPub ? '<p><strong>Apoyo gráfico:</strong> ' + payload.apoyoGraficoExtPub + '</p>' : '') +
-                  '<hr>' +
-                  '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
-                  '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
-              });
-            }
+        // Guardar también en Solicitudes-Extensión del spreadsheet VcM (con los campos extra)
+        var ssVcmExtP = SpreadsheetApp.openById(SPREADSHEET_ID_VCM);
+        var sheetExtP = ssVcmExtP.getSheetByName(SHEET_EXTENSION_VCM);
+        if (sheetExtP) {
+          var filtroExtP = sheetExtP.getFilter();
+          if (filtroExtP) filtroExtP.remove();
+          sheetExtP.appendRow([
+            timestamp,
+            payload.emailResponsable,
+            payload.nombreProyectoPublicacion,
+            payload.descripcionPublicacion,
+            payload.fechaProyectoPublicacion,
+            payload.lugarExtPub,
+            payload.formatoExtPub,
+            payload.organizaExtPub,
+            payload.cicloExtPub,
+            payload.participanExtPub,
+            payload.reseñaParticipantesExtPub,
+            payload.publicoObjetivoExtPub,
+            payload.cantidadAsistentesExtPub,
+            payload.apoyoGraficoExtPub === 'Sí' ? folderUrl : payload.apoyoGraficoExtPub,
+            payload.coberturaExtPub ? payload.coberturaExtPub.join(', ') : '',        // ← acá van los extra
+            payload.disposicionSalaExtPub,
+            payload.solicitudesEspecialesExtPub ? payload.solicitudesEspecialesExtPub.join(', ') : ''
+          ]);
+        }
+
+        var sheetDest = ss.getSheetByName('Destinatarios');
+
+        if (sheetDest) {
+          var destExt = sheetDest.getRange('B4').getValue();
+          if (destExt) {
+            MailApp.sendEmail({
+              to: destExt,
+              subject: '[FaAAD Diseño] Nueva actividad registrada',
+              htmlBody:
+                '<p>Estimad-, te llega este correo porque se ha registrado una nueva actividad en el formulario único de registro FaAAD correspondiente a la unidad que coordinas.</p>' +
+                '<p>Ten en cuenta que este correo solo despliega la información que la persona ingresó al hacer clic en enviar.</p>' +
+                '<hr>' +
+                '<p><strong>Tipo de solicitud:</strong> Iniciativas de extensión organizadas por UDP</p>' +
+                '<p><strong>Enviado por:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
+                '<hr>' +
+                (payload.organizaExtPub ? '<p><strong>Organiza:</strong> ' + payload.organizaExtPub + '</p>' : '') +
+                '<p><strong>Título:</strong> ' + (payload.nombreProyectoPublicacion || '') + '</p>' +
+                (payload.cicloExtPub ? '<p><strong>Ciclo o proyecto:</strong> ' + payload.cicloExtPub + '</p>' : '') +
+                '<p><strong>Descripción:</strong> ' + (payload.descripcionPublicacion || '') + '</p>' +
+                (payload.participanExtPub ? '<p><strong>Participan o colaboran:</strong> ' + payload.participanExtPub + '</p>' : '') +
+                (payload.reseñaParticipantesExtPub ? '<p><strong>Reseña de participantes:</strong> ' + payload.reseñaParticipantesExtPub + '</p>' : '') +
+                '<p><strong>Fecha:</strong> ' + (payload.fechaProyectoPublicacion || '') + '</p>' +
+                (payload.lugarExtPub ? '<p><strong>Lugar:</strong> ' + payload.lugarExtPub + '</p>' : '') +
+                (payload.formatoExtPub ? '<p><strong>Formato:</strong> ' + payload.formatoExtPub + '</p>' : '') +
+                (payload.publicoObjetivoExtPub ? '<p><strong>Público objetivo:</strong> ' + payload.publicoObjetivoExtPub + '</p>' : '') +
+                (payload.cantidadAsistentesExtPub ? '<p><strong>Cantidad de asistentes:</strong> ' + payload.cantidadAsistentesExtPub + '</p>' : '') +
+                (payload.apoyoGraficoExtPub ? '<p><strong>Apoyo gráfico:</strong> ' + payload.apoyoGraficoExtPub + '</p>' : '') +
+                '<hr>' +
+                '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
+                '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
+            });
           }
         }
-      
+      }
+
     } else {
       var sheetGeneral = ss.getSheetByName(SHEET_GENERAL);
       if (sheetGeneral) {
@@ -348,6 +367,34 @@ if (tipoNombre === '') {
           filtroActivo.remove();
         }
         sheetGeneral.appendRow(row);
+      }
+      // Extensión: guardar también en pestaña específica del spreadsheet VcM
+      if (payload.tipoSolicitud === 'extension2') {
+        var ssVcmExt = SpreadsheetApp.openById(SPREADSHEET_ID_VCM);
+        var sheetExt = ssVcmExt.getSheetByName(SHEET_EXTENSION_VCM);
+        if (sheetExt) {
+          var filtroExt = sheetExt.getFilter();
+          if (filtroExt) filtroExt.remove();
+          sheetExt.appendRow([
+            timestamp,                                    // A - Marca temporal
+            payload.emailResponsable,                     // B - Email
+            payload.tituloExtension2,                     // C - Título
+            payload.descripcionExtension2,                // D - Descripción
+            payload.fechaHoraExtension2,                  // E - Fecha y hora
+            payload.lugarExtension2,                      // F - Lugar
+            payload.formatoExtension2,                    // G - Formato
+            payload.organizaExtension2,                   // H - Organiza
+            payload.cicloExtension2,                      // I - Ciclo o proyecto
+            payload.participanExtension2,                 // J - Participan
+            payload.reseñaParticipantesExtension2,        // K - Reseña
+            payload.publicoObjetivoExtension2,            // L - Público objetivo
+            payload.cantidadAsistentesExtension2,         // M - Cantidad asistentes
+            payload.apoyoGraficoExtension2 === 'Sí' ? folderUrl : payload.apoyoGraficoExtension2, // N - Apoyo gráfico
+            payload.coberturaExtension2 ? payload.coberturaExtension2.join(', ') : '',           // O - Cobertura
+            payload.disposicionSalaExtension2,            // P - Disposición sala
+            payload.solicitudesEspecialesExtension2 ? payload.solicitudesEspecialesExtension2.join(', ') : '' // Q - Solicitudes especiales
+          ]);
+        }
       }
 
       // Buscar destinatario según tipo de solicitud
