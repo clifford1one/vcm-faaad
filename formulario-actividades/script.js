@@ -64,7 +64,10 @@ function buildCardHTML(id) {
 
         '<div class="field">' +
         '<label for="descripcionExtension2-' + id + '">Descripción del evento o iniciativa <span class="req">*</span></label>' +
-        '<input type="text" id="descripcionExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        // '<input type="text" id="descripcionExtension2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<textarea id="descripcionExtension2-' + id + '" rows="1" placeholder="Respuesta larga" required></textarea>' +
+        
+
         '<p class="field-error" id="err-descripcionExtension2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
@@ -136,7 +139,8 @@ function buildCardHTML(id) {
 
         '<div class="field">' +
         '<label for="reseñaParticipantesExtension2-' + id + '">Reseña de participantes e instituciones</label>' +
-        '<input type="text" id="reseñaParticipantesExtension2-' + id + '" placeholder="Respuesta corta">' +
+        '<input type="text" id="reseñaParticipantesExtension2-' + id + '" rows="1" placeholder="Respuesta corta">' +
+        // '<textarea id="reseñaParticipantesExtension2-' + id + '" placeholder="Respuesta larga"></textarea>' +
         '</div>' +
         '</div>' +
 
@@ -227,7 +231,9 @@ function buildCardHTML(id) {
 
         '<div class="field">' +
         '<label for="descripcionExterna2-' + id + '">Descripción de la iniciativa <span class="req">*</span></label>' +
-        '<input type="text" id="descripcionExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+        // '<input type="text" id="descripcionExterna2-' + id + '" placeholder="Respuesta corta" required>' +
+        '<textarea id="descripcionExterna2-' + id + '" rows="1" placeholder="Respuesta larga" required></textarea>' +
+
         '<p class="field-error" id="err-descripcionExterna2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
@@ -292,12 +298,16 @@ function buildCardHTML(id) {
         '<div class="field-row">' +
         '<div class="field">' +
         '<label for="participanExterna2-' + id + '">Participan o colaboran</label>' +
-        '<input type="text" id="participanExterna2-' + id + '" placeholder="Respuesta corta">' +
+        // '<input type="text" id="participanExterna2-' + id + '" placeholder="Respuesta corta">' +
+        '<textarea id="participanExterna2-' + id + '" rows="1" placeholder="Respuesta larga"></textarea>' +
+
         '</div>' +
 
         '<div class="field">' +
         '<label for="reseñaParticipantesExterna2-' + id + '">Reseña de los participantes</label>' +
-        '<input type="text" id="reseñaParticipantesExterna2-' + id + '" placeholder="Respuesta corta">' +
+        // '<input type="text" id="reseñaParticipantesExterna2-' + id + '" placeholder="Respuesta corta">' +
+        '<textarea id="reseñaParticipantesExterna2-' + id + '" rows="1" placeholder="Respuesta larga"></textarea>' +
+
         '</div>' +
         '</div>' +
 
@@ -397,7 +407,13 @@ function buildCardHTML(id) {
 
         '<div class="field">' +
         '<label for="reseñaInvestigacion2-' + id + '">Reseña</label>' +
-        '<input type="text" id="reseñaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+
+        // texto corto
+        // '<input type="text" id="reseñaInvestigacion2-' + id + '" placeholder="Respuesta corta">' +
+
+        // introducir saltos de linea
+        '<textarea id="reseñaInvestigacion2-' + id + '" rows="1" placeholder="Respuesta larga"></textarea>' +
+
         '</div>' +
 
         '<div class="field-row">' +
@@ -490,7 +506,9 @@ function buildCardHTML(id) {
 
         '<p class="section-title">Registro de actividades VCM</p>' +
         '<div class="field"><label for="actividadVcm-' + id + '">Descripción de la Actividad <span class="req">*</span></label>' +
-        '<input type="text" id="actividadVcm-' + id + '" placeholder="Respuesta corta" required>' +
+        // '<input type="text" id="actividadVcm-' + id + '" placeholder="Respuesta corta" required>' +
+        '<textarea id="actividadVcm-' + id + '" rows="1" placeholder="Respuesta larga" required></textarea>' +
+
         '<p class="field-error" id="err-actividadVcm-' + id + '">Este campo es obligatorio.</p></div>' +
 
         '<div class="field"><label for="responsableVcm-' + id + '">Responsable UDP<span class="req">*</span></label>' +
@@ -646,9 +664,9 @@ function buildCardHTML(id) {
         '</div>' +
         '</div>' +
 
-        ////////////////////////////////////
-        ////////// PROYECTOOOOOS ///////////
-        ////////////////////////////////////
+        ////////////////////////////////////////////
+        ////////////// PROYECTOOOOOS ///////////////
+        ////////////////////////////////////////////
 
         // Publicación de proyecto
         '<div class="form-section solicitud-publicacion" id="solicitud-publicacion-' + id + '" style="display:none">' +
@@ -662,8 +680,9 @@ function buildCardHTML(id) {
 
         '<div class="field">' +
         '<label for="descripcionPublicacion-' + id + '">Descripción del proyecto <span class="req">*</span></label>' +
-        // '<textarea id="descripcionPublicacion-' + id + '" rows="6" placeholder="Describe el proyecto, su contexto y objetivos." required></textarea>' +
-        '<input type="text" id="descripcionPublicacion-' + id + '" placeholder="Describe el proyecto, su contexto y objetivos." required>' +
+        // '<input type="text" id="descripcionPublicacion-' + id + '" placeholder="Describe el proyecto, su contexto y objetivos." required>' +
+        '<textarea id="descripcionPublicacion-' + id + '" rows="1" placeholder="Describe el proyecto, su contexto y objetivos." required></textarea>' +
+
         '<p class="field-error" id="err-descripcionPublicacion-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
@@ -1135,6 +1154,10 @@ function wireCard(id) {
         this.classList.remove('error');
         hideFieldError('tipoSolicitud-' + id);
         hideErrorSummary();
+
+            card.querySelectorAll('textarea').forEach(function (ta) {
+        if (ta.offsetParent !== null) autoExpand(ta);
+    });
     });
 
     // fuera del listener, junto a los demás
@@ -1338,6 +1361,12 @@ function wireCard(id) {
     });
 });
  
+// expandir textarea al escribir
+card.querySelectorAll('textarea').forEach(function (ta) {
+    ta.addEventListener('input', function () {
+        autoExpand(this);
+    });
+});
 }
 
 // Wire apoyo gráfico drop zones (called lazily when panel opens)
@@ -1979,6 +2008,10 @@ function getRadio(id, name) {
 function getChecked(id, name) {
     return Array.from(document.querySelectorAll('input[name="' + name + '-' + id + '"]:checked'))
         .map(function (cb) { return cb.value; });
+}
+function autoExpand(el) {
+    el.style.height = 'auto';
+    el.style.height = el.scrollHeight + 'px';
 }
 
 // ── Confirmación ─────────────────────────────────────────────

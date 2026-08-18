@@ -376,6 +376,15 @@
    appearance: none;
  }
 
+textarea {
+    height: auto;
+    min-height: 0;
+    overflow: hidden;
+    resize: none;
+    line-height: 1.5;
+    padding: 20px 0;
+}
+
  input:focus,
  select:focus,
  textarea:focus {
@@ -392,12 +401,6 @@
  input::placeholder,
  textarea::placeholder {
    color: #999;
- }
-
- textarea {
-   min-height: 130px;
-   resize: vertical;
-   line-height: 1.65;
  }
 
  select {
@@ -1388,10 +1391,6 @@
      padding-right: 26px;
    }
 
-   textarea {
-     padding: 14px 0;
-     min-height: 120px;
-   }
 
    .form-section {
      padding: 22px 18px;
