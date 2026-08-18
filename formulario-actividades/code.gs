@@ -1,23 +1,17 @@
-// a partir de aca, es codigo nuevo que lo separa en las pestañas
 // spreadsheet oficial
-// var SPREADSHEET_ID = '18EUt_wauhDenkEmjawYFDDZ7XYgLmSiIQmonL4LVRIA';
 var SPREADSHEET_ID = '1zuFTho0-2zNFo2zzrFC3w_5hehucmAgJzHeWb1y6uRU';
 var SHEET_GENERAL = 'Respuestas de Formulario 1';
 
 // aca se duplica las de extension, y agrega algunos campos
 var SHEET_EXTENSION_VCM = 'Solicitudes-Extensión';
 
-
 //spreadsheet vcm
 var SPREADSHEET_ID_VCM = '1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw';
-// var SHEET_GENERAL_VCM = 'pruebitas'
 var SHEET_GENERAL_VCM = 'Registro-VcM';
-
 
 // spreadsheet emi - para proyectoooos
 var SPREADSHEET_ID_PROYECTOS = '1Y_pmmK7_d_mQAK3xOXO9k0ADidAzcqXbBcZnTqEmdks';
 var SHEET_PROYECTOS = 'Proyectos';
-
 
 var DRIVE_FOLDER_ID = '1Qd9rSijCviNjZU6j7IeekKv-L56TWTm5'; // imagenes (solicitudes-general)
 var DRIVE_FOLDER_ID_PUBLICACION = '1_QqPOgXPq5u2xjR3NdJql7as17hcLyFj'; // imagenes (publicacion-proyectos)
@@ -39,19 +33,10 @@ function enviarProyecto(payload) {
     var datePrefix = Utilities.formatDate(now, Session.getScriptTimeZone(), 'yyyy-MM-dd');
 
     // 1. Determinar el título para el nombre de la carpeta
-    // var titulo = payload.tituloExtension || payload.tituloExterna || payload.tituloInvestigacion || "Sin Titulo";
     var titulo = payload.tituloExtension2 || payload.tituloExterna2 || payload.tituloInvestigacion2 || payload.actividadVcm || payload.nombreProyectoPublicacion || "Sin Titulo";
     var folderName = datePrefix + "-" + titulo;
 
-    // // 2. Crear la carpeta en Drive
-    // var parentFolder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
-    // var newFolder = parentFolder.createFolder(folderName);
-    // var folderUrl = newFolder.getUrl();
-    // var imagesFolder = newFolder.createFolder("Imágenes");
-
     // 2. Crear la carpeta en Drive
-    // var parentFolder = DriveApp.getFolderById(DRIVE_FOLDER_ID);
-
     var folderIdToUse = DRIVE_FOLDER_ID;
     if (payload.tipoSolicitud === 'publicacion') folderIdToUse = DRIVE_FOLDER_ID_PUBLICACION;
     else if (payload.tipoSolicitud === 'vcm') folderIdToUse = DRIVE_FOLDER_ID_VCM;
@@ -390,17 +375,16 @@ function enviarProyecto(payload) {
           var filtroExt = sheetExt.getFilter();
           if (filtroExt) filtroExt.remove();
           sheetExt.appendRow([
-            timestamp,                                    // A - Marca temporal
-            payload.emailResponsable,                     // B - Email
-            payload.tituloExtension2,                     // C - Título
-            payload.descripcionExtension2,                // D - Descripción
-
-            // solo inicio
-            // payload.fechaHoraExtension2,   
-            
+            // A - Marca temporal
+            timestamp,
+            // B - Email
+            payload.emailResponsable,
+            // C - Título                     
+            payload.tituloExtension2,
+            // D - Descripción                
+            payload.descripcionExtension2,                
             // inicio y término
             (payload.fechaInicioExtension2 || '') + ' — ' + (payload.fechaFinExtension2 || ''),// E - Fecha y hora
-            
             payload.lugarExtension2,                      // F - Lugar
             payload.formatoExtension2,                    // G - Formato
             payload.organizaExtension2,                   // H - Organiza
@@ -423,8 +407,8 @@ function enviarProyecto(payload) {
         var columnaTipo = '';
         if (payload.tipoSolicitud === 'extension2') columnaTipo = 'B';
         else if (payload.tipoSolicitud === 'externa2') columnaTipo = 'C';
-        // else if (payload.tipoSolicitud === 'publicacion') columnaTipo = 'D'; // publicación académica
-        // E = prensa (no tiene tipo de solicitud asociado todavía)
+        // D = publicación académica
+        // E = prensa 
         else if (payload.tipoSolicitud === 'investigacion2') columnaTipo = 'F';
 
         Logger.log('tipoSolicitud: ' + payload.tipoSolicitud);
@@ -440,13 +424,7 @@ function enviarProyecto(payload) {
               bodyContent =
                 (payload.tituloExtension2 ? '<p><strong>Título:</strong> ' + payload.tituloExtension2 + '</p>' : '') +
                 (payload.descripcionExtension2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExtension2 + '</p>' : '') +
-
-                // solo inicio
-                // (payload.fechaHoraExtension2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExtension2 + '</p>' : '') +
-
                 // inicio y término
-                ((payload.fechaInicioExtension2 || payload.fechaFinExtension2) ? '<p><strong>Fecha y hora:</strong> ' + (payload.fechaInicioExtension2 || '') + ' — ' + (payload.fechaFinExtension2 || '') + '</p>' : '') +
-
                 (payload.lugarExtension2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExtension2 + '</p>' : '') +
                 (payload.formatoExtension2 ? '<p><strong>Formato:</strong> ' + payload.formatoExtension2 + '</p>' : '') +
                 (payload.organizaExtension2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExtension2 + '</p>' : '') +
@@ -463,13 +441,8 @@ function enviarProyecto(payload) {
               bodyContent =
                 (payload.tituloExterna2 ? '<p><strong>Título:</strong> ' + payload.tituloExterna2 + '</p>' : '') +
                 (payload.descripcionExterna2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExterna2 + '</p>' : '') +
-
-                // solo inicio
-                // (payload.fechaHoraExterna2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExterna2 + '</p>' : '') +
-
                 // inicio y término
                 ((payload.fechaInicioExterna2 || payload.fechaFinExterna2) ? '<p><strong>Fecha y hora:</strong> ' + (payload.fechaInicioExterna2 || '') + ' — ' + (payload.fechaFinExterna2 || '') + '</p>' : '') +
-
                 (payload.lugarExterna2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExterna2 + '</p>' : '') +
                 (payload.formatoExterna2 ? '<p><strong>Formato:</strong> ' + payload.formatoExterna2 + '</p>' : '') +
                 (payload.organizaExterna2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExterna2 + '</p>' : '') +
