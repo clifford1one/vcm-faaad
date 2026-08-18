@@ -127,7 +127,13 @@ function enviarProyecto(payload) {
       row[7] = payload.descripcionExtension2;
       row[8] = payload.participanExtension2;
       row[9] = payload.reseñaParticipantesExtension2;
-      row[10] = payload.fechaHoraExtension2;
+
+      // fechaHora solo inicio
+      // row[10] = payload.fechaHoraExtension2;
+
+      // fechaHora inicio y término
+      row[10] = (payload.fechaInicioExtension2 || '') + ' — ' + (payload.fechaFinExtension2 || '');
+
       row[11] = payload.lugarExtension2;
       row[12] = payload.formatoExtension2;
       row[13] = payload.publicoObjetivoExtension2;
@@ -141,7 +147,13 @@ function enviarProyecto(payload) {
       row[19] = payload.participanExterna2;
       row[20] = payload.reseñaParticipantesExterna2;
       row[21] = payload.enlacesExterna2;
-      row[22] = payload.fechaHoraExterna2;
+
+      // solo inicio
+      // row[22] = payload.fechaHoraExterna2;
+
+      // inicio y témrino
+      row[22] = (payload.fechaInicioExterna2 || '') + ' — ' + (payload.fechaFinExterna2 || '');
+
       row[23] = payload.lugarExterna2;
       row[24] = payload.formatoExterna2;
       row[25] = payload.publicoObjetivoExterna2;
@@ -226,6 +238,7 @@ function enviarProyecto(payload) {
           '<p><strong>Enviado por:</strong> ' + payload.nombreResponsable + ' (' + payload.emailResponsable + ')</p>' +
           '<hr>' +
           '<p><a href="https://docs.google.com/spreadsheets/d/1mssLeTJuhg49QZPdkB7zQZO78p5AuA6J71hX302aciw/edit?usp=sharing">Ver en la planilla</a></p>' +
+          '<p><strong>Imágenes:</strong> <a href="' + folderUrl + '">Ver carpeta en Drive</a></p>' +
           '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
       });
     } else if (payload.tipoSolicitud === 'publicacion') {
@@ -353,6 +366,7 @@ function enviarProyecto(payload) {
                 (payload.apoyoGraficoExtPub ? '<p><strong>Apoyo gráfico:</strong> ' + payload.apoyoGraficoExtPub + '</p>' : '') +
                 '<hr>' +
                 '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
+                '<p><strong>Imágenes:</strong> <a href="' + folderUrl + '">Ver carpeta en Drive</a></p>' +
                 '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
             });
           }
@@ -380,7 +394,13 @@ function enviarProyecto(payload) {
             payload.emailResponsable,                     // B - Email
             payload.tituloExtension2,                     // C - Título
             payload.descripcionExtension2,                // D - Descripción
-            payload.fechaHoraExtension2,                  // E - Fecha y hora
+
+            // solo inicio
+            // payload.fechaHoraExtension2,   
+            
+            // inicio y término
+            (payload.fechaInicioExtension2 || '') + ' — ' + (payload.fechaFinExtension2 || ''),// E - Fecha y hora
+            
             payload.lugarExtension2,                      // F - Lugar
             payload.formatoExtension2,                    // G - Formato
             payload.organizaExtension2,                   // H - Organiza
@@ -420,7 +440,13 @@ function enviarProyecto(payload) {
               bodyContent =
                 (payload.tituloExtension2 ? '<p><strong>Título:</strong> ' + payload.tituloExtension2 + '</p>' : '') +
                 (payload.descripcionExtension2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExtension2 + '</p>' : '') +
-                (payload.fechaHoraExtension2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExtension2 + '</p>' : '') +
+
+                // solo inicio
+                // (payload.fechaHoraExtension2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExtension2 + '</p>' : '') +
+
+                // inicio y término
+                ((payload.fechaInicioExtension2 || payload.fechaFinExtension2) ? '<p><strong>Fecha y hora:</strong> ' + (payload.fechaInicioExtension2 || '') + ' — ' + (payload.fechaFinExtension2 || '') + '</p>' : '') +
+
                 (payload.lugarExtension2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExtension2 + '</p>' : '') +
                 (payload.formatoExtension2 ? '<p><strong>Formato:</strong> ' + payload.formatoExtension2 + '</p>' : '') +
                 (payload.organizaExtension2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExtension2 + '</p>' : '') +
@@ -437,7 +463,13 @@ function enviarProyecto(payload) {
               bodyContent =
                 (payload.tituloExterna2 ? '<p><strong>Título:</strong> ' + payload.tituloExterna2 + '</p>' : '') +
                 (payload.descripcionExterna2 ? '<p><strong>Descripción:</strong> ' + payload.descripcionExterna2 + '</p>' : '') +
-                (payload.fechaHoraExterna2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExterna2 + '</p>' : '') +
+
+                // solo inicio
+                // (payload.fechaHoraExterna2 ? '<p><strong>Fecha y hora:</strong> ' + payload.fechaHoraExterna2 + '</p>' : '') +
+
+                // inicio y término
+                ((payload.fechaInicioExterna2 || payload.fechaFinExterna2) ? '<p><strong>Fecha y hora:</strong> ' + (payload.fechaInicioExterna2 || '') + ' — ' + (payload.fechaFinExterna2 || '') + '</p>' : '') +
+
                 (payload.lugarExterna2 ? '<p><strong>Lugar:</strong> ' + payload.lugarExterna2 + '</p>' : '') +
                 (payload.formatoExterna2 ? '<p><strong>Formato:</strong> ' + payload.formatoExterna2 + '</p>' : '') +
                 (payload.organizaExterna2 ? '<p><strong>Organiza:</strong> ' + payload.organizaExterna2 + '</p>' : '') +
@@ -483,6 +515,7 @@ function enviarProyecto(payload) {
                 bodyContent +
                 '<hr>' +
                 '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>' +
+                '<p><strong>Imágenes:</strong> <a href="' + folderUrl + '">Ver carpeta en Drive</a></p>' +
                 '<p>— Coordinaciones de Facultad <a href="https://faad.udp.cl/">Facultad de Arquitectura, Arte y Diseño</a> – UDP</p>'
             });
           }

@@ -68,18 +68,32 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-descripcionExtension2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
+        // fechaHora solo inicio
+        // '<div class="field-row">' +
+        // '<div class="field">' +
+        // '<label for="fechaHoraExtension2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        // '<input type="text" class="datepicker" id="fechaHoraExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        // '<p class="field-error" id="err-fechaHoraExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        // '</div>' +
+
+        // fechaHora inicio y término 
         '<div class="field-row">' +
         '<div class="field">' +
-        '<label for="fechaHoraExtension2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker" id="fechaHoraExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
-        '<p class="field-error" id="err-fechaHoraExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '<label for="fechaInicioExtension2-' + id + '">Fecha y hora de inicio <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaInicioExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaInicioExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '<div class="field">' +
+        '<label for="fechaFinExtension2-' + id + '">Fecha y hora de término <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaFinExtension2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaFinExtension2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
         '</div>' +
 
         '<div class="field">' +
         '<label for="lugarExtension2-' + id + '">Lugar <span class="req">*</span></label>' +
         '<input type="text" id="lugarExtension2-' + id + '" placeholder="Respuesta corta" required>' +
         '<p class="field-error" id="err-lugarExtension2-' + id + '">Este campo es obligatorio.</p>' +
-        '</div>' +
         '</div>' +
 
         '<div class="field">' +
@@ -97,8 +111,6 @@ function buildCardHTML(id) {
         '<select id="organizaExtension2-' + id + '" required>' +
         '<option value="">Selecciona una opción</option>' +
         '<option value="Escuela de Diseño">Escuela de Diseño</option>' +
-        '<option value="Escuela de Arquitectura">Escuela de Arquitectura</option>' +
-        '<option value="Escuela de Arte">Escuela de Arte</option>' +
         '<option value="Laboratorio de Interacción (LID)">Laboratorio de Interacción (LID)</option>' +
         '<option value="LABORATORIO OTF">LABORATORIO OTF</option>' +
         '<option value="LAB 360">LAB 360</option>' +
@@ -219,11 +231,25 @@ function buildCardHTML(id) {
         '<p class="field-error" id="err-descripcionExterna2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
+        // fechaHora solo inicio
+        // '<div class="field-row">' +
+        // '<div class="field">' +
+        // '<label for="fechaHoraExterna2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
+        // '<input type="text" class="datepicker" id="fechaHoraExterna2-' + id + '" placeholder="Seleccione fecha y hora" readonly required>' +
+        // '<p class="field-error" id="err-fechaHoraExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        // '</div>' +
+
+        // fechaHora inicio y termino
         '<div class="field-row">' +
         '<div class="field">' +
-        '<label for="fechaHoraExterna2-' + id + '">Fecha y hora <span class="req">*</span></label>' +
-        '<input type="text" class="datepicker" id="fechaHoraExterna2-' + id + '" placeholder="Seleccione fecha y hora" readonly required>' +
-        '<p class="field-error" id="err-fechaHoraExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '<label for="fechaInicioExterna2-' + id + '">Fecha y hora de inicio <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaInicioExterna2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaInicioExterna2-' + id + '">Este campo es obligatorio.</p>' +
+        '</div>' +
+        '<div class="field">' +
+        '<label for="fechaFinExterna2-' + id + '">Fecha y hora de término <span class="req">*</span></label>' +
+        '<input type="text" class="datepicker" id="fechaFinExterna2-' + id + '" placeholder="Seleccione fecha y hora..." readonly required>' +
+        '<p class="field-error" id="err-fechaFinExterna2-' + id + '">Este campo es obligatorio.</p>' +
         '</div>' +
 
         '<div class="field">' +
@@ -1492,7 +1518,14 @@ function validateForm() {
                 { fid: 'organizaExtension2', label: 'Organiza(n) (Solicitud ' + num + ')' },
                 { fid: 'tituloExtension2', label: 'Título (Solicitud ' + num + ')' },
                 { fid: 'descripcionExtension2', label: 'Descripción (Solicitud ' + num + ')' },
-                { fid: 'fechaHoraExtension2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+               
+                // fechaHora solo incio
+                // { fid: 'fechaHoraExtension2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+                
+                // fechaHora inicio y término
+                { fid: 'fechaInicioExtension2', label: 'Fecha y hora de inicio (Solicitud ' + num + ')' },
+                { fid: 'fechaFinExtension2', label: 'Fecha y hora de término (Solicitud ' + num + ')' },
+
                 { fid: 'lugarExtension2', label: 'Lugar (Solicitud ' + num + ')' },
                 { fid: 'formatoExtension2', label: 'Formato (Solicitud ' + num + ')' },
                 { fid: 'apoyoGraficoExtension2', label: 'Apoyo gráfico (Solicitud ' + num + ')' }
@@ -1513,7 +1546,14 @@ function validateForm() {
                 { fid: 'organizaExterna2', label: 'Organiza(n) (Solicitud ' + num + ')' },
                 { fid: 'tituloExterna2', label: 'Título (Solicitud ' + num + ')' },
                 { fid: 'descripcionExterna2', label: 'Descripción (Solicitud ' + num + ')' },
-                { fid: 'fechaHoraExterna2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+
+                // solo inicio
+                // { fid: 'fechaHoraExterna2', label: 'Fecha y hora (Solicitud ' + num + ')' },
+
+                // inicio y término
+                { fid: 'fechaInicioExterna2', label: 'Fecha y hora de inicio (Solicitud ' + num + ')' },
+                { fid: 'fechaFinExterna2', label: 'Fecha y hora de término (Solicitud ' + num + ')' },
+
                 { fid: 'lugarExterna2', label: 'Lugar (Solicitud ' + num + ')' },
                 { fid: 'formatoExterna2', label: 'Formato (Solicitud ' + num + ')' }
             ]);
@@ -1765,7 +1805,14 @@ function buildPayload(id) {
         payload.descripcionExtension2 = cval(id, 'descripcionExtension2');
         payload.participanExtension2 = cval(id, 'participanExtension2');
         payload.reseñaParticipantesExtension2 = cval(id, 'reseñaParticipantesExtension2');
-        payload.fechaHoraExtension2 = cval(id, 'fechaHoraExtension2');
+        
+        // fechaHora solo inicio
+        // payload.fechaHoraExtension2 = cval(id, 'fechaHoraExtension2');
+
+        // fechaHora inicio y término
+        payload.fechaInicioExtension2 = cval(id, 'fechaInicioExtension2');
+        payload.fechaFinExtension2 = cval(id, 'fechaFinExtension2');
+
         payload.lugarExtension2 = cval(id, 'lugarExtension2');
         payload.formatoExtension2 = getRadio(id, 'formatoExtension2');
         payload.publicoObjetivoExtension2 = cval(id, 'publicoObjetivoExtension2');
@@ -1793,7 +1840,14 @@ function buildPayload(id) {
         payload.participanExterna2 = cval(id, 'participanExterna2');
         payload.reseñaParticipantesExterna2 = cval(id, 'reseñaParticipantesExterna2');
         payload.enlacesExterna2 = cval(id, 'enlacesExterna2');
-        payload.fechaHoraExterna2 = cval(id, 'fechaHoraExterna2');
+
+        // solo inicio
+        // payload.fechaHoraExterna2 = cval(id, 'fechaHoraExterna2');
+
+        // inicio y término
+        payload.fechaInicioExterna2 = cval(id, 'fechaInicioExterna2');
+        payload.fechaFinExterna2 = cval(id, 'fechaFinExterna2');
+
         payload.lugarExterna2 = cval(id, 'lugarExterna2');
         payload.formatoExterna2 = getRadio(id, 'formatoExterna2');
         payload.publicoObjetivoExterna2 = cval(id, 'publicoObjetivoExterna2');
