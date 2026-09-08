@@ -72,7 +72,7 @@
  }
 
  .topbar-logo img {
-   height: 4vw;
+   height: 6vw;
    width: auto;
    display: block;
    /* margin-right:10vw; */
@@ -197,6 +197,46 @@
    font-size: 0.95rem;
    color: #444;
    line-height: 1.55;
+ }
+
+ /* fecha y lugar, bajo el título */
+ .page-header .header-fecha {
+   font-family: 'NectoMono', monospace;
+   font-size: 0.78rem;
+   letter-spacing: 0.1em;
+   text-transform: uppercase;
+   color: var(--fg);
+   margin-bottom: 4px;
+ }
+
+ .page-header .header-lugar {
+   font-family: 'NectoMono', monospace;
+   font-size: 0.68rem;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   color: #666;
+   margin-bottom: 22px;
+ }
+
+ /* ── Presentación de la convocatoria ── */
+ .intro {
+   margin-bottom: 48px;
+ }
+
+ .intro .section-title {
+   margin-bottom: 18px;
+ }
+
+ .intro p {
+   font-family: 'WorkSans', sans-serif;
+   font-size: 0.95rem;
+   line-height: 1.65;
+   color: #444;
+   margin-bottom: 14px;
+ }
+
+ .intro p:last-child {
+   margin-bottom: 0;
  }
 
  /* ── Aviso previo al formulario ── */
@@ -456,6 +496,203 @@ textarea {
    background: var(--fg);
    color: var(--bg);
    border-color: var(--fg);
+ }
+
+ /* ── Casilla única (declaración): texto izquierda / cuadrado derecha ── */
+ .check-box {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 20px;
+   padding: 16px 18px;
+   border: 1px solid var(--gray);
+   cursor: pointer;
+   transition: border-color 0.13s;
+ }
+
+ .check-box:hover {
+   border-color: var(--fg);
+ }
+
+ .check-texto {
+   font-family: 'WorkSans', sans-serif;
+   font-size: 0.95rem;
+   line-height: 1.5;
+   color: var(--fg);
+ }
+
+ .check-texto .helper {
+   margin-top: 6px;
+ }
+
+ .check-marca {
+   position: relative;
+   flex: 0 0 auto;
+   display: flex;
+   align-items: center;
+ }
+
+ /* input invisible pero enfocable: permite tab y el focus() del resumen de errores */
+ .check-marca input[type="checkbox"] {
+   position: absolute;
+   inset: 0;
+   width: 22px;
+   height: 22px;
+   margin: 0;
+   opacity: 0;
+   cursor: pointer;
+ }
+
+ .check-cuadro {
+   width: 22px;
+   height: 22px;
+   border: 1px solid var(--fg);
+   background: transparent;
+   transition: background 0.13s;
+ }
+
+ .check-marca input:checked+.check-cuadro {
+   background: var(--fg);
+ }
+
+ .check-marca input:focus-visible+.check-cuadro {
+   outline: 2px solid var(--fg);
+   outline-offset: 2px;
+ }
+
+ .check-marca input.error+.check-cuadro {
+   border-color: #b83a24;
+ }
+
+ /* ── Visor de las bases (modal) ── */
+ .pdf-modal {
+   position: fixed;
+   inset: 0;
+   z-index: 100;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 24px;
+   background: rgba(17, 17, 17, 0.75);
+ }
+
+ /* gana al display:flex de arriba, si no el atributo hidden no surte efecto */
+ .pdf-modal[hidden] {
+   display: none;
+ }
+
+ .pdf-modal-caja {
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 1100px;
+   height: 100%;
+   background: var(--bg);
+   border: 2px solid var(--fg);
+ }
+
+ .pdf-modal-barra {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 16px;
+   padding: 10px 12px 10px 16px;
+   border-bottom: 2px solid var(--fg);
+   font-family: 'NectoMono', monospace;
+   font-size: 0.68rem;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   color: var(--fg);
+ }
+
+ .pdf-modal-acciones {
+   display: flex;
+   align-items: center;
+   gap: 14px;
+ }
+
+ .pdf-modal-acciones a {
+   font-family: 'NectoMono', monospace;
+   font-size: 0.68rem;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   color: var(--fg);
+ }
+
+ .pdf-modal-cerrar {
+   width: 32px;
+   height: 32px;
+   padding: 0;
+   border: 1px solid var(--fg);
+   border-radius: 0;
+   background: transparent;
+   color: var(--fg);
+   font-size: 1.1rem;
+   line-height: 1;
+   cursor: pointer;
+   transition: all 0.13s;
+ }
+
+ .pdf-modal-cerrar:hover {
+   background: var(--fg);
+   color: var(--bg);
+ }
+
+ /* contenedor scrolleable donde PDF.js dibuja una página por canvas */
+ #bases-visor {
+   flex: 1;
+   width: 100%;
+   overflow-y: auto;
+   overflow-x: hidden;
+   background: #8a8a8a;
+   padding: 16px;
+   outline: none;
+ }
+
+ #bases-visor canvas {
+   display: block;
+   width: 100%;
+   height: auto;
+   margin: 0 auto 16px;
+   background: #fff;
+   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.35);
+ }
+
+ #bases-visor canvas:last-child {
+   margin-bottom: 0;
+ }
+
+ #bases-visor .visor-msg {
+   font-family: 'NectoMono', monospace;
+   font-size: 0.72rem;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   color: var(--bg);
+   text-align: center;
+   padding: 40px 20px;
+   line-height: 1.6;
+ }
+
+ #bases-estado {
+   font-family: 'NectoMono', monospace;
+   font-size: 0.68rem;
+   letter-spacing: 0.06em;
+   text-transform: uppercase;
+   color: #666;
+ }
+
+ @media (max-width: 700px) {
+   .pdf-modal {
+     padding: 0;
+   }
+
+   .pdf-modal-caja {
+     border-width: 0;
+   }
+
+   .pdf-modal-barra {
+     padding: 12px;
+   }
  }
 
  /* ── Botones Sí/No ── */

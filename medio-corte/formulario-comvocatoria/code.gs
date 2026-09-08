@@ -1,14 +1,17 @@
 /* ============================================================
    CONVOCATORIA FERIA MEDIO CORTE 2026 — backend Apps Script
    ------------------------------------------------------------
-   Las columnas se crean solas a partir de los labels que manda
-   el formulario. Si agregas una pregunta nueva en el SCHEMA de
-   script.js, acá se agrega una columna nueva al final sin
-   romper las respuestas anteriores.
+   Las columnas se escriben por POSICIÓN, en el orden del SCHEMA de
+   script.js. Los encabezados se ponen solo cuando la pestaña está
+   vacía, así que puedes renombrarlos a mano sin romper nada.
+
+   OJO: si cambias el orden o agregas/quitas preguntas en el SCHEMA,
+   las columnas se corren. En ese caso conviene empezar con pestañas
+   nuevas (o vaciar las existentes) para no mezclar formatos.
    ============================================================ */
 
 // PLACEHOLDER: ID de la planilla (lo que va entre /d/ y /edit en la URL)
-var SPREADSHEET_ID = 'PEGA_AQUI_EL_ID_DE_LA_PLANILLA';
+var SPREADSHEET_ID = '1B05LQit8j3r5E72B-WecGEWki3WKvmf_xlWkoq2lIAc';
 
 // Una pestaña por tipo de convocatoria
 var SHEETS = {
@@ -18,10 +21,10 @@ var SHEETS = {
 };
 
 // PLACEHOLDER: ID de la carpeta de Drive donde se guardan las imágenes
-var DRIVE_FOLDER_ID = 'PEGA_AQUI_EL_ID_DE_LA_CARPETA';
+var DRIVE_FOLDER_ID = '1OeljKNCZ6pE_2ILBnlTDep74I3RcDi0f';
 
 // PLACEHOLDER: a quién le llega el aviso de cada postulación
-var MAIL_TO = 'correo@ejemplo.cl';
+var MAIL_TO = 'santiago.gaete@mail.udp.cl';
 
 // PLACEHOLDER: true = le manda copia de confirmación a quien postula
 var ENVIAR_COPIA_AL_POSTULANTE = false;
@@ -75,21 +78,22 @@ function enviarPostulacion(payload) {
             });
         }
 
-        // 2. Armar el registro: columnas fijas + las del formulario
-        var registro = {
-            'Estado': 'Pendiente',
-            'Fecha de envío': timestamp,
-            'Tipo de postulación': payload.tipoLabel
-        };
+        // 2. Armar la fila: columnas fijas + las del formulario, en orden
+        var headers = ['Estado', 'Fecha de envío', 'Tipo de postulación'];
+        var fila = ['Pendiente', timestamp, payload.tipoLabel];
+
         payload.datos.forEach(function (d) {
-            registro[d.label] = d.valor;
+            headers.push(d.label);
+            fila.push(d.valor);
         });
-        registro['Carpeta de imágenes'] = folderUrl;
+
+        headers.push('Carpeta de imágenes');
+        fila.push(folderUrl);
 
         // 3. Escribir en la pestaña correspondiente
         var ss = SpreadsheetApp.openById(SPREADSHEET_ID);
         var sheet = ss.getSheetByName(nombreSheet) || ss.insertSheet(nombreSheet);
-        appendPorEtiquetas(sheet, registro);
+        appendPorPosicion(sheet, headers, fila);
 
         // 4. Avisos por correo
         enviarAvisoInterno(payload, folderUrl, nombreSheet);
@@ -107,37 +111,34 @@ function enviarPostulacion(payload) {
 
 
 /**
- * Escribe una fila haciendo calzar cada valor con su columna por el
- * nombre del encabezado. Si aparece una etiqueta nueva, crea la columna
- * al final en vez de correr las existentes.
+ * Escribe la fila por POSICIÓN, no por nombre de columna.
+ *
+ * El orden lo define el SCHEMA de script.js, así que cada postulación
+ * ocupa siempre las mismas columnas, en el mismo orden y sin huecos.
+ *
+ * Los encabezados se escriben UNA sola vez, cuando la pestaña está vacía.
+ * Después puedes renombrarlos a mano sin romper nada: el script ya no los
+ * lee, solo agrega filas debajo.
  */
-function appendPorEtiquetas(sheet, registro) {
+function appendPorPosicion(sheet, headers, fila) {
     var filtro = sheet.getFilter();
     if (filtro) filtro.remove();
 
-    var lastCol = sheet.getLastColumn();
-    var headers = lastCol > 0
-        ? sheet.getRange(1, 1, 1, lastCol).getValues()[0].filter(String)
-        : [];
+    if (sheet.getLastRow() === 0) {
+        sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
+        sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
+        sheet.setFrozenRows(1);
+    }
 
-    // Agregar columnas que no existan todavía
-    Object.keys(registro).forEach(function (label) {
-        if (headers.indexOf(label) === -1) headers.push(label);
-    });
-
-    sheet.getRange(1, 1, 1, headers.length).setValues([headers]);
-    sheet.getRange(1, 1, 1, headers.length).setFontWeight('bold');
-    sheet.setFrozenRows(1);
-
-    var fila = headers.map(function (h) {
-        return registro.hasOwnProperty(h) ? registro[h] : '';
-    });
     sheet.appendRow(fila);
 }
 
 
 function enviarAvisoInterno(payload, folderUrl, nombreSheet) {
-    var detalle = payload.datos.map(function (d) {
+    // Los campos que no se le mostraron a la persona no se listan
+    var detalle = payload.datos.filter(function (d) {
+        return !d.oculto;
+    }).map(function (d) {
         return '<p><strong>' + d.label + ':</strong> ' + (d.valor || '—') + '</p>';
     }).join('');
 
