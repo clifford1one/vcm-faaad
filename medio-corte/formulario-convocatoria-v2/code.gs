@@ -149,12 +149,11 @@ function enviarAvisoInterno(payload, folderUrl, nombreSheet) {
         htmlBody:
             '<p>Se registró una nueva postulación a la Feria Medio Corte 2026.</p>' +
             '<p><strong>Tipo:</strong> ' + payload.tipoLabel + '</p>' +
-            '<hr>' + detalle + '<hr>' +
+            '<hr>' + detalle + '<hr>' 
             (folderUrl ? '<p><a href="' + folderUrl + '">Ver imágenes en Drive</a></p>' : '') +
             '<p><a href="https://docs.google.com/spreadsheets/d/' + SPREADSHEET_ID + '/edit">Ver en la planilla</a></p>'
     });
 }
-
 
 function enviarCopiaPostulante(payload) {
     MailApp.sendEmail({
